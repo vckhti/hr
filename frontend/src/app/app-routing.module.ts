@@ -8,16 +8,9 @@ const routes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full'
   },
-  { path: 'home', component: TestComponent },
+  { path: 'home', component: AppComponent },
 ];
 
-// const appRoutes: Routes = [    // define this before @NgModule
-//   { path: '',
-//     redirectTo: '/home',
-//     pathMatch: 'full'
-//   },
-//   { path: 'home', component: HomeComponent },
-// ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
