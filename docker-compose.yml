@@ -3,7 +3,7 @@ services:
 
   db:
     image: mysql:5.6
-    container_name: billing-client-db
+    container_name: client-db
     tty: true
     restart: unless-stopped
     volumes:
@@ -11,16 +11,16 @@ services:
     ports:
     - 127.0.0.1:3306:3306
     environment:
-      MYSQL_DATABASE: ${ADMIN_DB_DATABASE:-billing_client}
-      MYSQL_ROOT_PASSWORD: ${ADMIN_DB_PASSWORD:-pass}
+      MYSQL_DATABASE: ${DB_DATABASE:-billing_client}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-pass}
     networks:
-      - billing-client-network
+      - client-network
 
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: billing-client-app
+    container_name: client-app
     tty: true
     restart: unless-stopped
     ports:
@@ -28,10 +28,10 @@ services:
     volumes:
       - ./:/var/www/html/
     networks:
-      - billing-client-network
+      - client-network
 
 networks:
-  billing-client-network:
+  client-network:
     driver: bridge
 
 volumes:
