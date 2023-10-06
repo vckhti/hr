@@ -18,7 +18,7 @@ import {TestComponent} from "../components/test/test.component";
     AppRoutingModule,
     DropdownModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
     //AccordionModule
 
   ],

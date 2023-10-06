@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+.dashboard-outer-wrapper {
+  max-width: 1010px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 5px;
+  padding-top: 70px;
+  border: 1px solid yellow;
+}
+
+.dashboard-inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.dashboard-inner-wrapper__left-block {
+  margin-right: 25px;
+  //max-width: 225px;
+  width: 100%;
+  flex-shrink: 0;
+  order: 2;
+  max-width: 100%;
+  border: 1px solid blue;
+}
+
+.dashboard-inner-wrapper__right-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  overflow: hidden;
+  border: 1px solid green;
+}
+
+.dashboard-content {
+  grid-area: content;
+  background-color: #FFF;
+  border-radius: 4px;
+  padding: 20px 0;
+ // border: 1px solid #d6d6d6;
+  //height: 100%;
+  min-height: 430px;
+  flex: 1 1 auto;
+  height: initial;
+  border: 1px solid red;
+}
