@@ -38,17 +38,23 @@ export class PersistanceService implements LocalStorageInterface{
     }
   }
 
-  addAuthorsToLocalstorage(args: any): void {
-
+  addAuthorsToLocalstorage(args: object): void {
+    let array=new Array();
+    array.push(args);
+    let str=JSON.stringify(array);
+    console.log('array', array);
+    this.set('authors',str);
   }
 
-  getAllDataFromLocalstorage(): Observable<LocalStorageInterface | null> {
+  getAllDataFromLocalstorage(): Observable<any> {
     const response = new PersistanceService();
 
-    response.authors = this.get('userEmail');
-    response.books = this.get('userFirstName');
+    response.authors = this.get('authors');
+    response.books = this.get('books');
 
-    return of(response)
+    let authorsArray= JSON.parse(response.authors);
+
+    return of(authorsArray)
       .pipe(
         catchError(() => of(null)),
       );

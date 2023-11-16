@@ -8,6 +8,7 @@ import {DashboardRoutingModule} from "./dashboard-routing.module";
 import {FormsModule} from "@angular/forms";
 import { AuthorsComponent } from './components/authors/authors.component';
 import { BooksComponent } from './components/books/books.component';
+import {PersistanceService} from "./services/persistance.service";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,9 @@ import { BooksComponent } from './components/books/books.component';
     CommonModule,
     DashboardRoutingModule,
     FormsModule,
+  ],
+  providers: [
+    PersistanceService
   ]
 })
 export class DashboardModule { }
