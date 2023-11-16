@@ -1,0 +1,17 @@
+.menu {
+  display: flex;
+  flex-direction: row;
+
+  span{
+    margin-left: 40px;
+    cursor: pointer;
+  }
+
+  a{
+    text-decoration: none;
+  }
+}
+
+.menu-wrapper {
+  height: 8vh;
+}

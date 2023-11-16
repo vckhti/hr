@@ -4,16 +4,24 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import {DashboardRoutingModule} from "./dashboard-routing.module";
+import {FormsModule} from "@angular/forms";
+import { AuthorsComponent } from './components/authors/authors.component';
+import { BooksComponent } from './components/books/books.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    AuthorsComponent,
+    BooksComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    DashboardRoutingModule,
+    FormsModule,
   ]
 })
 export class DashboardModule { }

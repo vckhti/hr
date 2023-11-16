@@ -7,11 +7,15 @@ import {DropdownModule} from 'primeng/dropdown';
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TestComponent} from "../components/test/test.component";
+import {NotFoundComponent} from "./core/components/not-found/not-found.component";
+import {MessageDialogComponent} from "./core/components/message-dialog/message-dialog.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
+    TestComponent,
+    NotFoundComponent,
+    MessageDialogComponent
   ],
   imports: [
     BrowserModule,

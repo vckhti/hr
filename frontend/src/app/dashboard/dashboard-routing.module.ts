@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {AuthorsComponent} from "./components/authors/authors.component";
+import {BooksComponent} from "./components/books/books.component";
 
 const routes: Routes = [
   {
@@ -10,11 +12,9 @@ const routes: Routes = [
      // DashboardGuard,
     ],
     children: [
-      {
-        path: '',
-        redirectTo: 'account',
-        pathMatch: 'full'
-      },
+      {path: '', redirectTo: '/authors', pathMatch: 'full'},
+      {path: 'authors', component: AuthorsComponent},
+      {path: 'books', component: BooksComponent},
 
       // {
       //   path: 'account',
