@@ -1,25 +1,23 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NgModel} from "@angular/forms";
 import {PersistanceService} from "../../services/persistance.service";
-import {Subscription} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
+import {AuthorInterface} from "../../interfaces/author.interface";
 
 @Component({
   selector: 'app-authors',
   templateUrl: './authors.component.html',
   styleUrls: ['./authors.component.scss']
 })
-export class AuthorsComponent implements OnInit, OnDestroy{
-  id: string | undefined = undefined;
+export class AuthorsComponent implements OnInit, OnDestroy {
   lastName: string | undefined = undefined;
   firstName: string | undefined = undefined;
   middleName: string | undefined = undefined;
   birthday: string | undefined = undefined;
 
-  subscription = new Subscription();
+  onDestroy$: Subject<boolean> = new Subject();
 
-  authors:any =[];
-
-  showFieldErrorBorders= false;
+  authors: any = [];
+  showFieldErrorBorders = false;
 
   constructor(
     private persistanceService: PersistanceService
@@ -27,58 +25,62 @@ export class AuthorsComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
-    this.subscription.add(
-      this.persistanceService.getAllDataFromLocalstorage().pipe(
-
-      ).subscribe((res) => {
-        console.log('res',res);
-        this.authors = res;
+    this.persistanceService.getAuthors().pipe(
+      takeUntil(this.onDestroy$),
+    ).subscribe((response: AuthorInterface[] | null) => {
+        console.log('response', response);
+        if (response) {
+          this.authors = response.map((item: AuthorInterface) => Object.assign({}, item));
         }
-      )
-
+      }
     );
+
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.onDestroy$.next(true);
   }
 
   inputFieldsInvalid(): boolean {
     if ((!this.lastName || this.lastName.length === 0)
       || (!this.firstName || this.firstName.length === 0)
-      || (!this.middleName || this.middleName.length === 0)) {
+      || (!this.middleName || this.middleName.length === 0)
+      || (!this.birthday || this.birthday.length === 0)) {
       return true;
     }
     return false;
   }
+
   refreshFields(): void {
     this.lastName = undefined;
     this.firstName = undefined;
     this.middleName = undefined;
     this.birthday = undefined;
-    this.showFieldErrorBorders= false;
+    this.showFieldErrorBorders = false;
   }
 
   addAuthor(): void {
-    this.showFieldErrorBorders = true;
     if (this.inputFieldsInvalid()) {
-      console.error('Заполните обязательные поля!');
+      this.showFieldErrorBorders = true;
       return;
     }
 
-    let args={
-      id: '1',
+    let args: AuthorInterface = {
       lastName: this.lastName,
       firstName: this.firstName,
       middleName: this.middleName,
       birthday: this.birthday,
     }
-    this.persistanceService.addAuthorsToLocalstorage(args);
-    this.refreshFields();
-
+    this.persistanceService.addAuthorsToLocalstorage(args).pipe(
+      takeUntil(this.onDestroy$),
+    ).subscribe((response) => {
+      console.log('addAuthorsToLocalstorage subscribe:', response);
+      if (response) {
+        this.authors = response.map((item: AuthorInterface) => Object.assign({}, item));
+        this.refreshFields();
+      }
+    });
   }
 
-  onBlur(field: NgModel) {
-  }
 
 }
