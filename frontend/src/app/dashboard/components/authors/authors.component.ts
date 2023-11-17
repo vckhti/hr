@@ -28,7 +28,6 @@ export class AuthorsComponent implements OnInit, OnDestroy {
     this.persistanceService.getAuthors().pipe(
       takeUntil(this.onDestroy$),
     ).subscribe((response: AuthorInterface[] | null) => {
-        console.log('response', response);
         if (response) {
           this.authors = response.map((item: AuthorInterface) => Object.assign({}, item));
         }
@@ -66,6 +65,7 @@ export class AuthorsComponent implements OnInit, OnDestroy {
     }
 
     let args: AuthorInterface = {
+      id: undefined,
       lastName: this.lastName,
       firstName: this.firstName,
       middleName: this.middleName,
@@ -74,7 +74,6 @@ export class AuthorsComponent implements OnInit, OnDestroy {
     this.persistanceService.addAuthorsToLocalstorage(args).pipe(
       takeUntil(this.onDestroy$),
     ).subscribe((response) => {
-      console.log('addAuthorsToLocalstorage subscribe:', response);
       if (response) {
         this.authors = response.map((item: AuthorInterface) => Object.assign({}, item));
         this.refreshFields();

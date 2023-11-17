@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {NotFoundComponent} from "./core/components/not-found/not-found.component";
+import {AuthorsComponent} from "./dashboard/components/authors/authors.component";
 
 const routes: Routes = [
-  // {
-  //   path: 'login',
-  //   loadChildren: () => import('./authentication/authentication.module').then(mod => mod.AuthenticationModule),
-  // },
   { path: '',
     loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule),
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule),
   }
 ];
 
