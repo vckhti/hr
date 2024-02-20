@@ -15,16 +15,17 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('question');
             $table->text('variant1');
             $table->text('variant2');
             $table->text('variant3');
             $table->text('variant4');
             $table->text('variant5');
             $table->text('variant6');
-            $table->integer('execution_time')->nullable();
+            $table->integer('execution_time_id')->nullable();
             $table->text('right_variant');
-            $table->text('history');
-            $table->boolean('come_back')->default(false);
+            $table->integer('history_id')->nullable();
+            $table->integer('come_back_id')->nullable();
         });
     }
 

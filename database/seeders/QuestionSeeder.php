@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Questions\QuestionsModel;
 use Illuminate\Container\Container;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -25,16 +26,20 @@ class QuestionSeeder extends Seeder
     public function run()
     {
 
-        DB::table('questions')->insert([
-        'variant1' => $this->faker->sentence(12),
-        'variant2' => $this->faker->sentence(12),
-        'variant3' => $this->faker->sentence(12),
-        'variant4' => $this->faker->sentence(12),
-        'variant5' => $this->faker->sentence(12),
-        'variant6' => $this->faker->sentence(12),
-        'execution_time' => $this->faker->unixTime(),
-        'right_variant' => $this->faker->sentence(12),
-        'history' => $this->faker->sentence(3),
-        ]);
+//        DB::table('questions')->insert([
+//        'variant1' => $this->faker->sentence(12),
+//        'variant2' => $this->faker->sentence(12),
+//        'variant3' => $this->faker->sentence(12),
+//        'variant4' => $this->faker->sentence(12),
+//        'variant5' => $this->faker->sentence(12),
+//        'variant6' => $this->faker->sentence(12),
+//        'execution_time' => $this->faker->unixTime(),
+//        'right_variant' => $this->faker->sentence(12),
+//        'history' => $this->faker->sentence(3),
+//        ]);
+
+        // QuestionsModel::factory()->create();
+        QuestionsModel::factory()->count(20)->create();
+       // factory(QuestionsModel::class,25)->create();
     }
 }

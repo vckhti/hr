@@ -2,6 +2,7 @@
 
 namespace App\Models\Questions;
 
+use Database\Factories\QuestionsFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,19 +10,25 @@ class QuestionsModel extends Model
 {
     protected $table = "questions";
 
+    public $timestamps = false;
+
 
     protected $fillable =
         [
+            'question',
             'variant1',
             'variant2',
             'variant3',
             'variant4',
             'variant5',
             'variant6',
-            'execution_time',
             'right_variant',
-            'history' ,
         ];
 
     use HasFactory;
+
+    protected static function newFactory()
+    {
+        return QuestionsFactory::new();
+    }
 }

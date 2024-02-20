@@ -9,6 +9,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AuthorsComponent } from './components/authors/authors.component';
 import { BooksComponent } from './components/books/books.component';
 import {PersistanceService} from "./services/persistance.service";
+import { TestLayoutComponent } from './components/test-layout/test-layout.component';
+import { QuestionComponent } from './components/question/question.component';
+import { AnswerComponent } from './components/answer/answer.component';
+import {DashboardService} from "./services/dashboard.service";
 
 @NgModule({
   declarations: [
@@ -17,7 +21,10 @@ import {PersistanceService} from "./services/persistance.service";
     FooterComponent,
     SidebarComponent,
     AuthorsComponent,
-    BooksComponent
+    BooksComponent,
+    TestLayoutComponent,
+    QuestionComponent,
+    AnswerComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +33,8 @@ import {PersistanceService} from "./services/persistance.service";
     ReactiveFormsModule
   ],
   providers: [
-    PersistanceService
+    PersistanceService,
+    DashboardService
   ]
 })
 export class DashboardModule { }

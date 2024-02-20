@@ -1,82 +1,114 @@
+body{
+  min-height: 100%;
+}
+
+/* You can add global styles to this file, and also import other style files */
 .dashboard-outer-wrapper {
-  //max-width: 1010px;
+  max-width: 1010px;
   width: 100%;
-  height: 100%;
   margin: 0 auto;
+  //padding: 5px;
+  //padding-top: 20px;
+ // border: 1px solid yellow;
+  min-height: 98vh;
 }
 
 .dashboard-inner-wrapper {
   display: flex;
+  flex-direction: row;
+ // border: 1px solid black;
+  height: 100%;
+  flex: 0 1 auto;
+}
+
+.dashboard-inner-wrapper__left-block {
+  margin-right: 25px;
+  max-width: 225px;
+  width: 100%;
+  //flex-shrink: 0;
+  order: 1;
+  //max-width: 100%;
+  border: 1px solid blue;
+}
+
+.dashboard-inner-wrapper__right-block {
+  width: 100%;
+  display: flex;
   flex-direction: column;
-  min-height: 86vh;
+
+  overflow: hidden;
+  order: 2;
+ // border: 1px solid green;
+  height: 100%;
 }
 
 .dashboard-content {
   grid-area: content;
   background-color: #FFF;
   border-radius: 4px;
+  padding: 20px 0;
+  //// border: 1px solid #d6d6d6;
+  //height: 100%;
+  min-height: 700px;
   flex: 1 1 auto;
-  height: initial;
+  height: 100%;
+ // border: 1px solid red;
 }
 
-.container-table {
-  padding: 1vw;
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-  }
-
-  td, th {
-    border: 1px solid black;
-  }
-
-  tr {
-    height: 40px;
-  }
+app-mobile-panel {
+  display: none;
 }
 
-.container-input {
-  min-height: 100px;
-  margin-top: 5vh;
-  margin-left: 1vw;
+@media (max-width: 767px) {
 
-  input, button, select {
-    width: 15vw;
-    margin-right: 1vw;
+  app-mobile-panel {
+    display: initial;
   }
 
-  button {
-    border: 1px solid black;
-    border-radius: 2px;
+  app-header {
+    display: none;
   }
 
-  label {
-    font-size: 12px;
+  .dashboard-outer-wrapper {
+    padding-top: 70px;
   }
+
+  .dashboard-inner-wrapper__left-block {
+    order: 2;
+    max-width: 100%;
+  }
+
+  .dashboard-inner-wrapper {
+    flex-direction: column;
+  }
+
+  .dashboard-content {
+    height: 100%;
+  }
+
 }
 
-.field-error {
-  border: 1px solid red;
+.form-cols {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
 }
 
-.button {
-  text-align: center;
+.form-col {
+  width: 100%;
+  //border: 1px solid black;
+}
+
+.app-button{
+  background-color: #0e5a83;
+  padding: 7px 15px;
+  color: #FFF;
   cursor: pointer;
-  outline: none;
-  color: black;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 2px #999;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: box-shadow .1s;
+  border: 1px solid darken(#0e5a83, 3%);
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-
-.button:active {
-  background-color: #bdc2bd;
-  box-shadow: 0 0px #666;
-  transform: translateY(2px);
-}
-
-
-
 
