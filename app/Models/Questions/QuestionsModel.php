@@ -2,6 +2,7 @@
 
 namespace App\Models\Questions;
 
+use App\Models\AnswersModel;
 use Database\Factories\QuestionsFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,4 +32,13 @@ class QuestionsModel extends Model
     {
         return QuestionsFactory::new();
     }
+
+//    public function answers()
+//    {
+//        return $this->hasMany(
+//            AnswersModel::class,
+//            'answer_id', // Внешний ключ в таблице questions
+//            'id' // Локальный ключ в таблице questions
+//        );
+//    }
 }

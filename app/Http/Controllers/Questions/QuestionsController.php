@@ -8,6 +8,6 @@ use App\Models\Questions\QuestionsModel;
 class QuestionsController extends Controller
 {
     public function getQuestions() {
-        return response()->json(QuestionsModel::get(),200);
+        return response()->json(QuestionsModel::with('answers')->get(),200);
     }
 }

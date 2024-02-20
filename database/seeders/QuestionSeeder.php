@@ -26,16 +26,8 @@ class QuestionSeeder extends Seeder
     public function run()
     {
 
-//        DB::table('questions')->insert([
-//        'variant1' => $this->faker->sentence(12),
-//        'variant2' => $this->faker->sentence(12),
-//        'variant3' => $this->faker->sentence(12),
-//        'variant4' => $this->faker->sentence(12),
-//        'variant5' => $this->faker->sentence(12),
-//        'variant6' => $this->faker->sentence(12),
-//        'execution_time' => $this->faker->unixTime(),
-//        'right_variant' => $this->faker->sentence(12),
-//        'history' => $this->faker->sentence(3),
+//        DB::table('answers')->insert([
+//        'question_id' => rand(1, 1),
 //        ]);
 
         // QuestionsModel::factory()->create();
