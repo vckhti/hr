@@ -64,9 +64,9 @@ export class RegionsModel {
   }
 
   public getSelectedAnswer(index: number): number | null {
-    if (this.data && this.data.length > 0 && index && this.data[index].answers?.current_value) {
-      const answersLength=this.data[index].answers;
-      return (this.data[index].answers.current_value as number);
+    const answersLength = this.data[index]?.answers.length as number;
+    if (this.data && this.data.length > 0 && index && this.data[index]?.answers[answersLength - 1]?.current_value) {
+      return (this.data[index]?.answers[answersLength - 1]?.current_value as number);
     } else {
       return null;
     }

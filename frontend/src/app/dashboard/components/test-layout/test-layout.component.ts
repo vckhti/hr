@@ -43,19 +43,23 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
   }
 
   public submit(event: number): void {
-    console.log('event', event, this.model.getQuestion(this.model.selectedQuestionIndex));
+    const answersLength = this.model.getQuestion(this.model.selectedQuestionIndex)?.answers.length as number;
     this.selectedAnswer = event;
-    if (this.model.getQuestion(this.model.selectedQuestionIndex) !== undefined) {
-      console.log('event if',this.model.selectedQuestionIndex, event);
+    if (this.model.getQuestion(this.model.selectedQuestionIndex) !== undefined && answersLength > 0) {
+      this._subscriptions.add(
+        this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, event).subscribe((res: any) => {
+          this.model.getQuestion(this.model.selectedQuestionIndex).answers[answersLength - 1].current_value = event;
+        })
+      );
+    }
+    else if (this.model.getQuestion(this.model.selectedQuestionIndex) !== undefined && answersLength === 0) {
       const answer: IAnswerInterface = {
         question_id: this.model.selectedQuestionIndex,
         current_value: event
       }
-
       this._subscriptions.add(
         this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, event).subscribe((res: any) => {
-          console.log('subscribe',res);
-          this.model.getQuestion(this.model.selectedQuestionIndex).answers = answer;
+          this.model.getQuestion(this.model.selectedQuestionIndex).answers.push(answer) ;
         })
       );
     }

@@ -14,6 +14,6 @@ export interface IQuestionInterface {
   history_id: number | null,
   come_back_id: number | null,
   answer_id: number | null,
-  answers: IAnswerInterface
+  answers: IAnswerInterface[]
 
 }

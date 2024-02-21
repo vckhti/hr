@@ -35,7 +35,7 @@ class QuestionsModel extends Model
 
     public function answers()
     {
-        return $this->hasOne(
+        return $this->hasMany(
             AnswersModel::class,
             'question_id', // Внешний ключ в таблице questions
             'id' // Локальный ключ в таблице questions
