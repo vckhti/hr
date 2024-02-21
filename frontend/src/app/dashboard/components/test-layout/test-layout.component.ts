@@ -3,6 +3,7 @@ import {RegionsModel} from "../../models/regions.model";
 import {BehaviorSubject, Subscription, switchMap} from "rxjs";
 import {DashboardService} from "../../services/dashboard.service";
 import {IQuestionInterface} from "../../interfaces/IQuestionInterface";
+import {IAnswerInterface} from "../../interfaces/answer.interface";
 
 @Component({
   selector: 'app-test-layout',
@@ -45,10 +46,17 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
     console.log('event', event, this.model.getQuestion(this.model.selectedQuestionIndex));
     this.selectedAnswer = event;
     if (this.model.getQuestion(this.model.selectedQuestionIndex) !== undefined) {
-      console.log('event if', event);
-      (this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).history_id = event;
+      console.log('event if',this.model.selectedQuestionIndex, event);
+      const answer: IAnswerInterface = {
+        question_id: this.model.selectedQuestionIndex,
+        current_value: event
+      }
+
       this._subscriptions.add(
-        this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, event).subscribe()
+        this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, event).subscribe((res: any) => {
+          console.log('subscribe',res);
+          this.model.getQuestion(this.model.selectedQuestionIndex).answers = answer;
+        })
       );
     }
 
@@ -56,20 +64,17 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
   }
 
   public nextQuestion(): void {
-    console.log('nextQuestion', this.selectedAnswer);
-    if (this.model.selectedQuestionIndex < this.model.getDataArrayLength()) {
+    if (this.model.selectedQuestionIndex < this.model.getDataArrayLength() -1) {
       this.model.selectedQuestionIndex = this.model.selectedQuestionIndex + 1;
-
+      // console.log('nextQuestion', this.model.selectedQuestionIndex);
     }
-
   }
 
   public previousQuestion(): void {
-    console.log('previousQuestion', this.selectedAnswer);
-    if(this.model.selectedQuestionIndex > 1) {
+    if (this.model.selectedQuestionIndex > 1) {
       this.model.selectedQuestionIndex = this.model.selectedQuestionIndex - 1;
+      // console.log('previousQuestion', this.model.selectedQuestionIndex);
     }
-
   }
 
 }

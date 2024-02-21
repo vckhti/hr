@@ -63,13 +63,13 @@ export class RegionsModel {
     return this.data.length ?? 0;
   }
 
-  public getSelectedAnswer(index: number): number {
-    if (this.data && this.data.length > 0 && index) {
-      return (this.data[index].history_id as number);
+  public getSelectedAnswer(index: number): number | null {
+    if (this.data && this.data.length > 0 && index && this.data[index].answers?.current_value) {
+      const answersLength=this.data[index].answers;
+      return (this.data[index].answers.current_value as number);
     } else {
-      return 1;
+      return null;
     }
-    //return 5;
   }
 
   public getQuestion(index: number): any {

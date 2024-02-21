@@ -1,3 +1,5 @@
+import {IAnswerInterface} from "./answer.interface";
+
 export interface IQuestionInterface {
   id: number,
   question: string,
@@ -11,5 +13,7 @@ export interface IQuestionInterface {
   right_variant: number,
   history_id: number | null,
   come_back_id: number | null,
+  answer_id: number | null,
+  answers: IAnswerInterface
 
 }

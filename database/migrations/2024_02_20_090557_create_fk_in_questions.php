@@ -14,7 +14,7 @@ class CreateFkInQuestions extends Migration
     public function up()
     {
         Schema::table('questions', function($table) {
-            $table->integer('answer_id')->unsigned();
+            $table->integer('answer_id')->unsigned()->nullable();
             $table->foreign('answer_id')->references('id')->on('answers');
         });
     }
@@ -26,6 +26,10 @@ class CreateFkInQuestions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+//        Schema::table('questions', function($table) {
+//            $table->dropForeign('answer_id');
+//            $table->dropColumn('answer_id');
+//        });
+         Schema::dropIfExists('questions');
     }
 }

@@ -33,12 +33,12 @@ class QuestionsModel extends Model
         return QuestionsFactory::new();
     }
 
-//    public function answers()
-//    {
-//        return $this->hasMany(
-//            AnswersModel::class,
-//            'answer_id', // Внешний ключ в таблице questions
-//            'id' // Локальный ключ в таблице questions
-//        );
-//    }
+    public function answers()
+    {
+        return $this->hasOne(
+            AnswersModel::class,
+            'question_id', // Внешний ключ в таблице questions
+            'id' // Локальный ключ в таблице questions
+        );
+    }
 }

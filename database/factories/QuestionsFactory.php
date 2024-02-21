@@ -31,7 +31,7 @@ class QuestionsFactory extends Factory
             'variant6' => $this->faker->sentence(12),
             //'execution_time' => $this->faker->unixTime(),
             'right_variant' => rand(1, 6),
-            'answer_id' => null,
+            //'answer_id' => null,
             //'history' => $this->faker->sentence(3),
         ];
     }

@@ -8,13 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class AnswersModel extends Model
 {
+    protected $table = "answers";
+
+    public $timestamps = false;
+
+    protected $fillable =
+        [
+            'current_value',
+
+        ];
+
     use HasFactory;
 
     public function questions()
     {
         return $this->belongsTo(
             QuestionsModel::class,
-            'question_id', // Внешний ключ в таблице answers
+            'answer_id', // Внешний ключ в таблице answers
             'id' // Локальный ключ в таблице answers
         );
     }
