@@ -5,8 +5,12 @@
       <
     </button>
     <button
-      *ngFor="let page of visiblePages"
-      [ngClass]="currentPageProps === page? 'selected' : ''"
+      *ngFor="let page of visiblePages;index as i;"
+      [ngClass]="{
+  'selected': currentPageProps === page,
+  'empty': !model.isQuestionAlreadyTouched(i) === true
+  }"
+
       (click)="onClicked(page)"
       [routerLink]="[urlProps]" [queryParams]="{page: page}"
     >

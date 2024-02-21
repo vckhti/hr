@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {RegionsModel} from "../../models/regions.model";
+import {DashboardModel} from "../../models/dashboardModel";
 import { Subscription} from "rxjs";
 import {DashboardService} from "../../services/dashboard.service";
 import {IQuestionInterface} from "../../interfaces/IQuestionInterface";
@@ -12,7 +12,7 @@ import {IAnswerInterface} from "../../interfaces/answer.interface";
 })
 export class TestLayoutComponent implements OnInit, OnDestroy{
 
-  @Input() model: RegionsModel;
+  @Input() model: DashboardModel;
   private _subscriptions: Subscription;
   selectedAnswer: number | undefined = undefined;
 
@@ -32,6 +32,7 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
 
 
   public submit(event: number): void {
+    // this.model.stopTest();
     const answersLength = this.model.getQuestion(this.model.selectedQuestionIndex)?.answers.length as number;
     this.selectedAnswer = event;
     if (this.model.getQuestion(this.model.selectedQuestionIndex) !== undefined && answersLength > 0) {
@@ -64,6 +65,10 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
     if (this.model.selectedQuestionIndex > 1) {
       this.model.selectedQuestionIndex = this.model.selectedQuestionIndex - 1;
     }
+  }
+
+  public finishTest(): void {
+    this.model.stopTest();
   }
 
 }

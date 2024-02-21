@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {RegionsModel} from "../models/regions.model";
+import {DashboardModel} from "../models/dashboardModel";
 import {map, Observable, of, take} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
@@ -29,7 +29,7 @@ export class DashboardService {
     )
   }
 
-  fetchRegionsToModel(model: RegionsModel): Observable<RegionsModel> {
+  fetchRegionsToModel(model: DashboardModel): Observable<DashboardModel> {
     const url = environment.serverUrl + '/get_questions';
 
     return this.http.get<any>(url).pipe(

@@ -1,4 +1,5 @@
 .pagination__pages {
+  padding-left: 225px;
   margin: 0 auto;
   width: 100%;
   //max-width: 300px;
@@ -12,7 +13,7 @@
   //align-self: end;
   display: flex;
   flex-direction: row;
-  padding-left: 0 !important;
+  //padding-left: 0 !important;
 
   //position: fixed;
   //z-index: 9;
@@ -45,7 +46,7 @@
   button {
     border: none;
     border-radius: 5px;
-    background-color: #0266fc;
+    background-color: #0e5a83;
     width: 32px;
     height: 28px;
     display: flex;
@@ -62,6 +63,10 @@
 
     &.selected {
       background-color: #f51162;
+    }
+
+    &.empty {
+      background-color: #421515;
     }
 
     &:not(:last-child) {

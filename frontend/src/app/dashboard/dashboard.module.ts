@@ -14,6 +14,7 @@ import { QuestionComponent } from './components/question/question.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import {DashboardService} from "./services/dashboard.service";
 import {PaginationModule} from "./modules/pagination/pagination.module";
+import { CountdownComponent } from './components/countdown/countdown.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {PaginationModule} from "./modules/pagination/pagination.module";
     BooksComponent,
     TestLayoutComponent,
     QuestionComponent,
-    AnswerComponent
+    AnswerComponent,
+    CountdownComponent
   ],
   imports: [
     CommonModule,

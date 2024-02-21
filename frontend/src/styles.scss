@@ -4,7 +4,7 @@ body{
 
 /* You can add global styles to this file, and also import other style files */
 .dashboard-outer-wrapper {
-  max-width: 1010px;
+  max-width: 90%;
   width: 100%;
   margin: 0 auto;
   //padding: 5px;
@@ -28,7 +28,7 @@ body{
   //flex-shrink: 0;
   order: 1;
   //max-width: 100%;
-  border: 1px solid blue;
+  //border: 1px solid blue;
 }
 
 .dashboard-inner-wrapper__right-block {
@@ -115,5 +115,22 @@ app-mobile-panel {
 button:disabled {
   background-color: #85959f;
   border: 1px solid darken(#85959f, 3%);
+}
+
+.app-button_red{
+  background-color: #811038;
+  padding: 7px 15px;
+  color: #FFF;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: box-shadow .1s;
+  border: 1px solid darken(#811038, 3%);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+fieldset{
+  border-radius: 6px;
+  border: 1px solid #d2d2d2;
 }
 

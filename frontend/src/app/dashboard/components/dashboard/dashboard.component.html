@@ -8,7 +8,10 @@
 
     <div class="dashboard-inner-wrapper__left-block">
       <!--Sidebar-->
-      <app-sidebar></app-sidebar>
+      <app-sidebar>
+
+      </app-sidebar>
+      <app-countdown [model]="model"></app-countdown>
     </div>
 
     <div class="dashboard-inner-wrapper__right-block">
@@ -25,6 +28,7 @@
 
   <app-footer>
     <mc-pagination
+      [model]="model"
       [total]="model.getDataArrayLength()-1"
       [currentPage]="model.selectedQuestionIndex"
       [limit]="1"

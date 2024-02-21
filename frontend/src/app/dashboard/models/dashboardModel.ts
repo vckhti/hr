@@ -1,13 +1,14 @@
-import {ResponseDataInterface} from "../interfaces/responseData.interface";
 import {IQuestionInterface} from "../interfaces/IQuestionInterface";
 
-export class RegionsModel {
+export class DashboardModel {
+  testStart: boolean | undefined;
   success: boolean
   errors: any;
   isLoading: boolean;
   selectedQuestionIndex: number;
   selectedQuestion: IQuestionInterface | undefined;
   public data: IQuestionInterface[] = [];
+  public touchedIndexes: number[] = []
 
   constructor() {
     this.success = true;
@@ -15,9 +16,22 @@ export class RegionsModel {
     this.isLoading = false;
     this.selectedQuestionIndex = 1;
     this.selectedQuestion = undefined;
+    this.testStart = false;
   }
 
-  public deleteFromDataArray(regionId: number): RegionsModel {
+  startTest(): void {
+    this.testStart = false;
+  }
+
+  stopTest(): void {
+    this.testStart = true;
+  }
+
+  isTestActive(): boolean {
+    return this.testStart === true;
+  }
+
+  public deleteFromDataArray(regionId: number): DashboardModel {
     for (let i = 0; i < this.data.length; i++) {
       if (regionId === this.data[i].id) {
         this.data.splice(i, 1);
@@ -27,13 +41,13 @@ export class RegionsModel {
     return this
   }
 
-  public pushToDataArray(region: any): RegionsModel {
+  public pushToDataArray(region: any): DashboardModel {
 
     this.data.push(region);
     return this
   }
 
-  public findElementAndEdit(region: any): RegionsModel {
+  public findElementAndEdit(region: any): DashboardModel {
     for (let i = 0; i < this.data.length; i++) {
       if (region.id === this.data[i].id) {
         this.data[i] = region;
@@ -43,14 +57,14 @@ export class RegionsModel {
     return this
   }
 
-  public saveToDataArray(array: IQuestionInterface[]): RegionsModel {
+  public saveToDataArray(array: IQuestionInterface[]): DashboardModel {
     this.data = [];
     this.data = array;
 
     return this;
   }
 
-  public saveData(response: IQuestionInterface[]): RegionsModel {
+  public saveData(response: IQuestionInterface[]): DashboardModel {
     console.log('saveData', response);
     this.data = response;
     this.errors = null;
@@ -72,7 +86,28 @@ export class RegionsModel {
     }
   }
 
+  isQuestionAlreadyTouched(index: number): boolean {
+    let uniqueArray = [...this.uniqueArray(this.touchedIndexes)];
+    return uniqueArray.includes(index);
+  }
+
+  isAllQuestionsTouched(questionsLength: number):boolean {
+    let uniqueArray = [...this.uniqueArray(this.touchedIndexes)];
+
+    return questionsLength === uniqueArray.length;
+  }
+
+  private uniqueArray(arr: any): any[] {
+    let a = [];
+    for (let i = 0, l = arr.length; i < l; i++)
+      if (a.indexOf(arr[i]) === -1 && arr[i] !== '')
+        a.push(arr[i]);
+    return a;
+  }
+
   public getQuestion(index: number): any {
+    this.touchedIndexes.push(index-1);
+
     //console.log('getAnswer this.data[index]');
     if (this.data && this.data.length && index) {
       //console.log('getAnswer this.data[index]', this.data[index]);
@@ -102,10 +137,17 @@ export class RegionsModel {
     return (this.selectedQuestionIndex === 1 );
   }
 
-  public cleanErrors(): RegionsModel {
+  public cleanErrors(): DashboardModel {
     this.errors = null;
 
     return this;
+  }
+
+  public isNoAnswer(currentNumber: number): boolean {
+    if(this.selectedQuestionIndex && (currentNumber > this.selectedQuestionIndex -1)) {
+      return true;
+    }
+    return false;
   }
 
 

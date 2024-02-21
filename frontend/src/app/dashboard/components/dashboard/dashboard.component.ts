@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, Subscription, switchMap} from "rxjs";
-import {RegionsModel} from "../../models/regions.model";
+import {DashboardModel} from "../../models/dashboardModel";
 import {DashboardService} from "../../services/dashboard.service";
 
 @Component({
@@ -9,14 +9,14 @@ import {DashboardService} from "../../services/dashboard.service";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy{
-  public model: RegionsModel;
-  private _listInitializer: BehaviorSubject<RegionsModel>;
+  public model: DashboardModel;
+  private _listInitializer: BehaviorSubject<DashboardModel>;
   private _subscriptions: Subscription;
 
   constructor(
     private dashboardService: DashboardService,
   ) {
-    this.model = new RegionsModel();
+    this.model = new DashboardModel();
     this._subscriptions = new Subscription();
     this._listInitializer = new BehaviorSubject(this.model);
   }
@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   private initRegionsDataArrayObserver(): void {
     this._subscriptions.add(
       this._listInitializer.pipe(
-        switchMap((model: RegionsModel) => this.dashboardService.fetchRegionsToModel(model)))
+        switchMap((model: DashboardModel) => this.dashboardService.fetchRegionsToModel(model)))
         .subscribe()
     );
   }
