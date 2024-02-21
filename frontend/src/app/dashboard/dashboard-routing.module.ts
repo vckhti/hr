@@ -10,8 +10,8 @@ const routes: Routes = [
     canActivate: [
     ],
     children: [
-      {path: '', redirectTo: '/test', pathMatch: 'full'},
-      {path: 'test', component: TestLayoutComponent},
+      // {path: '', redirectTo: '/test', pathMatch: 'full'},
+      // {path: 'test', component: TestLayoutComponent},
       //{path: 'books', component: BooksComponent},
       {path: '**', redirectTo: '/test', pathMatch: 'full'},
     ],

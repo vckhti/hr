@@ -1,5 +1,3 @@
-<p>test-layout works!</p>
-
 <fieldset>
   <div class="form-group">
     <app-question [question]=model.getQuestion(model.selectedQuestionIndex)?.question></app-question>
@@ -41,6 +39,6 @@
 </fieldset>
 
 <div class="buttons-wrapper">
-  <button class="app-button" type="button" (click)="previousQuestion()">Предыдущий</button>
-  <button class="app-button" type="button" (click)="nextQuestion()">Следующий</button>
+  <button class="app-button" type="button" (click)="previousQuestion()" [disabled]="model.isFirstQuestion()" >Предыдущий</button>
+  <button class="app-button" type="button" (click)="nextQuestion()" [disabled]="model.isLastQuestion()">Следующий</button>
 </div>

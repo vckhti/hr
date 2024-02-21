@@ -14,11 +14,22 @@
     <div class="dashboard-inner-wrapper__right-block">
       <!--Content-->
       <div class="dashboard-content">
-        <router-outlet></router-outlet>
+        <app-test-layout [model]="model" ></app-test-layout>
+       <!-- <router-outlet></router-outlet>-->
       </div>
     </div>
 
   </div>
 
-  <app-footer></app-footer>
+
+
+  <app-footer>
+    <mc-pagination
+      [total]="model.getDataArrayLength()-1"
+      [currentPage]="model.selectedQuestionIndex"
+      [limit]="1"
+      (newItemEvent)="handleCurrentPage($event)"
+    ></mc-pagination>
+
+  </app-footer>
 </div>

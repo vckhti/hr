@@ -94,6 +94,14 @@ export class RegionsModel {
 
   }
 
+  isLastQuestion(): boolean {
+    return (this.selectedQuestionIndex === (this.data.length - 1) );
+  }
+
+  isFirstQuestion(): boolean {
+    return (this.selectedQuestionIndex === 1 );
+  }
+
   public cleanErrors(): RegionsModel {
     this.errors = null;
 

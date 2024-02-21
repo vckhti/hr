@@ -13,6 +13,7 @@ import { TestLayoutComponent } from './components/test-layout/test-layout.compon
 import { QuestionComponent } from './components/question/question.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import {DashboardService} from "./services/dashboard.service";
+import {PaginationModule} from "./modules/pagination/pagination.module";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {DashboardService} from "./services/dashboard.service";
     CommonModule,
     DashboardRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginationModule
   ],
   providers: [
     PersistanceService,

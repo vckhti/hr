@@ -1,5 +1,5 @@
 <div class="form-group">
-<span>
-  <input name="answer" #radioInput type="radio" [value]=num (click)="onRowSelect()" > {{answer}}
-</span>
+<label [for]=num>
+  <input name="answer" #radioInput type="radio" [value]=num (click)="onRowSelect()" [id]=num > {{answer}}
+</label>
 </div>

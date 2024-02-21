@@ -112,3 +112,8 @@ app-mobile-panel {
   text-overflow: ellipsis;
 }
 
+button:disabled {
+  background-color: #85959f;
+  border: 1px solid darken(#85959f, 3%);
+}
+
