@@ -15,7 +15,7 @@ class AnswersModel extends Model
     protected $fillable =
         [
             'current_value',
-
+            'thinking_time',
         ];
 
     use HasFactory;

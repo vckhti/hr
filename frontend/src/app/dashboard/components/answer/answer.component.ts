@@ -16,26 +16,20 @@ import {
 })
 export class AnswerComponent {
   @ViewChild('radioInput', {static: true}) radioInput: ElementRef;
-  @Input('questionIndex') set questionIndex(questionIndex: number){
-    if (questionIndex){
-      this.radioInput.nativeElement.checked = false;
-    }
-  }
-  _questionIndex: any;
-  get questionIndex(): any {
-    return this._questionIndex;
-  }
   @Input() answer: string  = '';
   @Input() num: number | undefined = undefined;
+
+  _questionIndex: number ;
+  get questionIndex(): number {return this._questionIndex;}
+  @Input('questionIndex') set questionIndex(questionIndex: number){
+    if (questionIndex){this.radioInput.nativeElement.checked = false;}
+  }
+
+  _selected:  number | undefined | null;
+  get selected():  number | undefined | null {return this._selected;}
   @Input('selected') set selected(selected: number | undefined | null) {
     this._selected = selected;
-    if (selected === this.num) {
-      this.radioInput.nativeElement.checked = true;
-    }
-  }
-  _selected: any;
-  get selected(): any {
-    return this._selected;
+    if (selected === this.num) {this.radioInput.nativeElement.checked = true;}
   }
 
   @Output() itemClick = new EventEmitter<number>();

@@ -15,17 +15,15 @@ export class DashboardService {
   ) {
   }
 
-  updateAnswer(question_id: number, current_choiсe: number): any {
+  updateAnswer(question_id: number, current_choiсe: number, thinkingTime: number ): any {
     const url = environment.serverUrl + '/updateAnswer';
     const args = {
       question_id: question_id,
-      current_choiсe: current_choiсe
+      current_choiсe: current_choiсe,
+      thinking_time: thinkingTime
     }
     return this.http.post(url,args).pipe(
       take(1)
-      // map(() => {
-      //   return of(null)
-      // })
     )
   }
 

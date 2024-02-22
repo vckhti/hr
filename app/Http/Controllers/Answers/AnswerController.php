@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Answers;
 
 use App\Http\Controllers\Controller;
 use App\Models\AnswersModel;
-use App\Models\CommonResponse;
 use App\ValidationFacade;
 use Illuminate\Http\Request;
 
@@ -15,6 +14,7 @@ class AnswerController extends Controller
         $answer= new AnswersModel();
         $answer->current_value = $input["current_choiсe"];
         $answer->question_id = $input["question_id"];
+        $answer->thinking_time = $input["thinking_time"];
         $answer->save();
         // dd($question);
 

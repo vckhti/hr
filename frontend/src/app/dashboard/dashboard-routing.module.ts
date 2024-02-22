@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {TestLayoutComponent} from "./components/test-layout/test-layout.component";
+import {LoginComponent} from "../modules/auth/components/login/login.component";
+import {NotFoundComponent} from "../core/components/not-found/not-found.component";
 
 const routes: Routes = [
   {
@@ -10,10 +11,10 @@ const routes: Routes = [
     canActivate: [
     ],
     children: [
-      // {path: '', redirectTo: '/test', pathMatch: 'full'},
-      // {path: 'test', component: TestLayoutComponent},
-      //{path: 'books', component: BooksComponent},
-      {path: '**', redirectTo: '/test', pathMatch: 'full'},
+      {
+        path: '**',
+        component: NotFoundComponent
+      }
     ],
   },
 ];

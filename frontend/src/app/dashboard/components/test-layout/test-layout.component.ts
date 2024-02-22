@@ -36,19 +36,26 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
     const answersLength = this.model.getQuestion(this.model.selectedQuestionIndex)?.answers.length as number;
     this.selectedAnswer = event;
     if (this.model.getQuestion(this.model.selectedQuestionIndex) !== undefined && answersLength > 0) {
+      let now = new Date().getTime();
+      const ms = now - this.model.getQuestion(this.model.selectedQuestionIndex).execution_time_id;
+      // console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
       this._subscriptions.add(
-        this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, event).subscribe((res: any) => {
+        this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, event, ms).subscribe((res: any) => {
           this.model.getQuestion(this.model.selectedQuestionIndex).answers[answersLength - 1].current_value = event;
+
         })
       );
     }
     else if (this.model.getQuestion(this.model.selectedQuestionIndex) !== undefined && answersLength === 0) {
+      let now = new Date().getTime();
+      const ms = now - this.model.getQuestion(this.model.selectedQuestionIndex).execution_time_id;
+      // console.log('Время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
       const answer: IAnswerInterface = {
         question_id: this.model.selectedQuestionIndex,
         current_value: event
       }
       this._subscriptions.add(
-        this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, event).subscribe((res: any) => {
+        this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, event, ms).subscribe((res: any) => {
           this.model.getQuestion(this.model.selectedQuestionIndex).answers.push(answer) ;
         })
       );
@@ -70,5 +77,10 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
   public finishTest(): void {
     this.model.stopTest();
   }
+
+ public questionChanged(): void {
+    // console.log(`questionChanged ${this.model.selectedQuestionIndex}`);
+    this.model.getQuestion(this.model.selectedQuestionIndex).execution_time_id = new Date().getTime();
+ }
 
 }

@@ -3,7 +3,10 @@
   <div>
     <fieldset>
       <div class="form-group">
-        <app-question [question]=model.getQuestion(model.selectedQuestionIndex)?.question></app-question>
+        <app-question
+          [question]=model.getQuestion(model.selectedQuestionIndex)
+          (questionIndexChanged)= questionChanged()
+        ></app-question>
       </div>
 
       <div class="form-cols">

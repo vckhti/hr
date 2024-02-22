@@ -9,6 +9,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NotFoundComponent} from "./core/components/not-found/not-found.component";
 import {MessageDialogComponent} from "./core/components/message-dialog/message-dialog.component";
 import {HttpClientModule} from "@angular/common/http";
+import {AuthModule} from "./modules/auth/auth.module";
+import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {AuthGuard} from "./modules/auth/services/auth.guard";
 
 @NgModule({
   declarations: [
@@ -22,11 +27,19 @@ import {HttpClientModule} from "@angular/common/http";
     HttpClientModule,
     DropdownModule,
     FormsModule,
+    StoreModule.forRoot({}, {
+    }),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      name: 'hr-test',
+      logOnly: true
+    }),
+    AuthModule,
     BrowserAnimationsModule,
-
-
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

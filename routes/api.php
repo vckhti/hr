@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Answers\AnswerController;
 use App\Http\Controllers\Questions\QuestionsController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Users\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('login', [UsersController::class,'login']);
 
 Route::any('/get_questions', [QuestionsController::class, 'getQuestions']);
 Route::post('/updateAnswer', [AnswerController::class, 'updateAnswer']);

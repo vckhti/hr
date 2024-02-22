@@ -1,4 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {IQuestionInterface} from "../../interfaces/IQuestionInterface";
 
 @Component({
   selector: 'app-question',
@@ -6,6 +7,28 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent {
-  @Input() question: string = '';
+
+  oldQuestionIndex: number | undefined;
+  _question: IQuestionInterface;
+
+  get question(): IQuestionInterface | null {
+    return this._question ?? null;
+  }
+
+  @Input('question') set question(question: IQuestionInterface | null) {
+    // console.log('question', question);
+    if (question) {
+      if (!this.oldQuestionIndex) {
+        this.oldQuestionIndex = question.id;
+        this.questionIndexChanged.emit(true);
+      } else if (this.oldQuestionIndex && this.oldQuestionIndex !== question.id) {
+        this.questionIndexChanged.emit(true);
+        this.oldQuestionIndex = question.id;
+      }
+      this._question = question;
+    }
+  }
+
+  @Output() questionIndexChanged = new EventEmitter<boolean>();
 
 }
