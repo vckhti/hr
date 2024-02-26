@@ -8,7 +8,8 @@ export class DashboardModel {
   selectedQuestionIndex: number;
   selectedQuestion: IQuestionInterface | undefined;
   public data: IQuestionInterface[] = [];
-  public touchedIndexes: number[] = []
+  public touchedIndexes: number[] = [];
+  testTimeLeft: number = 0;
 
   constructor() {
     this.success = true;

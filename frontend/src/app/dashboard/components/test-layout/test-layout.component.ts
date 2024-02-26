@@ -75,6 +75,7 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
   }
 
   public finishTest(): void {
+    console.log('finishTime', this.model.testTimeLeft - 1);
     this.model.stopTest();
   }
 

@@ -1,0 +1,42 @@
+<div class="admin-navbar">
+  <nav>
+    <div class="menu">
+
+      <div class="navbar-items">
+        <!--        <div>-->
+        <!--          <a routerLink="/">Перейти в магазин</a>-->
+        <!--        </div>-->
+
+        <div>
+          <ul class="navbar-li" *ngIf="authService.isAuthenticated(); else login">
+            <li routerLinkActive="active">
+              <a [routerLink]="['/admin','tests']">Тесты</a>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+
+      <div>
+        <ul>
+          <li routerLinkActive="active">
+            <a href="#" (click)="logout($event)">Выйти</a>
+          </li>
+        </ul>
+        <ng-template #login>
+          <ul>
+            <li routerLinkActive="active">
+              <a [routerLink]="['/admin','login']">Войти</a>
+            </li>
+          </ul>
+        </ng-template>
+      </div>
+    </div>
+
+  </nav>
+</div>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

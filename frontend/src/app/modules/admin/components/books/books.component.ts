@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
-import {PersistanceService} from "../../services/persistance.service";
-import {AuthorInterface} from "../../interfaces/author.interface";
+import {AuthorInterface} from "../../../../dashboard/interfaces/author.interface";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {BookInterface} from "../../interfaces/book.interface";
-import {SortConfigInterface} from "../../interfaces/sort-config.interface";
+import {BookInterface} from "../../../../dashboard/interfaces/book.interface";
+import {SortConfigInterface} from "../../../../dashboard/interfaces/sort-config.interface";
+import {PersistanceService} from "../../services/persistance.service";
 
 @Component({
   selector: 'app-books',

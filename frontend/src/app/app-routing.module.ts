@@ -16,6 +16,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule),
   },
+  { path: 'admin',
+    //canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/admin/admin.module').then(mod => mod.AdminModule),
+  },
+  {
+    path: '**',
+    component: LoginComponent
+  }
 ];
 
 

@@ -13,6 +13,7 @@ export class PersistanceService {
     localStorage.removeItem('email');
     localStorage.removeItem('token-exp');
     localStorage.removeItem('roles');
+    localStorage.removeItem('id');
   }
 
   get(key: string): any {

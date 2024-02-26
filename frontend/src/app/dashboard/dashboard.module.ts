@@ -6,9 +6,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import {DashboardRoutingModule} from "./dashboard-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { AuthorsComponent } from './components/authors/authors.component';
-import { BooksComponent } from './components/books/books.component';
-import {PersistanceService} from "./services/persistance.service";
 import { TestLayoutComponent } from './components/test-layout/test-layout.component';
 import { QuestionComponent } from './components/question/question.component';
 import { AnswerComponent } from './components/answer/answer.component';
@@ -22,8 +19,6 @@ import { CountdownComponent } from './components/countdown/countdown.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    AuthorsComponent,
-    BooksComponent,
     TestLayoutComponent,
     QuestionComponent,
     AnswerComponent,
@@ -37,7 +32,6 @@ import { CountdownComponent } from './components/countdown/countdown.component';
     PaginationModule
   ],
   providers: [
-    PersistanceService,
     DashboardService
   ]
 })

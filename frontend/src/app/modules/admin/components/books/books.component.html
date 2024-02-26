@@ -1,44 +1,44 @@
 <div class="content-wrapper">
   <div class="container">
-    <div class="container-input">
-      <div class="row">
+<!--    <div class="container-input">-->
+<!--      <div class="row">-->
 
-        <form [formGroup]="form" (ngSubmit)="addBook()">
+<!--        <form [formGroup]="form" (ngSubmit)="addBook()">-->
 
-        <label *ngIf="authors && authors.length > 0" for="authorsList">Выберите автора *:&nbsp; </label>
-        <select id="authorsList" formControlName="bookAuthor" *ngIf="authors && authors.length > 0">
-          <option disabled selected value="">Выберите автора</option>
-          <option *ngFor="let item of authors" value="{{item}}">{{item}}</option>
-        </select>
-        <input formControlName="bookName" placeholder="Введите название книги *" type="text">
-        <input formControlName="bookPublisher" placeholder="Введите издателя *">
-        <input formControlName="bookYear" placeholder="Введите год *">
+<!--        <label *ngIf="authors && authors.length > 0" for="authorsList">Выберите автора *:&nbsp; </label>-->
+<!--        <select id="authorsList" formControlName="bookAuthor" *ngIf="authors && authors.length > 0">-->
+<!--          <option disabled selected value="">Выберите автора</option>-->
+<!--          <option *ngFor="let item of authors" value="{{item}}">{{item}}</option>-->
+<!--        </select>-->
+<!--        <input formControlName="bookName" placeholder="Введите название книги *" type="text">-->
+<!--        <input formControlName="bookPublisher" placeholder="Введите издателя *">-->
+<!--        <input formControlName="bookYear" placeholder="Введите год *">-->
 
-        <button type="submit" class ="button">Добавить книгу</button>
+<!--        <button type="submit" class ="button">Добавить книгу</button>-->
 
-      </form>
+<!--      </form>-->
 
-      </div>
+<!--      </div>-->
 
-    </div>
+<!--    </div>-->
     <div class="container-table">
 
       <table class="table">
-        <col style="width: 9%;"/>
-        <col style="width: 29%;"/>
-        <col style="width: 26%;"/>
-        <col style="width: 26%;"/>
-        <col style="width: 10%;"/>
+        <col style="width: 20%;"/>
+        <col style="width: 20%;"/>
+        <col style="width: 20%;"/>
+        <col style="width: 20%;"/>
+        <col style="width: 20%;"/>
         <thead>
         <tr>
-          <th colspan="5">Книги</th>
+          <th colspan="5">Результаты тестирования</th>
         </tr>
         <tr>
-          <th scope="col">id</th>
-          <th scope="col">Автор</th>
-          <th scope="col">Название</th>
-          <th scope="col">Издатель</th>
-          <th scope="col">Год</th>
+          <th scope="col">Id</th>
+          <th scope="col">Тестируемый</th>
+          <th scope="col">Кол-во правильных ответов</th>
+          <th scope="col">Кол-во неправильных ответов</th>
+          <th scope="col">Детали</th>
         </tr>
         </thead>
 
@@ -47,7 +47,7 @@
           <td>
             <button class="sort-button"
                    (click)="onSortContainersClick('id')">
-            Сортировать по полю "id"
+            Сортировать по "id"
             <span *ngIf="sortConfig.asc === true && sortConfig.column === 'id'">\</span>
             <span *ngIf="sortConfig.asc === false || sortConfig.column !== 'id'">/</span>
           </button>
@@ -55,7 +55,7 @@
           <td>
             <button class="sort-button"
                     (click)="onSortContainersClick('bookAuthor')">
-              Сортировать по полю "автор"
+              Сортировать по полю
               <span *ngIf="sortConfig.asc === true && sortConfig.column === 'bookAuthor'">\</span>
               <span *ngIf="sortConfig.asc === false || sortConfig.column !== 'bookAuthor'">/</span>
             </button>
@@ -63,7 +63,7 @@
           <td>
             <button class="sort-button"
                     (click)="onSortContainersClick('bookName')">
-              Сортировать по полю "название"
+              Сортировать по полю
               <span *ngIf="sortConfig.asc === true && sortConfig.column === 'bookName'">\</span>
               <span *ngIf="sortConfig.asc === false || sortConfig.column !== 'bookName'">/</span>
             </button>
@@ -71,7 +71,7 @@
           <td>
             <button class="sort-button"
                     (click)="onSortContainersClick('bookPublisher')">
-              Сортировать по полю "издатель"
+              Сортировать по полю
               <span *ngIf="sortConfig.asc === true && sortConfig.column === 'bookPublisher'">\</span>
               <span *ngIf="sortConfig.asc === false || sortConfig.column !== 'bookPublisher'">/</span>
             </button>
@@ -79,7 +79,7 @@
           <td>
             <button class="sort-button"
                     (click)="onSortContainersClick('bookYear')">
-              Сортировать по полю "год"
+              Сортировать по полю
               <span *ngIf="sortConfig.asc === true && sortConfig.column === 'bookYear'">\</span>
               <span *ngIf="sortConfig.asc === false || sortConfig.column !== 'bookYear'">/</span>
             </button>

@@ -23,8 +23,11 @@ class QuestionsModel extends Model
             'variant4',
             'variant5',
             'variant6',
-            'right_variant',
         ];
+
+    protected $hidden = [
+        'right_variant'
+    ];
 
     use HasFactory;
 

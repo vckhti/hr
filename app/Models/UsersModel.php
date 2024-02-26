@@ -13,10 +13,6 @@ class UsersModel extends Model
   public $email;
   public $id;
 
-  public static $temp_username;
-  public static $temp_role;
-  public static $temp_email;
-  public static $temp_id;
 
   public function __construct(array $args = [])
   {
@@ -47,23 +43,12 @@ class UsersModel extends Model
 
   public static function login(string $login, string $password, ?string $captcha_response = null): bool
   {
-
-    // Checking credentials in billing
-//    $response = OracleFacade::procedure(
-//      'begin issa.ui_login_k(:login, :password, :cursor); end;',
-//      [
-//        ':login' => ['value' => $login],
-//        ':password' => ['value' => $password],
-//      ]
-//    )->first();
-
     //$user = UsersModel::findOrFail($id);
     $response = DB::table('user')
       ->where('name', $login)
       ->where('password', $password)
       ->first();
 
-    //dd($response->name);
 
     if (isset($response)) {
 
@@ -78,6 +63,7 @@ class UsersModel extends Model
       UsersModel::setCurrent($user);
 
       //LogFacade::login($user->login);
+
       return true;
     } else {
       return false;
@@ -86,33 +72,17 @@ class UsersModel extends Model
 
   public static function getCurrent(): ?UsersModel
   {
-    if (self::$temp_role && self::$temp_username && self::$temp_email && self::$temp_id ) {
-      $user = new UsersModel();
-
-      $user->role = self::$temp_role;
-      $user->user_name = self::$temp_username;
-      $user->email = self::$temp_email;
-      $user->id = self::$temp_id;
-
-      return $user;
-    } else {
-      return null;
-    }
-
+      return session('current_user');
   }
 
   public static function setCurrent(UsersModel $user): void
   {
-    self::$temp_role = $user->getUserRole();
-    self::$temp_username = $user->getUserName();
-    self::$temp_email = $user->getEmail();
-    self::$temp_id = $user->getUserId();
-    //session()->put('current_user', $user);
+    session()->put('current_user', $user);
   }
 
   public function getUserRole(): string
   {
-    return ($this->role) ?? 'admin';
+    return ($this->role);
   }
 
   public function getUserName(): string
@@ -122,7 +92,7 @@ class UsersModel extends Model
 
   public function getEmail(): string
   {
-    return ($this->email) ?? 'marimonov@mail.ru';
+    return ($this->email);
   }
 
   public function getUserId(): int

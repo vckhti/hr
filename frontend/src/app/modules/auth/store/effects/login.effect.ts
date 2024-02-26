@@ -50,8 +50,13 @@ export class LoginEffect {
     () =>
       this.actions$.pipe(
         ofType(loginSuccessAction),
-        tap(() => {
-          this.router.navigateByUrl('/dashboard');
+        tap((action: any) => {
+          if (action.currentUser.roles.includes('admin')) {
+            this.router.navigateByUrl('/admin/tests');
+          } else {
+            this.router.navigateByUrl('/dashboard');
+          }
+
         })
       ),
     {dispatch: false}

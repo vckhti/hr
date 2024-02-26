@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {LoginComponent} from "../modules/auth/components/login/login.component";
 import {NotFoundComponent} from "../core/components/not-found/not-found.component";
 
 const routes: Routes = [

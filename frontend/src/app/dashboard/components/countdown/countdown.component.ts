@@ -12,7 +12,10 @@ export class CountdownComponent {
   @Input() model: DashboardModel;
 
   timeRemaining$ = timer(0, 1000).pipe(
-    map(n => (this.seconds - n) * 1000),
+    map(n => {
+      // console.log('(this.seconds - n) * 1000', (this.seconds - n));
+      this.model.testTimeLeft = this.model.testTimeLeft + 1;
+      return (this.seconds - n) * 1000}),
     takeWhile(n => this.model.isTestActive() === false),
     takeWhile(n => n >= 0),
   );
