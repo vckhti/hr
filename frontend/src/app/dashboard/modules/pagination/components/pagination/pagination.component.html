@@ -14,7 +14,7 @@
       (click)="onClicked(page)"
       [routerLink]="[urlProps]" [queryParams]="{page: page}"
     >
-      {{ page }}
+      {{ page + 1}}
     </button>
     <button
       [disabled]="currentPageProps === pagesCount"

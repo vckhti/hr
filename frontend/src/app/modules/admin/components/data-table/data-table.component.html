@@ -1,0 +1,50 @@
+<p-table [value]="items"
+		 [resizableColumns]="true"
+		 columnResizeMode="expand"
+		 selectionMode="single"
+         #table
+		 [filterDelay]="10"
+		 [(selection)]="selectedItem"
+		 (onRowSelect)="onRowSelect()"
+		 (onRowUnselect)="onRowUnselect($event)"
+		 responsiveLayout="scroll"
+		 [paginator]="paginationEnable"
+		 [rows]="perPage"
+		 [loading]="loading">
+
+	<ng-template pTemplate="header">
+		<tr>
+			<ng-container *ngFor="let column of columns">
+				<th pResizableColumn [pSortableColumn]="column.field"
+					[pSortableColumnDisabled]="column.sortable === false"
+					[style.width.px]="column.width"
+					[title]="column.header">
+
+					{{ column.header }}
+					<p-sortIcon [field]="column.field" *ngIf="column.sortable !== false"></p-sortIcon>
+
+				</th>
+			</ng-container>
+		</tr>
+		<tr *ngIf="showFilters">
+			<ng-container *ngFor="let column of columns">
+				<th>
+					<input type="text"
+						   class="table-filter"
+						   (input)="table.filter($any($event).target.value, column.displayField ? column.displayField : column.field , 'contains')"
+          >
+
+        </th>
+			</ng-container>
+		</tr>
+	</ng-template>
+
+	<ng-template pTemplate="body" let-item>
+		<tr [pSelectableRow]="item"  >
+			<th class="like-td" *ngFor="let column of columns" >
+				{{ column.displayField ? item[column.displayField] : item[column.field] }}
+			</th>
+		</tr>
+	</ng-template>
+
+</p-table>

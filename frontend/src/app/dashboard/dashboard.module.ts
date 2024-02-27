@@ -12,6 +12,9 @@ import { AnswerComponent } from './components/answer/answer.component';
 import {DashboardService} from "./services/dashboard.service";
 import {PaginationModule} from "./modules/pagination/pagination.module";
 import { CountdownComponent } from './components/countdown/countdown.component';
+import {DialogModule} from "primeng/dialog";
+import { TestResultsComponent } from './components/test-results/test-results.component';
+import {DialogService} from "primeng/dynamicdialog";
 
 @NgModule({
   declarations: [
@@ -22,17 +25,20 @@ import { CountdownComponent } from './components/countdown/countdown.component';
     TestLayoutComponent,
     QuestionComponent,
     AnswerComponent,
-    CountdownComponent
+    CountdownComponent,
+    TestResultsComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    PaginationModule
+    PaginationModule,
+    DialogModule
   ],
   providers: [
-    DashboardService
+    DashboardService,
+    DialogService
   ]
 })
 export class DashboardModule { }

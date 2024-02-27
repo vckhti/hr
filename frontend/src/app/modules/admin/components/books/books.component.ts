@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
-import {AuthorInterface} from "../../../../dashboard/interfaces/author.interface";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BookInterface} from "../../../../dashboard/interfaces/book.interface";
 import {SortConfigInterface} from "../../../../dashboard/interfaces/sort-config.interface";
-import {PersistanceService} from "../../services/persistance.service";
+import {AdminService} from "../../services/admin.service";
+import {TableColumn} from "../../interfaces/table-column";
 
 @Component({
   selector: 'app-books',
@@ -23,31 +23,31 @@ export class BooksComponent {
 
   sortConfig: SortConfigInterface = { asc: false, column: 'bookAuthor' };
 
-  authors: any = [];
-  books: any = [];
+  data: any = [];
+
+  selectedRow: any;
+
+  columns: TableColumn[] = [
+    {header: 'Id', field: 'id', width: 110, sortable: false},
+    {header: 'Тестируемый', field: 'user_id', width: 200, sortable: false},
+    {header: 'Кол-во правильных ответов', field: 'right_questions', width: 200, sortable: false},
+    {header: 'Кол-во неправильных ответов', field: 'wrong_questions', width: 235, sortable: false},
+    {header: 'Дата прохождения тестирования', field: 'created_at', width: 235, sortable: false},
+  ];
 
   constructor(
-    private persistanceService: PersistanceService
+    private adminService: AdminService
   ) {
   }
 
   ngOnInit() {
-    this.persistanceService.getAuthors().pipe(
-      takeUntil(this.onDestroy$),
-    ).subscribe((response: AuthorInterface[] | null) => {
-      if (response) {
-        this.authors = response.map((item: AuthorInterface) => {
-          return (item.lastName + ' ' + item.firstName + ' ' + item.middleName);
-        });
-      }
-    });
 
 
-    this.persistanceService.getBooks().pipe(
+    this.adminService.getTestResults().pipe(
       takeUntil(this.onDestroy$),
-    ).subscribe((response: BookInterface[] | null) => {
+    ).subscribe((response: any[] | null) => {
       if (response) {
-        this.books = response.map((item: BookInterface) => Object.assign({}, item));
+        this.data = response.map((item: any) => Object.assign({}, item));
       }
     });
 
@@ -65,22 +65,7 @@ export class BooksComponent {
       return;
     }
 
-    const args: BookInterface = {
-      id: undefined,
-      bookAuthor: this.form.get('bookAuthor')?.value,
-      bookName: this.form.get('bookName')?.value,
-      bookPublisher: this.form.get('bookPublisher')?.value,
-      bookYear: this.form.get('bookYear')?.value,
-    };
 
-    this.persistanceService.addBooksToLocalstorage(args).pipe(
-      takeUntil(this.onDestroy$),
-    ).subscribe((response) => {
-      if (response) {
-        this.form.reset();
-        this.books = response.map((item: BookInterface) => Object.assign({}, item));
-      }
-    });
   }
 
   doSort(): void {
@@ -112,7 +97,7 @@ export class BooksComponent {
   }
 
   sortBooksByID(asc: boolean = true): void {
-    this.books?.sort((a: BookInterface, b: BookInterface) => {
+    this.data?.sort((a: BookInterface, b: BookInterface) => {
       if ( a.id && b.id && a.id > b.id) {
         return asc ? 1 : -1;
       } else if (a.id && b.id && a.id < b.id) {
@@ -124,7 +109,7 @@ export class BooksComponent {
   }
 
   sortBooksByBookAuthor(asc: boolean = true): void {
-    this.books?.sort((a: BookInterface, b: BookInterface) => {
+    this.data?.sort((a: BookInterface, b: BookInterface) => {
       if ( a.bookAuthor && b.bookAuthor && a.bookAuthor > b.bookAuthor) {
         return asc ? 1 : -1;
       } else if (a.bookAuthor && b.bookAuthor && a.bookAuthor < b.bookAuthor) {
@@ -136,7 +121,7 @@ export class BooksComponent {
   }
 
   sortBooksByBookName(asc: boolean = true): void {
-    this.books?.sort((a: BookInterface, b: BookInterface) => {
+    this.data?.sort((a: BookInterface, b: BookInterface) => {
       if ( a.bookName && b.bookName && a.bookName > b.bookName) {
         return asc ? 1 : -1;
       } else if (a.bookName && b.bookName && a.bookName < b.bookName) {
@@ -148,7 +133,7 @@ export class BooksComponent {
   }
 
   sortBooksByBookPublisher(asc: boolean = true): void {
-    this.books?.sort((a: BookInterface, b: BookInterface) => {
+    this.data?.sort((a: BookInterface, b: BookInterface) => {
       if ( a.bookPublisher && b.bookPublisher && a.bookPublisher > b.bookPublisher) {
         return asc ? 1 : -1;
       } else if (a.bookPublisher && b.bookPublisher && a.bookPublisher < b.bookPublisher) {
@@ -160,7 +145,7 @@ export class BooksComponent {
   }
 
   sortBooksByBookYear(asc: boolean = true): void {
-    this.books?.sort((a: BookInterface, b: BookInterface) => {
+    this.data?.sort((a: BookInterface, b: BookInterface) => {
       if ( a.bookYear && b.bookYear && a.bookYear > b.bookYear) {
         return asc ? 1 : -1;
       } else if (a.bookYear && b.bookYear && a.bookYear < b.bookYear) {
@@ -175,6 +160,12 @@ export class BooksComponent {
     this.sortConfig.asc = (this.sortConfig.column === column) ? !this.sortConfig.asc : true;
     this.sortConfig.column = column;
     this.doSort();
+  }
+
+  onRowSelected(event: any): void {
+    console.log('event', event);
+    this.selectedRow = event;
+
   }
 
 

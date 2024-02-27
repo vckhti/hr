@@ -4,6 +4,8 @@ import { Subscription} from "rxjs";
 import {DashboardService} from "../../services/dashboard.service";
 import {IQuestionInterface} from "../../interfaces/IQuestionInterface";
 import {IAnswerInterface} from "../../interfaces/answer.interface";
+import {DialogService} from "primeng/dynamicdialog";
+import {TestResultsComponent} from "../test-results/test-results.component";
 
 @Component({
   selector: 'app-test-layout',
@@ -11,13 +13,16 @@ import {IAnswerInterface} from "../../interfaces/answer.interface";
   styleUrls: ['./test-layout.component.scss']
 })
 export class TestLayoutComponent implements OnInit, OnDestroy{
-
   @Input() model: DashboardModel;
+  public selectedAnswer: number | undefined = undefined;
+  public isLoading = false;
+  testIsOver = false;
+
   private _subscriptions: Subscription;
-  selectedAnswer: number | undefined = undefined;
 
   constructor(
     private dashboardService: DashboardService,
+    private dialogService: DialogService,
   ) {
     this._subscriptions = new Subscription();
   }
@@ -28,8 +33,6 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this._subscriptions.unsubscribe();
   }
-
-
 
   public submit(event: number): void {
     // this.model.stopTest();
@@ -42,7 +45,6 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
       this._subscriptions.add(
         this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, event, ms).subscribe((res: any) => {
           this.model.getQuestion(this.model.selectedQuestionIndex).answers[answersLength - 1].current_value = event;
-
         })
       );
     }
@@ -75,8 +77,41 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
   }
 
   public finishTest(): void {
-    console.log('finishTime', this.model.testTimeLeft - 1);
+   // console.log('finishTime', this.model.testTimeLeft - 1);
+    this.isLoading = true;
+
+    const args = {
+      subject_metter_id: 0,
+      questions_count: 19,
+      testing_times: this.model.testTimeLeft - 1,
+    }
+
     this.model.stopTest();
+    this._subscriptions.add(
+      this.dashboardService.finishTest(args)
+        .subscribe((res: any) => {
+          this.isLoading = false;
+          console.log('finish', res);
+          this.testIsOver = true;
+          this.showResultsDialog(res.questions_count,res.right_questions,res.wrong_questions,res.testing_times,);
+        })
+    )
+  }
+
+  private showResultsDialog(questions_count: number,right_questions: number, wrong_questions: number, testing_time: number): void {
+
+    this.dialogService.open(TestResultsComponent, {
+      header: 'Результаты тестирования',
+      width: '600px',
+      height: '600px',
+      data: {
+        questions_count: questions_count,
+        right_questions: right_questions,
+        wrong_questions: wrong_questions,
+        testing_time: testing_time,
+      }
+    });
+
   }
 
  public questionChanged(): void {

@@ -1,0 +1,33 @@
+<div class="main-wrapper">
+
+  <div class="content">
+    <div class="form-group">
+      <label>Количество вопросов: </label>
+      <span>{{questions_count}}</span>
+    </div>
+
+    <div class="form-group">
+      <label>Количество правильных ответов: </label>
+      <span>{{right_questions}}</span>
+    </div>
+
+    <div class="form-group">
+      <label>Количество неправильных ответов: </label>
+      <span>{{wrong_questions}}</span>
+    </div>
+
+    <div class="form-group">
+      <label>Время тестирования: </label>
+      <span>{{testing_time * 1000 | date:'mm:ss'}}</span>
+    </div>
+  </div>
+
+  <div class="buttons-wrapper">
+    <button type="submit"
+            class="app-button"
+            (click)="closeWindow()"
+    > Закрыть
+    </button>
+  </div>
+
+</div>

@@ -56,11 +56,14 @@
     <button class="app-button" type="button" (click)="previousQuestion()" [disabled]="model.isFirstQuestion()">
       Предыдущий
     </button>
-    <button class="app-button app-button_red" type="button" (click)="finishTest()" [disabled]="!model.isAllQuestionsTouched(model.getDataArrayLength()-1)">
+    <button class="app-button app-button_red" type="button" (click)="finishTest()">
       Завершить тестирование
     </button>
     <button class="app-button" type="button" (click)="nextQuestion()" [disabled]="model.isLastQuestion()">Следующий
     </button>
   </div>
+
+<!--<div>[disabled]="!model.isAllQuestionsTouched(model.getDataArrayLength()-1) || isLoading || testIsOver"</div>-->
+
 
 </div>

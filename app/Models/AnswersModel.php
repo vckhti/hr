@@ -10,12 +10,13 @@ class AnswersModel extends Model
 {
     protected $table = "answers";
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable =
         [
             'current_value',
             'thinking_time',
+            'user_id',
         ];
 
     use HasFactory;

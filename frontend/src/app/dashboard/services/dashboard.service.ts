@@ -15,6 +15,13 @@ export class DashboardService {
   ) {
   }
 
+  finishTest(args: any): any {
+    const url = environment.serverUrl + '/finishTest';
+    return this.http.post(url,args).pipe(
+      //take(1)
+    )
+  }
+
   updateAnswer(question_id: number, current_choiсe: number, thinkingTime: number ): any {
     const url = environment.serverUrl + '/updateAnswer';
     const args = {

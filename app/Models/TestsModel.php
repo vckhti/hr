@@ -9,6 +9,8 @@ class TestsModel extends Model
 {
     protected $table = "tests";
 
+    public $timestamps = true;
+
     protected $fillable = [
         'id',
         'subject_metter_ids',

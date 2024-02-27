@@ -27,8 +27,6 @@ class CreateTestsTable extends Migration
             $table->text('comeback_ids')->nullable();
             $table->text('history_ids')->nullable();
             $table->text('answer_times_ids')->nullable();
-
-
         });
     }
 

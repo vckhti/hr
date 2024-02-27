@@ -23,6 +23,14 @@ class UsersModelSeeder extends Seeder
         ]);
 
         DB::table('user')->insert([
+            'email' => 'tester@mail.ru',
+            'name' => 'tester',
+            'address' => 'test address',
+            'password' => '123456',
+            'role' => 'tester',
+        ]);
+
+        DB::table('user')->insert([
             'email' => 'marimonov@mail.ru',
             'name' => 'marimonov',
             'address' => 'Abakan',
