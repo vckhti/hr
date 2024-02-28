@@ -47,7 +47,7 @@ export class ContractSummaryComponent implements OnInit, OnChanges, OnDestroy {
 				this.loading = true;
         //this.initRequestContractSummaryObserver(contractId);
         this.keys = this.transformLeadObjectToArray(changes.contract.currentValue);
-        console.log('ngOnChanges if',changes.contract.currentValue, this.keys);
+        // console.log('ngOnChanges if',changes.contract.currentValue, this.keys);
         this.cdr.detectChanges();
 			}
 		}
@@ -64,7 +64,7 @@ export class ContractSummaryComponent implements OnInit, OnChanges, OnDestroy {
         takeUntil(this.onDestroy$),
       )
       .subscribe(response => {
-        console.log('response if' );
+        // console.log('response if' );
         this.summary = response;
         this.loading = false;
       });

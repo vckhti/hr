@@ -163,7 +163,7 @@ export class BooksComponent {
   }
 
   onRowSelected(event: any): void {
-    console.log('event', event);
+    // console.log('event', event);
     this.selectedRow = event;
 
   }

@@ -22,11 +22,11 @@ export class DashboardService {
     )
   }
 
-  updateAnswer(question_id: number, current_choiсe: number, thinkingTime: number ): any {
+  updateAnswer(question_id: number, current_choiсe: number | null, thinkingTime: number ): any {
     const url = environment.serverUrl + '/updateAnswer';
     const args = {
       question_id: question_id,
-      current_choiсe: current_choiсe,
+      current_choiсe: current_choiсe ?? null,
       thinking_time: thinkingTime
     }
     return this.http.post(url,args).pipe(
@@ -39,11 +39,11 @@ export class DashboardService {
 
     return this.http.get<any>(url).pipe(
       map((response: IQuestionInterface[]) => {
-        console.log('response', response);
+        // console.log('response', response);
         return model.saveData(response)
       }),
       catchError((err: any) => {
-        console.log('err', err);
+        // console.log('err', err);
         return of(model);
       })
     )

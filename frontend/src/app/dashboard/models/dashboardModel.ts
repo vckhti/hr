@@ -69,7 +69,7 @@ export class DashboardModel {
   }
 
   public saveData(response: IQuestionInterface[]): DashboardModel {
-    console.log('saveData', response);
+    // console.log('saveData', response);
     this.data = response;
     this.errors = null;
     this.success = true;

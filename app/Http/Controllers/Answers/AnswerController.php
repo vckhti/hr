@@ -18,9 +18,15 @@ class AnswerController extends Controller
         $user = UsersModel::getCurrent();
 
         $answer->user_id = $user->id;
-        $answer->current_value = $input["current_choiсe"];
         $answer->question_id = $input["question_id"];
         $answer->thinking_time = $input["thinking_time"];
+
+        if (!empty($input["current_choiсe"])) {
+            $answer->current_value = $input["current_choiсe"];
+        } else {
+            $answer->current_value = 0;
+        }
+
         $answer->save();
         // dd($question);
 

@@ -41,7 +41,7 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
     if (this.model.getQuestion(this.model.selectedQuestionIndex) !== undefined && answersLength > 0) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion(this.model.selectedQuestionIndex).execution_time_id;
-      // console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
+      // // console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
       this._subscriptions.add(
         this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, event, ms).subscribe((res: any) => {
           this.model.getQuestion(this.model.selectedQuestionIndex).answers[answersLength - 1].current_value = event;
@@ -51,7 +51,7 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
     else if (this.model.getQuestion(this.model.selectedQuestionIndex) !== undefined && answersLength === 0) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion(this.model.selectedQuestionIndex).execution_time_id;
-      // console.log('Время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
+      // // console.log('Время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
       const answer: IAnswerInterface = {
         question_id: this.model.selectedQuestionIndex,
         current_value: event
@@ -66,23 +66,39 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
 
   public nextQuestion(): void {
     if (this.model.selectedQuestionIndex < this.model.getDataArrayLength() -1) {
-      this.model.selectedQuestionIndex = this.model.selectedQuestionIndex + 1;
+      let now = new Date().getTime();
+      const ms = now - this.model.getQuestion(this.model.selectedQuestionIndex).execution_time_id;
+      // // console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
+      this._subscriptions.add(
+        this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, null, ms)
+          .subscribe((res: any) => {
+            this.model.selectedQuestionIndex = this.model.selectedQuestionIndex + 1;
+        })
+      );
     }
   }
 
   public previousQuestion(): void {
     if (this.model.selectedQuestionIndex > 0) {
-      this.model.selectedQuestionIndex = this.model.selectedQuestionIndex - 1;
+      let now = new Date().getTime();
+      const ms = now - this.model.getQuestion(this.model.selectedQuestionIndex).execution_time_id;
+      // // console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
+      this._subscriptions.add(
+        this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, null, ms)
+          .subscribe((res: any) => {
+            this.model.selectedQuestionIndex = this.model.selectedQuestionIndex - 1;
+        })
+      );
     }
   }
 
   public finishTest(): void {
-   // console.log('finishTime', this.model.testTimeLeft - 1);
+   // // console.log('finishTime', this.model.testTimeLeft - 1);
     this.isLoading = true;
 
     const args = {
       subject_metter_id: 0,
-      questions_count: 19,
+      questions_count: 20,
       testing_times: this.model.testTimeLeft - 1,
       comeback_ids: this.converArrayIndexesToQuestionsIdString(this.model.marksQuestionsIndexesClone),
     }
@@ -92,7 +108,7 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
       this.dashboardService.finishTest(args)
         .subscribe((res: any) => {
           this.isLoading = false;
-          console.log('finish', res);
+          // console.log('finish', res);
           this.testIsOver = true;
           this.showResultsDialog(res.questions_count,res.right_questions,res.wrong_questions,res.testing_times,);
         })
@@ -133,7 +149,7 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
   }
 
  public questionChanged(): void {
-    // console.log(`questionChanged ${this.model.selectedQuestionIndex}`);
+    // // console.log(`questionChanged ${this.model.selectedQuestionIndex}`);
     this.model.getQuestion(this.model.selectedQuestionIndex).execution_time_id = new Date().getTime();
  }
 
