@@ -35,7 +35,6 @@ class TestController extends Controller
 
     public function finishTest(Request $request) {
         $input = ValidationFacade::validate($request->all(),[]);
-
         $test = new TestsModel();
 
         $user = UsersModel::getCurrent();
@@ -122,7 +121,7 @@ class TestController extends Controller
             'wrong_questions' => ($questions_count - $right_questions),
             'testing_times' => $input["testing_times"],
             'testing_max_time' => (20 * 60),
-            'comeback_ids' => 0,
+            'comeback_ids' => $input["comeback_ids"],
             'history_ids' => $history_ids,
             'answer_times_ids' => $answer_times_ids,
         ]);

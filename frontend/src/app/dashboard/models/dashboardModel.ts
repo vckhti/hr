@@ -7,15 +7,18 @@ export class DashboardModel {
   isLoading: boolean;
   selectedQuestionIndex: number;
   selectedQuestion: IQuestionInterface | undefined;
+
   public data: IQuestionInterface[] = [];
   public touchedIndexes: number[] = [];
+  public marksQuestionsIndexes: number[] = [];
+  public marksQuestionsIndexesClone: number[] = [];
   testTimeLeft: number = 0;
 
   constructor() {
     this.success = true;
     this.errors = null;
     this.isLoading = false;
-    this.selectedQuestionIndex = 1;
+    this.selectedQuestionIndex = 0;
     this.selectedQuestion = undefined;
     this.testStart = false;
   }
@@ -87,6 +90,12 @@ export class DashboardModel {
     }
   }
 
+  isMarkForComeBack(index: number): boolean {
+    // return this.getQuestion(index)?.come_back_id === 1;
+    let uniqueArray = [...this.uniqueArray(this.marksQuestionsIndexes)];
+    return uniqueArray.includes(index);
+  }
+
   isQuestionAlreadyTouched(index: number): boolean {
     let uniqueArray = [...this.uniqueArray(this.touchedIndexes)];
     return uniqueArray.includes(index);
@@ -107,11 +116,14 @@ export class DashboardModel {
   }
 
   public getQuestion(index: number): any {
-    this.touchedIndexes.push(index-1);
-
-    //console.log('getAnswer this.data[index]');
-    if (this.data && this.data.length && index) {
-      //console.log('getAnswer this.data[index]', this.data[index]);
+    this.touchedIndexes.push(index);
+    this.touchedIndexes = this.uniqueArray(this.touchedIndexes);
+    if (this.data && this.data.length && index > -1) {
+      if (this.data[index].come_back_id === 1) {
+        this.marksQuestionsIndexes.push(index);
+        this.marksQuestionsIndexesClone.push(index);
+      }
+      this.marksQuestionsIndexes = this.uniqueArray(this.marksQuestionsIndexes);
       return this.data[index];
     } else {
       return null;
@@ -135,7 +147,7 @@ export class DashboardModel {
   }
 
   isFirstQuestion(): boolean {
-    return (this.selectedQuestionIndex === 1 );
+    return (this.selectedQuestionIndex === 0 );
   }
 
   public cleanErrors(): DashboardModel {

@@ -9,9 +9,18 @@
     <div class="dashboard-inner-wrapper__left-block">
       <!--Sidebar-->
       <app-sidebar>
-
+        <app-countdown [model]="model"></app-countdown>
+        <br>
+        <button
+          class="app-button"
+          [ngClass]="{'disabled': model.getQuestion(model.selectedQuestionIndex)?.come_back_id &&
+          model.getQuestion(model.selectedQuestionIndex)?.come_back_id === 1}"
+          (click)="markQuestion(model.selectedQuestionIndex)">
+          {{model.getQuestion(model.selectedQuestionIndex)?.come_back_id? 'Снять метку' : 'Пометить вопрос'}}
+        </button>
       </app-sidebar>
-      <app-countdown [model]="model"></app-countdown>
+
+
     </div>
 
     <div class="dashboard-inner-wrapper__right-block">
@@ -29,7 +38,7 @@
   <app-footer>
     <mc-pagination
       [model]="model"
-      [total]="model.getDataArrayLength()-1"
+      [total]="20"
       [currentPage]="model.selectedQuestionIndex"
       [limit]="1"
       (newItemEvent)="handleCurrentPage($event)"

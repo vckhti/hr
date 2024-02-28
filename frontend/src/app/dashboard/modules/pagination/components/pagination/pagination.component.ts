@@ -14,7 +14,7 @@ import {DashboardModel} from "../../../../models/dashboardModel";
   selector: 'mc-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class PaginationComponent implements OnInit, OnChanges {
   @Input('total') totalItemLengthProps: number;
@@ -53,7 +53,7 @@ export class PaginationComponent implements OnInit, OnChanges {
 
       this.visiblePages = Array.from(
         new Array(length).keys(),
-        (item) => item + startIndex + 1
+        (item) => item + startIndex
       );
     }
   }

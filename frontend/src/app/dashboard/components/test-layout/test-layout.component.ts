@@ -71,7 +71,7 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
   }
 
   public previousQuestion(): void {
-    if (this.model.selectedQuestionIndex > 1) {
+    if (this.model.selectedQuestionIndex > 0) {
       this.model.selectedQuestionIndex = this.model.selectedQuestionIndex - 1;
     }
   }
@@ -84,6 +84,7 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
       subject_metter_id: 0,
       questions_count: 19,
       testing_times: this.model.testTimeLeft - 1,
+      comeback_ids: this.converArrayIndexesToQuestionsIdString(this.model.marksQuestionsIndexesClone),
     }
 
     this.model.stopTest();
@@ -96,6 +97,23 @@ export class TestLayoutComponent implements OnInit, OnDestroy{
           this.showResultsDialog(res.questions_count,res.right_questions,res.wrong_questions,res.testing_times,);
         })
     )
+  }
+
+  private uniqueArray(arr: any): any[] {
+    let a = [];
+    for (let i = 0, l = arr.length; i < l; i++)
+      if (a.indexOf(arr[i]) === -1 && arr[i] !== '')
+        a.push(arr[i]);
+    return a;
+  }
+
+  converArrayIndexesToQuestionsIdString(array: number[]): string {
+    let str='';
+    this.uniqueArray(array).map(item => item +1).forEach(item => {
+      str=str + item + ',';
+    });
+
+    return str;
   }
 
   private showResultsDialog(questions_count: number,right_questions: number, wrong_questions: number, testing_time: number): void {

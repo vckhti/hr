@@ -62,11 +62,15 @@
     }
 
     &.selected {
-      background-color: #f51162;
+      background-color: #f51162 !important;
     }
 
     &.empty {
       background-color: #421515;
+    }
+
+    &.comeback {
+      background-color: #7a7878;
     }
 
     &:not(:last-child) {

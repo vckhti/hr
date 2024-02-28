@@ -8,7 +8,8 @@
       *ngFor="let page of visiblePages;index as i;"
       [ngClass]="{
   'selected': currentPageProps === page,
-  'empty': !model.isQuestionAlreadyTouched(i) === true
+  'empty': !model.isQuestionAlreadyTouched(i) === true,
+  'comeback': model.isMarkForComeBack(i) === true
   }"
 
       (click)="onClicked(page)"
