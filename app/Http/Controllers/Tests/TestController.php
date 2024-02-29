@@ -45,19 +45,20 @@ class TestController extends Controller
 
 
         $questions = DB::table('questions')
-            ->where('id' ,'>', 1)->get();
+            ->where('id' ,'>', 0)->get();
 
         $questions_count = $input["questions_count"];
         $right_questions = 0;
 
-        for ($i = 2; $i <= $questions_count; $i++) {
+        for ($i = 1; $i <= $questions_count; $i++) {
             $answer = DB::table('answers')
                 ->where('user_id', $user->id)
                 ->where('question_id', $i)
+                ->where('current_value','!=', null)
                 ->latest('created_at')
                 ->first() ?? null;
 
-            if (!empty($answer) && ($questions[$i-2]->id === $answer->question_id) && ($questions[$i-2]->right_variant == $answer->current_value)) {
+            if (!empty($answer) && ($questions[$i-1]->id === $answer->question_id) && ($questions[$i-1]->right_variant == $answer->current_value)) {
                 $right_questions = $right_questions + 1;
             }
         }
@@ -66,8 +67,9 @@ class TestController extends Controller
         $doubles =DB::table('answers')
             ->select(DB::raw('COUNT(*) as count,question_id'))
             ->where('user_id',  $user->id)
-            ->where('question_id', '>', 1)
-            ->where('question_id', '<', $questions_count)
+            ->where('current_value','!=', null)
+            ->where('question_id', '>', 0)
+            ->where('question_id', '<', $questions_count+1)
             ->groupBy('question_id')
             ->get();
 
@@ -76,7 +78,6 @@ class TestController extends Controller
                 $change_answer_ids=$change_answer_ids.$item->question_id.';';
             }
         }
-
 
         $thinkingTime = DB::table('answers')
                 ->select(DB::raw('id,question_id,thinking_time,user_id'))

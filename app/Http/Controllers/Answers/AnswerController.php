@@ -23,8 +23,6 @@ class AnswerController extends Controller
 
         if (!empty($input["current_choiсe"])) {
             $answer->current_value = $input["current_choiсe"];
-        } else {
-            $answer->current_value = 0;
         }
 
         $answer->save();
