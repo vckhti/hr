@@ -1,0 +1,20 @@
+<div class="answers-history" *ngIf="contract">
+  <div class="form-group">
+    <label for="question-select"> Выберите вопрос </label>
+  <select id="question-select" #select1 (change)="onQestionIdChanged(select1.value)">
+    <option *ngFor="let item of numbersArray" value="{{item}}">{{item}} </option>
+  </select>
+  </div>
+
+	<table class="contract-summary__table">
+		<tr *ngFor="let item of data; index as i">
+      <td class="{{'td'+i}}">Время ответа:</td>
+      <td class="{{'td'+i}}">{{ item.created_at}}</td>
+      <td class="{{'td'+i}}">{{i === 0 ? 'Выбранный ответ' : 'Ответ'}}:</td>
+      <td class="{{'td'+i}}">{{ item.current_value}}</td>
+		</tr>
+	</table>
+
+</div>
+
+<!--<app-tab-loader *ngIf="loading"></app-tab-loader>-->

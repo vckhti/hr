@@ -13,6 +13,7 @@ import {DataTableComponent} from "./components/data-table/data-table.component";
 import {TabsComponent} from "./components/tabs/tabs.component";
 import {TabComponent} from "./components/tab/tab.component";
 import {ContractSummaryComponent} from "./components/contract-summary/contract-summary.component";
+import {AnswersHistoryComponent} from "./components/answers-history/answers-history.component";
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
   ],
   declarations: [
     AdminLayoutComponent,
+    AnswersHistoryComponent,
     ContractSummaryComponent,
     BooksComponent,
     DataTableComponent,

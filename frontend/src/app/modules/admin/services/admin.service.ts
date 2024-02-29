@@ -24,7 +24,7 @@ export class AdminService{
     )
   }
 
-  getTestById(arg: any): Observable<any> {
+  getQuestionById(arg: any): Observable<any> {
     const url = environment.serverUrl + '/get_test_by_id';
 
     return this.http.post<any>(url,arg).pipe(

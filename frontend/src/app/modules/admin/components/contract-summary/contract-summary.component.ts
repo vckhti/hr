@@ -40,7 +40,6 @@ export class ContractSummaryComponent implements OnInit, OnChanges, OnDestroy {
 		if (changes.contract) {
 			const contractId: number|undefined = changes.contract?.currentValue?.id ?? undefined;
 
-
 			if (contractId !== undefined) {
 				// Requiring contract summary
 
@@ -57,18 +56,7 @@ export class ContractSummaryComponent implements OnInit, OnChanges, OnDestroy {
 		this.onDestroy$.next(true);
 	}
 
-  private initRequestContractSummaryObserver(contractId: number): void {
-    const arg = {id: contractId}
-    this.adminService.getTestById(arg)
-      .pipe(
-        takeUntil(this.onDestroy$),
-      )
-      .subscribe(response => {
-        // console.log('response if' );
-        this.summary = response;
-        this.loading = false;
-      });
-  }
+
 
   private transformLeadObjectToArray(value: any) : any[] {
     let keys = [];

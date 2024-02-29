@@ -23,13 +23,20 @@ class TestController extends Controller
         return response()->json($test->get(),200);
     }
 
-    public function getTestById(Request $request) {
+    public function getQuestionById(Request $request) {
         $input = ValidationFacade::validate($request->all(),[]);
-//dd($input);
-        $test = new TestsModel();
+
+        $user = UsersModel::getCurrent();
+
+        $answers = DB::table('answers')
+            ->where('user_id', $input["user_id"])
+            ->where('question_id', $input["question_id"])
+            ->where('current_value','!=', null)
+            ->orderByDesc('created_at')
+            ->get();
 
 
-        return response()->json($test->findOrFail($input["id"]));
+        return response()->json($answers ,200);
     }
 
 
