@@ -23,21 +23,7 @@ class TestController extends Controller
         return response()->json($test->get(),200);
     }
 
-    public function getQuestionById(Request $request) {
-        $input = ValidationFacade::validate($request->all(),[]);
 
-        $user = UsersModel::getCurrent();
-
-        $answers = DB::table('answers')
-            ->where('user_id', $input["user_id"])
-            ->where('question_id', $input["question_id"])
-            ->where('current_value','!=', null)
-            ->orderByDesc('created_at')
-            ->get();
-
-
-        return response()->json($answers ,200);
-    }
 
 
     public function finishTest(Request $request) {

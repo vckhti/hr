@@ -1,17 +1,23 @@
 <div class="answers-history" *ngIf="contract">
   <div class="form-group">
-    <label for="question-select"> Выберите вопрос </label>
+    <label for="question-select"> Выберите вопрос: </label>
   <select id="question-select" #select1 (change)="onQestionIdChanged(select1.value)">
     <option *ngFor="let item of numbersArray" value="{{item}}">{{item}} </option>
   </select>
   </div>
+  <div *ngIf="question" class="form-group question">
+    <span >{{question.question}}</span>
+    <div *ngFor="let item of variants; index as i">
+      <span >{{item}}</span>
+    </div>
+  </div>
 
 	<table class="contract-summary__table">
 		<tr *ngFor="let item of data; index as i">
-      <td class="{{'td'+i}}">Время ответа:</td>
-      <td class="{{'td'+i}}">{{ item.created_at}}</td>
       <td class="{{'td'+i}}">{{i === 0 ? 'Выбранный ответ' : 'Ответ'}}:</td>
       <td class="{{'td'+i}}">{{ item.current_value}}</td>
+      <td class="{{'td'+i}}">Время ответа:</td>
+      <td class="{{'td'+i}}">{{ item.created_at}}</td>
 		</tr>
 	</table>
 

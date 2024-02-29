@@ -19,12 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [UsersController::class,'login']);
 
 Route::any('/get_questions', [QuestionsController::class, 'getQuestions']);
+Route::any('/get_question_by_id', [QuestionsController::class, 'getQuestionById']);
 
 Route::post('/updateAnswer', [AnswerController::class, 'updateAnswer']);
+Route::post('/get_answers_by_question_id', [AnswerController::class, 'getAnswersByQuestionId']);
 
 Route::post('/finishTest', [TestController::class, 'finishTest']);
 Route::get('/get_test_results', [TestController::class, 'getTestResults']);
-Route::post('/get_test_by_id', [TestController::class, 'getQuestionById']);
+
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
