@@ -12,6 +12,17 @@ export class AdminService{
   ) {
   }
 
+  getNames(): Observable<any> {
+    const url = environment.serverUrl + '/get_users_names';
+
+    return this.http.get<any>(url).pipe(
+      catchError((err: any) => {
+        // // console.log('err', err);
+        return of(null);
+      })
+    )
+  }
+
 
   getTestResults(): Observable<any> {
     const url = environment.serverUrl + '/get_test_results';

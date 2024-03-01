@@ -17,7 +17,17 @@ import {AdminService} from "../../services/admin.service";
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class AnswersHistoryComponent implements OnInit, OnDestroy {
-  @Input() contract?: any;
+  _contract: any;
+  get contract(): any {
+    return this._contract;
+  }
+  @Input('contract') set contract(contract: any) {
+    // console.log('setter contract ');
+    this._contract = contract;
+    this.selectedNumber = 1;
+    this.onQestionIdChanged('1');
+  }
+  selectedNumber: 1;
   loading = false;
   onDestroy$ = new Subject();
   data: any[];
@@ -37,6 +47,7 @@ export class AnswersHistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
 
   }
 
@@ -84,7 +95,7 @@ export class AnswersHistoryComponent implements OnInit, OnDestroy {
 
 
   fillNubersArray(): void {
-    for (let i = 0; i < 21; i++) {
+    for (let i = 1; i < 21; i++) {
       this.numbersArray.push(i);
     }
   }

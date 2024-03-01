@@ -19,6 +19,7 @@ import {TableColumn} from "../../interfaces/table-column";
 export class DataTableComponent<ItemType> {
 
 	@Input() items: ItemType[] = [];
+  @Input() usersDescriptions: any[] = [];
 	@Input() columns: TableColumn[] = [];
 	@Input() selectedItem?: ItemType;
 	@Input() loading = false;
@@ -55,6 +56,10 @@ export class DataTableComponent<ItemType> {
       default:
         return orgId.toString();
     }
+  }
+
+  toInt(str: string): any {
+    return str && str.length > 0 ? parseInt(str) : ''
   }
 
 }

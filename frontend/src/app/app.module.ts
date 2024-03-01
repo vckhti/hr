@@ -19,7 +19,8 @@ import {AuthGuard} from "./modules/auth/services/auth.guard";
   declarations: [
     AppComponent,
     NotFoundComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+
   ],
   imports: [
     BrowserModule,

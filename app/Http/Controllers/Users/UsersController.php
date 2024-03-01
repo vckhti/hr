@@ -37,6 +37,16 @@ class UsersController extends Controller
 
   }
 
+    public function getNames()
+    {
+        $doubles =DB::table('user')
+            ->select(DB::raw('id,name'))
+            ->get();
+
+
+        return response()->json($doubles, 200);
+    }
+
   public function logout(Request $request)
   {
     //dd(phpinfo());

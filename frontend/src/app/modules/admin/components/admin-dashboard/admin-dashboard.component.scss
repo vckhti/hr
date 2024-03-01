@@ -32,11 +32,16 @@ table {
 }
 
 .container-table{
-  height: calc(50vh - 25px);
+  height: calc(20vh);
+  margin-bottom: 50px;
 }
 
-.container-tabs {
-  height: calc(50vh - 25px);
+.container-tab1 {
+  height: calc((45vh - 50px) - 25px);
+}
+
+.container-tab2 {
+  height: calc(35vh - 25px);
 }
 
 

@@ -7,11 +7,11 @@ import {AdminService} from "../../services/admin.service";
 import {TableColumn} from "../../interfaces/table-column";
 
 @Component({
-  selector: 'app-books',
-  templateUrl: './books.component.html',
-  styleUrls: ['./books.component.scss']
+  selector: 'app-admin-dashboard',
+  templateUrl: './admin-dashboard.component.html',
+  styleUrls: ['./admin-dashboard.component.scss']
 })
-export class BooksComponent {
+export class AdminDashboardComponent {
   form = new FormGroup({
     bookAuthor: new FormControl(null, [Validators.required]),
     bookName: new FormControl(null, [Validators.required]),
@@ -23,7 +23,8 @@ export class BooksComponent {
 
   sortConfig: SortConfigInterface = { asc: false, column: 'bookAuthor' };
 
-  data: any = [];
+  data: any[] = [];
+  usersNames: any[] = [];
 
   selectedRow: any;
 
@@ -41,6 +42,13 @@ export class BooksComponent {
   }
 
   ngOnInit() {
+    this.adminService.getNames().pipe(
+      takeUntil(this.onDestroy$),
+    ).subscribe((response: any[] | null) => {
+      if (response) {
+        this.usersNames = response.map((item: any) => Object.assign({}, item));
+      }
+    });
 
 
     this.adminService.getTestResults().pipe(
@@ -56,6 +64,8 @@ export class BooksComponent {
   ngOnDestroy() {
     this.onDestroy$.next(true);
   }
+
+
 
 
   addBook(): void {

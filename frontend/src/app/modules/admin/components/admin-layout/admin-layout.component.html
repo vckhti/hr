@@ -10,7 +10,7 @@
         <div>
           <ul class="navbar-li" *ngIf="authService.isAuthenticated(); else login">
             <li routerLinkActive="active">
-              <a [routerLink]="['/admin','tests']">Тесты</a>
+              <a class="app-button" [routerLink]="['/admin','tests']">Результаты тестирования</a>
             </li>
 
           </ul>
@@ -21,13 +21,13 @@
       <div>
         <ul>
           <li routerLinkActive="active">
-            <a href="#" (click)="logout($event)">Выйти</a>
+            <a class="app-button" (click)="logout($event)">Выйти</a>
           </li>
         </ul>
         <ng-template #login>
           <ul>
             <li routerLinkActive="active">
-              <a [routerLink]="['/admin','login']">Войти</a>
+              <a class="app-button" [routerLink]="['/admin','login']">Войти</a>
             </li>
           </ul>
         </ng-template>

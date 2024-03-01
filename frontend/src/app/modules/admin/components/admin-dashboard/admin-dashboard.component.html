@@ -5,30 +5,32 @@
                       [showFilters]="true"
                       [perPage] = 25
                       [items]="data"
+                      [usersDescriptions]= "usersNames"
                       (selectedItemChange) = onRowSelected($event)
       ></app-data-table>
 
     </div>
 
-    <div class="container-tabs">
+    <div class="container-tab1">
 
       <app-tabs>
-
         <app-tab header="Информация">
           <ng-template>
             <app-contract-summary [contract]=selectedRow></app-contract-summary>
           </ng-template>
         </app-tab>
-
-        <app-tab header="История вопросов">
-          <ng-template>
-            <app-answers-history [contract]=selectedRow></app-answers-history>
-          </ng-template>
-        </app-tab>
-
       </app-tabs>
-
     </div>
+  </div>
+
+  <div class="container-tab2">
+    <app-tabs>
+      <app-tab header="История вопросов">
+        <ng-template>
+          <app-answers-history [contract]=selectedRow></app-answers-history>
+        </ng-template>
+      </app-tab>
+    </app-tabs>
   </div>
 
 </div>
