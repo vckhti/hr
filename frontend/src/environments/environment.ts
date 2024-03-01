@@ -6,9 +6,6 @@
 export const environment = {
   production: false,
   serverUrl: 'http://localhost/api',
-  modules: [
-  ]
-  //serverUrl: 'http://rt-onyma-prebilling1.rtcomm.ru:8082'
 };
 
 /*
