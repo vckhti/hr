@@ -92,8 +92,14 @@ class TestController extends Controller
             }
         }
 
+        $all_user_answers = DB::table('answers')
+            ->select(DB::raw('id,question_id,thinking_time,user_id'))
+            ->where('user_id',  $user->id)
+            ->orderBy('created_at')
+            ->get();
+
         $history_ids = '';
-        foreach($thinkingTime as $item) {
+        foreach($all_user_answers as $item) {
             $history_ids= $history_ids.$item->question_id.';';
         }
 
