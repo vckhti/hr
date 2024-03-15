@@ -8,10 +8,7 @@ import {
   OnInit,
   SimpleChanges
 } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { Actions, ofType } from '@ngrx/effects';
-import { map, takeUntil } from 'rxjs/operators';
 import {AdminService} from "../../services/admin.service";
 
 @Component({
@@ -21,6 +18,7 @@ import {AdminService} from "../../services/admin.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContractSummaryComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() usersDescriptions: any[] = [];
 	@Input() contract?: any;
 	summary: any[] = [];
 	loading = false;
@@ -41,12 +39,9 @@ export class ContractSummaryComponent implements OnInit, OnChanges, OnDestroy {
 			const contractId: number|undefined = changes.contract?.currentValue?.id ?? undefined;
 
 			if (contractId !== undefined) {
-				// Requiring contract summary
 
 				this.loading = true;
-        //this.initRequestContractSummaryObserver(contractId);
         this.keys = this.transformLeadObjectToArray(changes.contract.currentValue);
-        // console.log('ngOnChanges if',changes.contract.currentValue, this.keys);
         this.cdr.detectChanges();
 			}
 		}

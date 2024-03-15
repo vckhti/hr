@@ -1,4 +1,8 @@
 <div class="tabs">
+  <div class="tabs__content">
+    <ng-content></ng-content>
+  </div>
+
   <div class="tabs__list">
     <ng-container *ngFor="let tab of getTabsArray()">
       <div class="tabs__list__tab"
@@ -7,7 +11,4 @@
     </ng-container>
   </div>
 
-	<div class="tabs__content">
-		<ng-content></ng-content>
-	</div>
 </div>

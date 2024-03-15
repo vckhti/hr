@@ -3,6 +3,7 @@ import {BehaviorSubject, Subscription, switchMap} from "rxjs";
 import {DashboardModel} from "../../models/dashboardModel";
 import {DashboardService} from "../../services/dashboard.service";
 import {IQuestionInterface} from "../../interfaces/IQuestionInterface";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   public model: DashboardModel;
   private _listInitializer: BehaviorSubject<DashboardModel>;
   private _subscriptions: Subscription;
+  public isProduction = environment.production;
 
   constructor(
     private dashboardService: DashboardService,

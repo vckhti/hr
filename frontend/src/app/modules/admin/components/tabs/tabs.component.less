@@ -15,27 +15,25 @@
 
 .tabs__list {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  flex-shrink: 0;
+  flex-wrap: wrap;
   gap: 2px;
 }
 
 .tabs__list__tab {
-  min-width: fit-content;
   padding: 7px 15px;
+  background-color: tint(#bdbdbd, 80%);
   color: #000;
-  background-color: #f3f3f3;
   cursor: pointer;
   font-size: 15px;
-  border-radius: 8px 8px 0 0;
+  border-radius: 0 0 8px 8px;
   border: 1px solid #bdbdbd;
-  transform: translateY(1px);
+  transform: translateY(-1px);
 
   &.active {
-    border-bottom: none;
+    border-top: none;
     background-color: #FFF;
     padding-top: 8px;
     font-weight: 700;
   }
 }
+

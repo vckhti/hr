@@ -38,54 +38,22 @@ body{
 
   overflow: hidden;
   order: 2;
- // border: 1px solid green;
   height: 100%;
+  margin-top: 15px;
 }
 
 .dashboard-content {
   grid-area: content;
   background-color: #FFF;
   border-radius: 4px;
-  padding: 20px 0;
-  //// border: 1px solid #d6d6d6;
-  //height: 100%;
+  // padding: 20px 0;
   min-height: 700px;
   flex: 1 1 auto;
   height: 100%;
- // border: 1px solid red;
 }
 
 app-mobile-panel {
   display: none;
-}
-
-@media (max-width: 767px) {
-
-  app-mobile-panel {
-    display: initial;
-  }
-
-  app-header {
-    display: none;
-  }
-
-  .dashboard-outer-wrapper {
-    padding-top: 70px;
-  }
-
-  .dashboard-inner-wrapper__left-block {
-    order: 2;
-    max-width: 100%;
-  }
-
-  .dashboard-inner-wrapper {
-    flex-direction: column;
-  }
-
-  .dashboard-content {
-    height: 100%;
-  }
-
 }
 
 .form-cols {
@@ -132,3 +100,157 @@ fieldset{
   border: 1px solid #d2d2d2;
 }
 
+// App data table
+app-data-table,
+.data-table {
+  height: 100%;
+  overflow: hidden;
+
+  .p-datatable {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .p-datatable-wrapper {
+    height: 100%;
+  }
+
+  .p-datatable-thead {
+    position: sticky;
+    top: 0;
+  }
+
+  .p-datatable table {
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed !important;
+    min-width: 100% !important;
+    width: 100% !important;
+  }
+
+  p-table .p-datatable .p-datatable-tbody > tr > td,
+  p-table .p-datatable .p-datatable-thead > tr > th {
+    border-right: none;
+    border-top: none;
+
+    &:last-child {
+      border-right: 1px solid #bdbdbd;
+    }
+  }
+
+  p-table .p-datatable .p-datatable-thead > tr:first-child > th {
+    border-top: 1px solid #bdbdbd;
+  }
+}
+
+// Table pagination
+.p-paginator .p-paginator-pages .p-paginator-page,
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last {
+  min-width: 30px;
+  height: 30px;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  color: #0e5a83;
+  background: #0e5a83;
+  border-color: #0e5a83;
+}
+
+.p-link:focus {
+  box-shadow: none;
+}
+
+.p-paginator {
+  padding: 3px;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .pagination {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .dashboard-outer-wrapper{
+    padding-top: 10px;
+  }
+
+  app-mobile-panel {
+    display: initial;
+  }
+
+  app-header {
+    display: none;
+  }
+
+  .dashboard-inner-wrapper__left-block {
+    order: 2;
+    max-width: 100%;
+  }
+
+  .dashboard-inner-wrapper {
+    flex-direction: column;
+  }
+
+  .dashboard-content {
+    height: 100%;
+  }
+
+}
+
+@media (max-width: 550px) {
+  .dashboard-outer-wrapper{
+    padding-top: 10px;
+  }
+  .pagination {
+    display: none;
+  }
+
+  .form-cols {
+    flex-direction: column;
+    margin-top: 30px;
+  }
+  .form-col {
+    height: 40%;
+  }
+
+  .form-group{
+    height: 30px !important;
+
+  }
+  label {
+    display: inline;
+    width: 100% !important;
+  }
+
+  fieldset{
+    border: none;
+  }
+
+  label{
+    font-size: 16px;
+  }
+
+  span {
+    font-size: 14px;
+  }
+
+  .buttons-wrapper{
+    margin-top: 20px;
+  }
+}
+
+@media (max-height: 550px) {
+  .dashboard-outer-wrapper{
+    padding-top: 10px;
+  }
+
+  .pagination {
+    display: none;
+  }
+}

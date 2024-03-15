@@ -16,7 +16,7 @@
       <app-tabs>
         <app-tab header="Информация">
           <ng-template>
-            <app-contract-summary [contract]=selectedRow></app-contract-summary>
+            <app-contract-summary [usersDescriptions]= "usersNames" [contract]=selectedRow></app-contract-summary>
           </ng-template>
         </app-tab>
       </app-tabs>
