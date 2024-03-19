@@ -7,7 +7,7 @@ import {Pipe, PipeTransform} from "@angular/core";
 export class UsernamePipe implements PipeTransform {
 
   transform(id: number, usersDecriptions: any[]): any {
-    console.log('transform', id, usersDecriptions);
+    // console.log('transform', id, usersDecriptions);
     if (usersDecriptions && usersDecriptions.length >0) {
       if (id && usersDecriptions && usersDecriptions.length > 0) {
         for (let i = 0; i < usersDecriptions.length; i++) {

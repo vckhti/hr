@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {logOutAction} from "../../../modules/auth/store/actions/login.action";
 import {Store} from "@ngrx/store";
+import {DashboardService} from "../../services/dashboard.service";
 
 @Component({
   selector: 'app-test-results',
@@ -19,11 +20,13 @@ export class TestResultsComponent {
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
-    private store: Store
+    private store: Store,
+    private dashboardService: DashboardService
   ) {
   }
 
   closeWindow(): void {
+    this.dashboardService.setTestFinished(true);
     this.store.dispatch(logOutAction());
     this.ref.close();
 

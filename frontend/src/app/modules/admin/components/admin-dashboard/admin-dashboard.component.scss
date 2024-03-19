@@ -33,15 +33,14 @@ table {
 
 .container-table{
   height: calc(30vh);
-  margin-bottom: 10px;
 }
 
 .container-tab1 {
-  height: calc((35vh - 50px));
+  height: calc((35vh - 25px));
 }
 
 .container-tab2 {
-  height: calc(35vh );
+  height: calc(35vh - 25px);
 }
 
 

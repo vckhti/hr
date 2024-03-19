@@ -14,6 +14,9 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {AuthGuard} from "./modules/auth/services/auth.guard";
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
+import {DashboardCanDeactivateService} from "./dashboard/services/dashboard-can-deactivate.service";
 
 @NgModule({
   declarations: [
@@ -37,8 +40,11 @@ import {AuthGuard} from "./modules/auth/services/auth.guard";
     }),
     AuthModule,
     BrowserAnimationsModule,
+    ToastModule,
   ],
   providers: [
+    DashboardCanDeactivateService,
+    MessageService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

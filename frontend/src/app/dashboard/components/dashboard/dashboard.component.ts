@@ -4,6 +4,7 @@ import {DashboardModel} from "../../models/dashboardModel";
 import {DashboardService} from "../../services/dashboard.service";
 import {IQuestionInterface} from "../../interfaces/IQuestionInterface";
 import {environment} from "../../../../environments/environment";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
   constructor(
     private dashboardService: DashboardService,
+    private messageService: MessageService
   ) {
     this.model = new DashboardModel();
     this._subscriptions = new Subscription();
@@ -25,8 +27,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    this.dashboardService.setTestFinished(false);
     this.initRegionsDataArrayObserver();
-
   }
 
   ngOnDestroy(): void {
@@ -42,17 +44,25 @@ export class DashboardComponent implements OnInit, OnDestroy{
   }
 
   public handleCurrentPage(event: any): void {
-    // console.log('handleCurrentPage', event);
-    if (this.model.selectedQuestionIndex > -1) {
+     // console.log('handleCurrentPage', event);
+    if (this.dashboardService.getIsAnswered() && this.model.selectedQuestionIndex > -1) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion(this.model.selectedQuestionIndex).execution_time_id;
-      // // console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
+      this.dashboardService.setIsAnswered(false);
+      // const currentQuestion = this.model.getQuestion(event);
+      // this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: null};
       this._subscriptions.add(
         this.dashboardService.updateAnswer((this.model.getQuestion(this.model.selectedQuestionIndex) as IQuestionInterface).id, null, ms)
           .subscribe((res: any) => {
             this.model.selectedQuestionIndex = parseInt(event);
           })
       );
+    } else {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Ответ не выбран',
+        detail: 'Выберите ответ!',
+      });
     }
   }
 
@@ -63,14 +73,14 @@ export class DashboardComponent implements OnInit, OnDestroy{
       this.model.getQuestion(index).come_back_id = null;
 
       let indexForDelete = this.model.marksQuestionsIndexes.indexOf((index));
-      // console.log('indexForDelete', index,indexForDelete,this.model.marksQuestionsIndexes);
+      // // console.log('indexForDelete', index,indexForDelete,this.model.marksQuestionsIndexes);
       if (indexForDelete !== -1) {
         //indexForDelete = indexForDelete + 1;
-        // console.log('Delete', indexForDelete);
+        // // console.log('Delete', indexForDelete);
         this.model.marksQuestionsIndexes.splice(indexForDelete, 1);
       }
     }
-    // console.log('this.model.getQuestion(index)', this.model.getQuestion(index));
+    // // console.log('this.model.getQuestion(index)', this.model.getQuestion(index));
   }
 
 }

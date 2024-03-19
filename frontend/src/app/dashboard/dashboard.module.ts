@@ -26,7 +26,8 @@ import {DialogService} from "primeng/dynamicdialog";
     QuestionComponent,
     AnswerComponent,
     CountdownComponent,
-    TestResultsComponent
+    TestResultsComponent,
+
   ],
   imports: [
     CommonModule,
@@ -38,7 +39,7 @@ import {DialogService} from "primeng/dynamicdialog";
   ],
   providers: [
     DashboardService,
-    DialogService
+    DialogService,
   ]
 })
 export class DashboardModule { }

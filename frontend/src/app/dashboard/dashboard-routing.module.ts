@@ -1,18 +1,19 @@
-import {NgModule} from '@angular/core';
+import {inject, NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {NotFoundComponent} from "../core/components/not-found/not-found.component";
+import {DashboardCanDeactivateService} from "./services/dashboard-can-deactivate.service";
+import {DashboardService} from "./services/dashboard.service";
 
 const routes: Routes = [
   {
     path: '', component:
     DashboardComponent,
-    canActivate: [
-    ],
+    canDeactivate: [DashboardCanDeactivateService],
     children: [
       {
         path: '**',
-        component: NotFoundComponent
+        component: NotFoundComponent,
       }
     ],
   },
@@ -23,4 +24,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class DashboardRoutingModule {
+
 }

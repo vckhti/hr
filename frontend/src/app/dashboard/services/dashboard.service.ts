@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {DashboardModel} from "../models/dashboardModel";
-import {map, Observable, of, take} from "rxjs";
+import {BehaviorSubject, map, Observable, of, take} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
@@ -10,9 +10,27 @@ import {IQuestionInterface} from "../interfaces/IQuestionInterface";
   providedIn: 'root'
 })
 export class DashboardService {
+  isAnswered$$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  isTestFinished$$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   constructor(
     private http: HttpClient,
   ) {
+  }
+
+  public setTestFinished(response: boolean): void {
+    this.isTestFinished$$.next(response);
+  }
+
+  public getTestFinished(): boolean {
+    return this.isTestFinished$$.getValue();
+  }
+
+  public setIsAnswered(response: boolean): void {
+    this.isAnswered$$.next(response);
+  }
+
+  public getIsAnswered(): boolean {
+    return this.isAnswered$$.getValue();
   }
 
   finishTest(args: any): any {
@@ -39,11 +57,11 @@ export class DashboardService {
 
     return this.http.get<any>(url).pipe(
       map((response: IQuestionInterface[]) => {
-        // console.log('response', response);
+        // // console.log('response', response);
         return model.saveData(response)
       }),
       catchError((err: any) => {
-        // console.log('err', err);
+        // // console.log('err', err);
         return of(model);
       })
     )

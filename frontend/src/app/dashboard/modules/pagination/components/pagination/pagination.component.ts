@@ -9,6 +9,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core'
 import {DashboardModel} from "../../../../models/dashboardModel";
+import {DashboardService} from "../../../../services/dashboard.service";
 
 @Component({
   selector: 'mc-pagination',
@@ -30,7 +31,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   visiblePages: number[];
   visibleRangeLength = 20;
 
-  constructor() {
+  constructor( private dashboardService: DashboardService) {
   }
 
   ngOnInit(): void {
