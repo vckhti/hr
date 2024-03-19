@@ -27,8 +27,10 @@ export class TestResultsComponent {
 
   closeWindow(): void {
     this.dashboardService.setTestFinished(true);
-    this.store.dispatch(logOutAction());
-    this.ref.close();
+    setTimeout(() => {
+      this.store.dispatch(logOutAction());
+      this.ref.close();
+    },1000);
 
   }
 

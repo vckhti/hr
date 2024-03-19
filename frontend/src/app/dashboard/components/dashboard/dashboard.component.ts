@@ -49,6 +49,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion(this.model.selectedQuestionIndex).execution_time_id;
       this.dashboardService.setIsAnswered(false);
+      const currentQuestion = this.model.getQuestion(this.model.selectedQuestionIndex);
+      this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
       // const currentQuestion = this.model.getQuestion(event);
       // this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: null};
       this._subscriptions.add(

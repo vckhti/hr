@@ -8,6 +8,8 @@ use App\Models\UsersModel;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Exception;
+
 class UsersController extends Controller
 {
 
@@ -20,13 +22,24 @@ class UsersController extends Controller
     ]);
 
 
+
+
+
     $success = UsersModel::login(
       $input['name'],
       $input['password']
     );
 
     if($success) {
-      //return response()->json(CommonData::getCommonData(),200);
+        $hasResult = null;
+        $hasResult = DB::table('answers')
+            ->where('user_id', CommonData::getCommonData()->id)
+            ->first();
+
+//        if (!empty($hasResult)) {
+//            throw new \Exception('Вы уже прошли тестирование.');
+//        } // TODO включить на проде!
+
         return response()->json([
             'id' => CommonData::getCommonData()->id,
             'username' => CommonData::getCommonData()->username,
