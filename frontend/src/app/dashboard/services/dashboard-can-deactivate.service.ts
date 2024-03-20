@@ -12,7 +12,7 @@ export class DashboardCanDeactivateService implements CanDeactivate<DashboardCom
 
   canDeactivate(component: DashboardComponent)  {
     if (!this.dashboardService.getTestFinished()) {
-      return window.confirm("Завершить тестирование и сохранить текущий результат?");
+      return window.confirm("Завершить тестирование и выйти без сохранения результата?");
     } else {
       return true;
     }

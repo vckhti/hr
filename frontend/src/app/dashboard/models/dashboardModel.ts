@@ -82,9 +82,9 @@ export class DashboardModel {
   }
 
   public getSelectedAnswer(): number | null {
-    const answersLength = this.data[this.selectedQuestionIndex]?.answers.length as number;
-    if (this.data && this.data.length > 0  && this.data[this.selectedQuestionIndex]?.answers[answersLength - 1]?.current_value) {
-      // //console.log('getSelectedAnswer',this.data[index]?.answers[answersLength - 1]?.current_value)
+    const answersLength = this.data[this.selectedQuestionIndex]?.answers && this.data[this.selectedQuestionIndex]?.answers.length ? (this.data[this.selectedQuestionIndex]?.answers.length as number) : null;
+    if (answersLength && this.data && this.data.length > 0  && this.data[this.selectedQuestionIndex]?.answers[answersLength - 1]?.current_value) {
+      //console.log('getSelectedAnswer',this.data[this.selectedQuestionIndex]?.answers[answersLength - 1]?.current_value)
       return (this.data[this.selectedQuestionIndex]?.answers[answersLength - 1]?.current_value as number);
     } else {
       return null;

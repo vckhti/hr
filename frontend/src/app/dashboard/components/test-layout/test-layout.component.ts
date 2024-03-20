@@ -57,9 +57,9 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
     this.dashboardService.setIsAnswered(true);
      //console.log('submit', event);
     // this.model.stopTest();
-    const answersLength = this.model.getQuestion()?.answers && this.model.getQuestion()?.answers.length? (this.model.getQuestion()?.answers.length as number) : 0;
+    const answersLength = (this.model.getQuestion()?.answers && this.model.getQuestion()?.answers.length)? (this.model.getQuestion()?.answers.length as number) : 0;
     this.selectedAnswer = event;
-    if (this.model.getQuestion() !== undefined && answersLength > 0) {
+    if (this.model.getQuestion() && answersLength > 0) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
       // // // console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
@@ -69,7 +69,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
         })
       );
     }
-    else if (this.model.getQuestion() && (answersLength === 0 )) {
+    else {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
       const answer: IAnswerInterface = {
@@ -98,7 +98,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
             this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
             this.model.selectedQuestionIndex = this.model.selectedQuestionIndex + 1;
             const nextQuestion = this.model.getQuestion();
-            if (nextQuestion.history_id === 1) {
+            if (nextQuestion.history_id && nextQuestion.history_id === 1) {
               this.dashboardService.setIsAnswered(true);
             } else {
               this.dashboardService.setIsAnswered(false);
@@ -129,7 +129,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
             this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
             this.model.selectedQuestionIndex = this.model.selectedQuestionIndex - 1;
             const previousQuestion = this.model.getQuestion();
-            if (previousQuestion.history_id === 1) {
+            if (previousQuestion.history_id && previousQuestion.history_id === 1) {
               this.dashboardService.setIsAnswered(true);
             } else {
               this.dashboardService.setIsAnswered(false);
