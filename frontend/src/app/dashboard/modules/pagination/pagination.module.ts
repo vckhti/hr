@@ -13,7 +13,6 @@ import {DashboardService} from "../../services/dashboard.service";
   exports: [PaginationComponent],
   providers: [
     UtilsService,
-    {provide: DashboardService, useExisting: DashboardService}
   ]
 })
 export class PaginationModule {}

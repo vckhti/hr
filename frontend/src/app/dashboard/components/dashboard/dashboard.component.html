@@ -13,10 +13,10 @@
         <br>
         <button
           class="app-button"
-          [ngClass]="{'disabled': model.getQuestion(model.selectedQuestionIndex)?.come_back_id &&
-          model.getQuestion(model.selectedQuestionIndex)?.come_back_id === 1}"
+          [ngClass]="{'disabled': model.getQuestion()?.come_back_id &&
+          model.getQuestion()?.come_back_id === 1}"
           (click)="markQuestion(model.selectedQuestionIndex)">
-          {{model.getQuestion(model.selectedQuestionIndex)?.come_back_id? 'Снять метку' : 'Пометить вопрос'}}
+          {{model.getQuestion()?.come_back_id? 'Снять метку' : 'Пометить вопрос'}}
         </button>
       </app-sidebar>
 

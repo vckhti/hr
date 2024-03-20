@@ -17,6 +17,7 @@ import {AuthGuard} from "./modules/auth/services/auth.guard";
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 import {DashboardCanDeactivateService} from "./dashboard/services/dashboard-can-deactivate.service";
+import {DashboardService} from "./dashboard/services/dashboard.service";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {DashboardCanDeactivateService} from "./dashboard/services/dashboard-can-
     ToastModule,
   ],
   providers: [
+    DashboardService,
     DashboardCanDeactivateService,
     MessageService,
     AuthGuard

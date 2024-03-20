@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
 
     this.isAnonymous$ = this.store.pipe(select(isLoggedInSelector)).subscribe(
       (isLoggedIn: any)=>{
-        // // // console.log('isLoggedIn', isLoggedIn);
+        // // // //console.log('isLoggedIn', isLoggedIn);
         if(isLoggedIn === true) {
           this.isAnonymous = false;
         } else {
@@ -41,10 +41,10 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     // return true;
     if (this.isAnonymous === false) {
-      // // // console.log('canActivate true');
+      // // // //console.log('canActivate true');
       return true;
     }
-    // // // console.log('canActivate false');
+    // // // //console.log('canActivate false');
     this.router.navigate(['/login']);
     return false;
   }

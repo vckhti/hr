@@ -109,7 +109,7 @@ class TestController extends Controller
 
         $answer_times_ids = '';
         foreach($thinkingTime->sortByDesc('thinking_time') as $item) {
-            $answer_times_ids= $answer_times_ids.$item->question_id.':'.$item->thinking_time.', ';
+            $answer_times_ids= $answer_times_ids.$item->question_id.', ';
         }
         //dd($thinkingTime->sortByDesc('thinking_time'));
 

@@ -17,7 +17,7 @@ export class AuthService {
   //   return this.http.post<any>(url,user).pipe(
   //     catchError((err) => {
   //       this.alert.danger('Сервеная ошибка');
-  //       console.error(err);
+  //       //console.error(err);
   //       return of(null);
   //     })
   //   );

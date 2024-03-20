@@ -57,11 +57,11 @@ export class DashboardService {
 
     return this.http.get<any>(url).pipe(
       map((response: IQuestionInterface[]) => {
-        // // console.log('response', response);
+        // // //console.log('response', response);
         return model.saveData(response)
       }),
       catchError((err: any) => {
-        // // console.log('err', err);
+        // // //console.log('err', err);
         return of(model);
       })
     )

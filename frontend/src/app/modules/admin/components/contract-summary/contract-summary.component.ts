@@ -84,7 +84,7 @@ export class ContractSummaryComponent implements OnInit, OnChanges, OnDestroy {
           break;
         case 'history_ids': newKey = 'История перемещения по вопросам';
           break;
-        case 'answer_times_ids': newKey = 'Время ответов по убывающей(милисекунды)';
+        case 'answer_times_ids': newKey = 'Время ответов по убывающей';
           break;
       }
       keys.push({key: newKey? newKey : key, value: value[key] != 0 ? value[key] : '-'});

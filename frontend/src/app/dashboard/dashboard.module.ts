@@ -38,7 +38,6 @@ import {DialogService} from "primeng/dynamicdialog";
     DialogModule
   ],
   providers: [
-    DashboardService,
     DialogService,
   ]
 })

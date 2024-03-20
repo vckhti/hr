@@ -69,7 +69,7 @@ export class DashboardModel {
   }
 
   public saveData(response: IQuestionInterface[]): DashboardModel {
-    // // console.log('saveData', response);
+    // // //console.log('saveData', response);
     this.data = response;
     this.errors = null;
     this.success = true;
@@ -81,10 +81,11 @@ export class DashboardModel {
     return this.data.length ?? 0;
   }
 
-  public getSelectedAnswer(index: number): number | null {
-    const answersLength = this.data[index]?.answers.length as number;
-    if (this.data && this.data.length > 0 && index && this.data[index]?.answers[answersLength - 1]?.current_value) {
-      return (this.data[index]?.answers[answersLength - 1]?.current_value as number);
+  public getSelectedAnswer(): number | null {
+    const answersLength = this.data[this.selectedQuestionIndex]?.answers.length as number;
+    if (this.data && this.data.length > 0  && this.data[this.selectedQuestionIndex]?.answers[answersLength - 1]?.current_value) {
+      // //console.log('getSelectedAnswer',this.data[index]?.answers[answersLength - 1]?.current_value)
+      return (this.data[this.selectedQuestionIndex]?.answers[answersLength - 1]?.current_value as number);
     } else {
       return null;
     }
@@ -115,16 +116,16 @@ export class DashboardModel {
     return a;
   }
 
-  public getQuestion(index: number): any {
-    this.touchedIndexes.push(index);
+  public getQuestion(): any {
+    this.touchedIndexes.push(this.selectedQuestionIndex);
     this.touchedIndexes = this.uniqueArray(this.touchedIndexes);
-    if (this.data && this.data.length && index > -1) {
-      if (this.data[index].come_back_id === 1) {
-        this.marksQuestionsIndexes.push(index);
-        this.marksQuestionsIndexesClone.push(index);
+    if (this.data && this.data.length && this.selectedQuestionIndex > -1) {
+      if (this.data[this.selectedQuestionIndex].come_back_id === 1) {
+        this.marksQuestionsIndexes.push(this.selectedQuestionIndex);
+        this.marksQuestionsIndexesClone.push(this.selectedQuestionIndex);
       }
       this.marksQuestionsIndexes = this.uniqueArray(this.marksQuestionsIndexes);
-      return this.data[index];
+      return this.data[this.selectedQuestionIndex];
     } else {
       return null;
     }

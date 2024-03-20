@@ -4,7 +4,7 @@
     <fieldset>
       <div class="form-group">
         <app-question
-          [question]=model.getQuestion(model.selectedQuestionIndex)
+          [question]=model.getQuestion()
           (questionIndexChanged)= questionChanged()
         ></app-question>
       </div>
@@ -12,39 +12,39 @@
       <div class="form-cols">
         <div class="form-col">
           <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [selected]="model.getSelectedAnswer(model.selectedQuestionIndex)" [num]="1"
-                      [answer]=model.getQuestion(model.selectedQuestionIndex)?.variant1></app-answer>
+                      [selected]="model.getSelectedAnswer()" [num]="1"
+                      [answer]=model.getQuestion()?.variant1></app-answer>
         </div>
         <div class="form-col">
           <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [selected]="model.getSelectedAnswer(model.selectedQuestionIndex)" [num]="2"
-                      [answer]=model.getQuestion(model.selectedQuestionIndex)?.variant2></app-answer>
-        </div>
-      </div>
-
-      <div class="form-cols">
-        <div class="form-col">
-          <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [selected]="model.getSelectedAnswer(model.selectedQuestionIndex)" [num]="3"
-                      [answer]=model.getQuestion(model.selectedQuestionIndex)?.variant3></app-answer>
-        </div>
-        <div class="form-col">
-          <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [selected]="model.getSelectedAnswer(model.selectedQuestionIndex)" [num]="4"
-                      [answer]=model.getQuestion(model.selectedQuestionIndex)?.variant4></app-answer>
+                      [selected]="model.getSelectedAnswer()" [num]="2"
+                      [answer]=model.getQuestion()?.variant2></app-answer>
         </div>
       </div>
 
       <div class="form-cols">
         <div class="form-col">
           <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [selected]="model.getSelectedAnswer(model.selectedQuestionIndex)" [num]="5"
-                      [answer]=model.getQuestion(model.selectedQuestionIndex)?.variant5></app-answer>
+                      [selected]="model.getSelectedAnswer()" [num]="3"
+                      [answer]=model.getQuestion()?.variant3></app-answer>
         </div>
         <div class="form-col">
           <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [selected]="model.getSelectedAnswer(model.selectedQuestionIndex)" [num]="6"
-                      [answer]=model.getQuestion(model.selectedQuestionIndex)?.variant6></app-answer>
+                      [selected]="model.getSelectedAnswer()" [num]="4"
+                      [answer]=model.getQuestion()?.variant4></app-answer>
+        </div>
+      </div>
+
+      <div class="form-cols">
+        <div class="form-col">
+          <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
+                      [selected]="model.getSelectedAnswer()" [num]="5"
+                      [answer]=model.getQuestion()?.variant5></app-answer>
+        </div>
+        <div class="form-col">
+          <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
+                      [selected]="model.getSelectedAnswer()" [num]="6"
+                      [answer]=model.getQuestion()?.variant6></app-answer>
         </div>
       </div>
 

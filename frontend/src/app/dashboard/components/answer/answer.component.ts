@@ -35,7 +35,7 @@ export class AnswerComponent {
   @Output() itemClick = new EventEmitter<number>();
 
   onRowSelect(): void {
-    // console.log('onRowSelect');
+    // //console.log('onRowSelect');
     this.itemClick.emit(this.num);
   }
 }
