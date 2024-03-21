@@ -68,7 +68,7 @@ class TestController extends Controller
 
         foreach($doubles as $item) {
             if ($item->count > 1) {
-                $change_answer_ids=$change_answer_ids.$item->question_id.';';
+                $change_answer_ids=$change_answer_ids.$item->question_id.', ';
             }
         }
 
@@ -103,7 +103,7 @@ class TestController extends Controller
         foreach($all_user_answers as $var) {
             if ($current_item !== $var->question_id) {
                 $current_item = $var->question_id;
-                $history_ids= $history_ids.$var->question_id.';';
+                $history_ids= $history_ids.$var->question_id.', ';
             }
         }
 

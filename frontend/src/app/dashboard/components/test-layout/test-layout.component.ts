@@ -59,6 +59,10 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
     // this.model.stopTest();
     const answersLength = (this.model.getQuestion()?.answers && this.model.getQuestion()?.answers.length)? (this.model.getQuestion()?.answers.length as number) : 0;
     this.selectedAnswer = event;
+    if (this.model.getQuestion()) {
+      this.model.setToSelectedQuestionAnswerIdFlag();
+    }
+
     if (this.model.getQuestion() && answersLength > 0) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
@@ -86,7 +90,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
 
   public nextQuestion(): void {
     // //console.log('nextQuestion',this.dashboardService.getIsAnswered());
-    if (this.dashboardService.getIsAnswered() && (this.model.selectedQuestionIndex < this.model.getDataArrayLength() -1)) {
+    if ( this.model.getQuestion().answer_id === 1 && this.model.getQuestion().answer_id === 1 && (this.model.selectedQuestionIndex < this.model.getDataArrayLength() -1)) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
       // // // //console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
@@ -98,11 +102,11 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
             this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
             this.model.selectedQuestionIndex = this.model.selectedQuestionIndex + 1;
             const nextQuestion = this.model.getQuestion();
-            if (nextQuestion.history_id && nextQuestion.history_id === 1) {
-              this.dashboardService.setIsAnswered(true);
-            } else {
-              this.dashboardService.setIsAnswered(false);
-            }
+            // if (nextQuestion.history_id && nextQuestion.history_id === 1) {
+            //   this.dashboardService.setIsAnswered(true);
+            // } else {
+            //   this.dashboardService.setIsAnswered(false);
+            // }
 
         })
       );
@@ -118,7 +122,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
 
   public previousQuestion(): void {
     // //console.log('previousQuestion',this.dashboardService.getIsAnswered());
-    if (this.dashboardService.getIsAnswered() && (this.model.selectedQuestionIndex > 0)) {
+    if ( this.model.getQuestion().answer_id === 1 && (this.model.selectedQuestionIndex > 0)) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
       // // // //console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
@@ -129,11 +133,11 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
             this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
             this.model.selectedQuestionIndex = this.model.selectedQuestionIndex - 1;
             const previousQuestion = this.model.getQuestion();
-            if (previousQuestion.history_id && previousQuestion.history_id === 1) {
-              this.dashboardService.setIsAnswered(true);
-            } else {
-              this.dashboardService.setIsAnswered(false);
-            }
+            // if (previousQuestion.history_id && previousQuestion.history_id === 1) {
+            //   this.dashboardService.setIsAnswered(true);
+            // } else {
+            //   this.dashboardService.setIsAnswered(false);
+            // }
         })
       );
     } else {
@@ -157,6 +161,8 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
     }
 
     this.model.stopTest();
+    this.model.resetAnswerIdFlags();
+    // console.log('this.model.data', this.model.data);
     this._subscriptions.add(
       this.dashboardService.finishTest(args)
         .subscribe((res: any) => {
@@ -179,7 +185,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   converArrayIndexesToQuestionsIdString(array: number[]): string {
     let str='';
     this.uniqueArray(array).map(item => item +1).forEach(item => {
-      str=str + item + ',';
+      str=str + item + ', ';
     });
 
     return str;

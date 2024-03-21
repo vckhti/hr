@@ -27,6 +27,12 @@ export class DashboardModel {
     this.testStart = false;
   }
 
+  resetAnswerIdFlags(): void {
+    this.data.forEach((item: any) => {
+      item.answer_id = null;
+    })
+  }
+
   stopTest(): void {
     this.testStart = true;
   }
@@ -129,6 +135,13 @@ export class DashboardModel {
     } else {
       return null;
     }
+  }
+
+  public setToSelectedQuestionAnswerIdFlag():void  {
+    if (this.data[this.selectedQuestionIndex]) {
+      this.data[this.selectedQuestionIndex].answer_id = 1;
+    }
+
   }
 
   public getData(): IQuestionInterface[] {
