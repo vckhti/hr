@@ -48,9 +48,6 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   ngAfterViewInit() {
   }
 
-  checkAnswerValid(event: number): void {
-  }
-
   ngOnDestroy(): void {
     this._subscriptions.unsubscribe();
   }
