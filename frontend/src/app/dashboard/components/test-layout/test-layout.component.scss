@@ -1,0 +1,39 @@
+.buttons-wrapper{
+  margin-top: 20px;
+  //align-self: end;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.test-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between !important;
+  min-height: 84vh;
+  max-height: 90vh;
+}
+
+@media (max-height: 800px) {
+  .test-wrapper {
+    min-height: 100%;
+  }
+
+}
+
+@media (max-width: 860px) {
+  .test-wrapper {
+    min-height: 100%;
+  }
+
+  .buttons-wrapper{
+    flex-direction: column;
+    margin: 0 auto;
+
+    button {
+      max-width: 220px;
+      margin-top: 10px;
+    }
+  }
+}
+

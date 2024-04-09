@@ -1,0 +1,19 @@
+.menu {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  //border: 1px solid purple;
+
+  span{
+    margin-left: 40px;
+    cursor: pointer;
+  }
+
+  a{
+    text-decoration: none;
+  }
+}
+
+.menu-wrapper {
+  height: 8vh;
+}

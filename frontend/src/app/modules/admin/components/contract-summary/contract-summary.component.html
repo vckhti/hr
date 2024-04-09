@@ -1,0 +1,14 @@
+<div class="contract-summary">
+
+	<table class="contract-summary__table">
+		<tr *ngFor="let item of keys; index as i">
+      <td class="{{'th'+i}}">{{ item.key}}:</td>
+      <td class="{{'td'+i}}">{{ item.key === 'Пользователь' ? ( item.value | username : this.usersDescriptions) : item.value}}</td>
+<!--			<td>{{ item | json | username : this.usersDescriptions}}</td>-->
+<!--			<td [innerHTML]="item"></td>-->
+		</tr>
+	</table>
+
+</div>
+
+<!--<app-tab-loader *ngIf="loading"></app-tab-loader>-->

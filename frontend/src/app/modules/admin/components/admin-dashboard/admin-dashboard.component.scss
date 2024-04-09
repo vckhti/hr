@@ -1,0 +1,48 @@
+input, select {
+  border: 1px solid black;
+  border-radius: 2px;
+
+  &.ng-invalid.ng-touched,
+  &.ng-invalid.ng-dirty {
+    border-color: red;
+  }
+}
+
+button{
+  opacity: 0.9;
+}
+
+.sort-button {
+  width: 100%;
+  min-height: 28px;
+  padding: 0;
+  margin: 0;
+}
+
+table {
+  margin: 0 auto;
+  width: 99%;
+  border: 1px solid #c5c5c5;
+
+  th,td {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #c5c5c5 !important;
+  }
+}
+
+.container-table{
+  height: calc(30vh);
+}
+
+.container-tab1 {
+  height: calc((35vh - 25px));
+}
+
+.container-tab2 {
+  height: calc(35vh - 25px);
+}
+
+
+
+

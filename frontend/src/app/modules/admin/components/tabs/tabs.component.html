@@ -1,0 +1,14 @@
+<div class="tabs">
+  <div class="tabs__content">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="tabs__list">
+    <ng-container *ngFor="let tab of getTabsArray()">
+      <div class="tabs__list__tab"
+           [class.active]="tab.active === true"
+           (click)="selectTab(tab)">{{ tab.header }}</div>
+    </ng-container>
+  </div>
+
+</div>

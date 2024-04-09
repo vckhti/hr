@@ -1,0 +1,36 @@
+<div class="content-wrapper">
+  <div class="container">
+    <div class="container-table">
+      <app-data-table [columns]="columns"
+                      [showFilters]="true"
+                      [perPage] = 25
+                      [items]="data"
+                      [usersDescriptions]= "usersNames"
+                      (selectedItemChange) = onRowSelected($event)
+      ></app-data-table>
+
+    </div>
+
+    <div class="container-tab1">
+
+      <app-tabs>
+        <app-tab header="Информация">
+          <ng-template>
+            <app-contract-summary [usersDescriptions]= "usersNames" [contract]=selectedRow></app-contract-summary>
+          </ng-template>
+        </app-tab>
+      </app-tabs>
+    </div>
+  </div>
+
+  <div class="container-tab2">
+    <app-tabs>
+      <app-tab header="История вопросов">
+        <ng-template>
+          <app-answers-history [contract]=selectedRow></app-answers-history>
+        </ng-template>
+      </app-tab>
+    </app-tabs>
+  </div>
+
+</div>

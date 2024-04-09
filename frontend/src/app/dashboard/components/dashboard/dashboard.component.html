@@ -1,28 +1,46 @@
-<div class="dashboard-outer-wrapper">
+<div  class="dashboard-outer-wrapper">
 
   <!--Header-->
-  <app-header></app-header>
-
-
+   <app-header *ngIf="!isProduction"></app-header>
 
   <!--Content-->
   <div class="dashboard-inner-wrapper">
 
     <div class="dashboard-inner-wrapper__left-block">
       <!--Sidebar-->
-      <app-sidebar></app-sidebar>
+      <app-sidebar>
+        <app-countdown [model]="model"></app-countdown>
+        <br>
+        <button
+          class="app-button"
+          [ngClass]="{'disabled': model.getQuestion()?.come_back_id &&
+          model.getQuestion()?.come_back_id === 1}"
+          (click)="markQuestion(model.selectedQuestionIndex)">
+          {{model.getQuestion()?.come_back_id? 'Снять метку' : 'Пометить вопрос'}}
+        </button>
+      </app-sidebar>
+
+
     </div>
 
     <div class="dashboard-inner-wrapper__right-block">
-
-
       <!--Content-->
       <div class="dashboard-content">
-        <router-outlet></router-outlet>
+        <app-test-layout [model]="model" ></app-test-layout>
+        <!--<router-outlet></router-outlet>-->
       </div>
-
     </div>
-
   </div>
-  <app-footer></app-footer>
+
+
+  <app-footer>
+    <mc-pagination
+      [model]="model"
+      [total]="20"
+      [currentPage]="model.selectedQuestionIndex"
+      [limit]="1"
+      (newItemEvent)="handleCurrentPage($event)"
+    ></mc-pagination>
+
+  </app-footer>
 </div>

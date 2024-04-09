@@ -1,0 +1,17 @@
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 486px;
+}
+
+.buttons-wrapper {
+  button {
+    float: right;
+  }
+}
+
+.form-group {
+  margin-bottom: 15px;
+
+}
