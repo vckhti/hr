@@ -22,7 +22,6 @@ export class AnswersHistoryComponent implements OnInit, OnDestroy {
     return this._contract;
   }
   @Input('contract') set contract(contract: any) {
-    // // //console.log('setter contract ');
     this._contract = contract;
     this.selectedNumber = 1;
     this.onQestionIdChanged('1');

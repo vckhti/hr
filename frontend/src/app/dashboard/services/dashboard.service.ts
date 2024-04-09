@@ -36,7 +36,6 @@ export class DashboardService {
   finishTest(args: any): any {
     const url = environment.serverUrl + '/finishTest';
     return this.http.post(url,args).pipe(
-      //take(1)
     )
   }
 
@@ -57,26 +56,12 @@ export class DashboardService {
 
     return this.http.get<any>(url).pipe(
       map((response: IQuestionInterface[]) => {
-        // // //console.log('response', response);
         return model.saveData(response)
       }),
       catchError((err: any) => {
-        // // //console.log('err', err);
         return of(model);
       })
     )
   }
 
-  // sortModelByID(model: RegionsModel): Observable<RegionsModel> {
-  //   let asc: boolean = false;
-  //   model.getData().sort((a: any, b: any) => {
-  //     if (a.id < b.id) {
-  //       return asc ? 1 : -1;
-  //     } if (a.id > b.id) {
-  //       return asc ? -1 : 1;
-  //     }
-  //     return 0;
-  //   });
-  //   return of(model);
-  // }
 }

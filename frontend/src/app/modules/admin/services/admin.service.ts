@@ -17,7 +17,6 @@ export class AdminService{
 
     return this.http.get<any>(url).pipe(
       catchError((err: any) => {
-        // // // //console.log('err', err);
         return of(null);
       })
     )
@@ -29,7 +28,6 @@ export class AdminService{
 
     return this.http.get<any>(url).pipe(
       catchError((err: any) => {
-        // // // //console.log('err', err);
         return of(null);
       })
     )
@@ -42,7 +40,6 @@ export class AdminService{
     }
     return this.http.post<any>(url,args).pipe(
       catchError((err: any) => {
-        // // // //console.log('err', err);
         return of(null);
       })
     );
@@ -53,7 +50,6 @@ export class AdminService{
 
     return this.http.post<any>(url,arg).pipe(
       catchError((err: any) => {
-        // // // //console.log('err', err);
         return of(null);
       })
     )

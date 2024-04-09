@@ -20,7 +20,6 @@ export class LoginEffect {
       switchMap(({request}) => {
         return this.authService.login(request).pipe(
           map((currentUser: CurrentUserInterface) => {
-            // // //console.log('login effect',currentUser);
             const expDate = new Date().getTime() + 86400000;
             this.persistanceService.set('email', currentUser.email);
             this.persistanceService.set('token-exp', expDate);
@@ -38,7 +37,6 @@ export class LoginEffect {
             return loginSuccessAction({currentUser});
           }),
           catchError((errorResponse: HttpErrorResponse) => {
-            // this.alert.danger(`Возникла ошибка: ${errorResponse.error?.message ?? 'Сервеная ошибка'}`);
             return of(loginFailureAction({errors: errorResponse.error?.message ?? 'Сервеная ошибка'}));
           })
         )

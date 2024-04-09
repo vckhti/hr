@@ -9,12 +9,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { TestLayoutComponent } from './components/test-layout/test-layout.component';
 import { QuestionComponent } from './components/question/question.component';
 import { AnswerComponent } from './components/answer/answer.component';
-import {DashboardService} from "./services/dashboard.service";
 import {PaginationModule} from "./modules/pagination/pagination.module";
 import { CountdownComponent } from './components/countdown/countdown.component';
 import {DialogModule} from "primeng/dialog";
 import { TestResultsComponent } from './components/test-results/test-results.component';
 import {DialogService} from "primeng/dynamicdialog";
+import {PersistanceService} from "./services/persistance.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import {DialogService} from "primeng/dynamicdialog";
     AnswerComponent,
     CountdownComponent,
     TestResultsComponent,
-
   ],
   imports: [
     CommonModule,
@@ -39,6 +38,7 @@ import {DialogService} from "primeng/dynamicdialog";
   ],
   providers: [
     DialogService,
+    PersistanceService
   ]
 })
 export class DashboardModule { }

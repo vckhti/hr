@@ -16,7 +16,6 @@ export class QuestionComponent {
   }
 
   @Input('question') set question(question: IQuestionInterface | null) {
-    // // // //console.log('question', question);
     if (question) {
       if (!this.oldQuestionIndex) {
         this.oldQuestionIndex = question.id;

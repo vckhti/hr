@@ -6,8 +6,8 @@ import {IQuestionInterface} from "../../interfaces/IQuestionInterface";
 import {IAnswerInterface} from "../../interfaces/answer.interface";
 import {DialogService} from "primeng/dynamicdialog";
 import {TestResultsComponent} from "../test-results/test-results.component";
-import {AnswerComponent} from "../answer/answer.component";
 import {MessageService} from "primeng/api";
+import {PersistanceService} from "../../services/persistance.service";
 
 @Component({
   selector: 'app-test-layout',
@@ -15,7 +15,6 @@ import {MessageService} from "primeng/api";
   styleUrls: ['./test-layout.component.scss']
 })
 export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
-  //@ViewChildren(AnswerComponent) viewChildren!: QueryList<AnswerComponent>;
 
   @Input() model: DashboardModel;
   public selectedAnswer: number | undefined = undefined;
@@ -28,6 +27,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   constructor(
     private dashboardService: DashboardService,
     private dialogService: DialogService,
+    private persistanceService: PersistanceService,
     private messageService: MessageService
   ) {
     this._subscriptions = new Subscription();
@@ -37,16 +37,9 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   ngAfterViewInit() {
-    // this.viewChildren.forEach(item => {
-    //   // //console.log('item', item);
-    // });
-    // this.viewChildren.forEach(item => {
-    //   // //console.log('item', item);
-    // });
   }
 
   checkAnswerValid(event: number): void {
-    // //console.log('checkAnswerValid',this.dashboardService.getIsAnswered());
   }
 
   ngOnDestroy(): void {
@@ -55,8 +48,6 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
 
   public submit(event: number): void {
     this.dashboardService.setIsAnswered(true);
-     //console.log('submit', event);
-    // this.model.stopTest();
     const answersLength = (this.model.getQuestion()?.answers && this.model.getQuestion()?.answers.length)? (this.model.getQuestion()?.answers.length as number) : 0;
     this.selectedAnswer = event;
     if (this.model.getQuestion()) {
@@ -66,10 +57,10 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
     if (this.model.getQuestion() && answersLength > 0) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
-      // // // console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
       this._subscriptions.add(
         this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, event, ms).subscribe((res: any) => {
           this.model.getQuestion().answers[answersLength - 1].current_value = event;
+          this.model.getQuestion().answers[answersLength - 1].user_id = parseInt(this.persistanceService.get('id'));
         })
       );
     }
@@ -78,7 +69,8 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
       const ms = now - this.model.getQuestion().execution_time_id;
       const answer: IAnswerInterface = {
         question_id: this.model.selectedQuestionIndex,
-        current_value: event
+        current_value: event,
+        user_id: parseInt(this.persistanceService.get('id')),
       }
       this._subscriptions.add(
         this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, event, ms).subscribe((res: any) => {
@@ -89,31 +81,21 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   public nextQuestion(): void {
-    // //console.log('nextQuestion',this.dashboardService.getIsAnswered());
     if ( this.model.getQuestion().answer_id === 1 && this.model.getQuestion().answer_id === 1 && (this.model.selectedQuestionIndex < this.model.getDataArrayLength() -1)) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
-      // // // //console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
       this._subscriptions.add(
         this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, null, ms)
           .subscribe((res: any) => {
-            // //console.log('nextQ res', res);
             const currentQuestion = this.model.getQuestion();
             this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
             this.model.selectedQuestionIndex = this.model.selectedQuestionIndex + 1;
-            const nextQuestion = this.model.getQuestion();
-            // if (nextQuestion.history_id && nextQuestion.history_id === 1) {
-            //   this.dashboardService.setIsAnswered(true);
-            // } else {
-            //   this.dashboardService.setIsAnswered(false);
-            // }
 
         })
       );
     } else {
-      // //console.log('nextQuestion else',this.dashboardService.getIsAnswered());
       this.messageService.add({
-        severity: 'success',
+        severity: 'error',
         summary: 'Ответ не выбран',
         detail: 'Выберите ответ!',
       });
@@ -121,28 +103,20 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   public previousQuestion(): void {
-    // //console.log('previousQuestion',this.dashboardService.getIsAnswered());
     if ( this.model.getQuestion().answer_id === 1 && (this.model.selectedQuestionIndex > 0)) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
-      // // // //console.log('время ответа вопроса №',this.model.selectedQuestionIndex,' составляет', ms);
       this._subscriptions.add(
         this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, null, ms)
           .subscribe((res: any) => {
             const currentQuestion = this.model.getQuestion();
             this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
             this.model.selectedQuestionIndex = this.model.selectedQuestionIndex - 1;
-            const previousQuestion = this.model.getQuestion();
-            // if (previousQuestion.history_id && previousQuestion.history_id === 1) {
-            //   this.dashboardService.setIsAnswered(true);
-            // } else {
-            //   this.dashboardService.setIsAnswered(false);
-            // }
         })
       );
     } else {
       this.messageService.add({
-        severity: 'success',
+        severity: 'error',
         summary: 'Ответ не выбран',
         detail: 'Выберите ответ!',
       });
@@ -150,7 +124,10 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   public finishTest(): void {
-   // // // //console.log('finishTime', this.model.testTimeLeft - 1);
+    if (!this.model.canFinishTest()) {
+      return ;
+    }
+
     this.isLoading = true;
 
     const args = {
@@ -162,12 +139,10 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
 
     this.model.stopTest();
     this.model.resetAnswerIdFlags();
-    // console.log('this.model.data', this.model.data);
     this._subscriptions.add(
       this.dashboardService.finishTest(args)
         .subscribe((res: any) => {
           this.isLoading = false;
-          // // //console.log('finish', res);
           this.testIsOver = true;
           this.showResultsDialog(res.questions_count,res.right_questions,res.wrong_questions,res.testing_times,);
         })
@@ -208,7 +183,6 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
  public questionChanged(): void {
-    // // // //console.log(`questionChanged ${this.model.selectedQuestionIndex}`);
     this.model.getQuestion().execution_time_id = new Date().getTime();
  }
 

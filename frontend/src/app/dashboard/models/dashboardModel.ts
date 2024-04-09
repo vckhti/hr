@@ -27,10 +27,24 @@ export class DashboardModel {
     this.testStart = false;
   }
 
+  canFinishTest(): boolean {
+    let counter = 0;
+    this.data.forEach((item: any) => {
+      if (item.answer_id !== null) {
+        counter = counter + 1;
+      }
+    });
+
+    if (counter === 20) {
+      return true;
+    }
+    return false;
+  }
+
   resetAnswerIdFlags(): void {
     this.data.forEach((item: any) => {
       item.answer_id = null;
-    })
+    });
   }
 
   stopTest(): void {
@@ -75,7 +89,6 @@ export class DashboardModel {
   }
 
   public saveData(response: IQuestionInterface[]): DashboardModel {
-    // // //console.log('saveData', response);
     this.data = response;
     this.errors = null;
     this.success = true;
@@ -90,7 +103,6 @@ export class DashboardModel {
   public getSelectedAnswer(): number | null {
     const answersLength = this.data[this.selectedQuestionIndex]?.answers && this.data[this.selectedQuestionIndex]?.answers.length ? (this.data[this.selectedQuestionIndex]?.answers.length as number) : null;
     if (answersLength && this.data && this.data.length > 0  && this.data[this.selectedQuestionIndex]?.answers[answersLength - 1]?.current_value) {
-      //console.log('getSelectedAnswer',this.data[this.selectedQuestionIndex]?.answers[answersLength - 1]?.current_value)
       return (this.data[this.selectedQuestionIndex]?.answers[answersLength - 1]?.current_value as number);
     } else {
       return null;
@@ -98,7 +110,6 @@ export class DashboardModel {
   }
 
   isMarkForComeBack(index: number): boolean {
-    // return this.getQuestion(index)?.come_back_id === 1;
     let uniqueArray = [...this.uniqueArray(this.marksQuestionsIndexes)];
     return uniqueArray.includes(index);
   }

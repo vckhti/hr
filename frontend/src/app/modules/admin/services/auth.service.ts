@@ -12,23 +12,11 @@ export class AuthService {
     private persistanceService: PersistanceService,
   ) { }
 
-  // login( user: AuthUserInterface ): Observable<CurrentUserInterface> {
-  //   const url = environment.serverUrl + '/api/login';
-  //   return this.http.post<any>(url,user).pipe(
-  //     catchError((err) => {
-  //       this.alert.danger('Сервеная ошибка');
-  //       //console.error(err);
-  //       return of(null);
-  //     })
-  //   );
-  // }
-  //
 
   public setToken (response: any) {
     if (response) {
       const expDate = new Date().getTime() + 86400000;
       this.persistanceService.set('token-exp', expDate.toString());
-      //this.persistanceService.set('token', response.token);
     }
     if (!response) {
       this.persistanceService.delete();

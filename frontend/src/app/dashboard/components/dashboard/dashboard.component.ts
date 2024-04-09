@@ -44,8 +44,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   }
 
   public handleCurrentPage(event: any): void {
-    // console.log('handleCurrentPage', this.model.getQuestion(),this.model.getQuestion().answer_id);
-    if ( (this.model.getQuestion().answer_id === 1) && this.model.selectedQuestionIndex > -1) {
+    if ( this.model.getQuestion().answer_id && (this.model.getQuestion().answer_id === 1) && this.model.selectedQuestionIndex > -1) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
       const currentQuestion = this.model.getQuestion();
@@ -58,7 +57,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
       );
     } else {
       this.messageService.add({
-        severity: 'success',
+        severity: 'error',
         summary: 'Ответ не выбран',
         detail: 'Выберите ответ!',
       });
@@ -72,14 +71,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
       this.model.getQuestion().come_back_id = null;
 
       let indexForDelete = this.model.marksQuestionsIndexes.indexOf((index));
-      // // //console.log('indexForDelete', index,indexForDelete,this.model.marksQuestionsIndexes);
       if (indexForDelete !== -1) {
-        //indexForDelete = indexForDelete + 1;
-        // // //console.log('Delete', indexForDelete);
         this.model.marksQuestionsIndexes.splice(indexForDelete, 1);
       }
     }
-    // // //console.log('this.model.getQuestion(index)', this.model.getQuestion(index));
   }
 
 }

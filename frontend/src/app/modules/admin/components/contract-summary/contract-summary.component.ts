@@ -74,7 +74,7 @@ export class ContractSummaryComponent implements OnInit, OnChanges, OnDestroy {
           break;
         case 'right_questions': newKey = 'Правильные ответы';
           break;
-        case 'wrong_questions': newKey = 'Неправильные ответоы';
+        case 'wrong_questions': newKey = 'Неправильные ответы';
           break;
         case 'testing_times': newKey = 'Время тестирования';
           break;

@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\DB;
 class QuestionsController extends Controller
 {
     public function getQuestions() {
-        return response()->json(QuestionsModel::with('answers')->get(),200);
+        return response()->json(
+            QuestionsModel::with('answers')
+                ->get(),200);
     }
 
     public function getQuestionById(Request $request) {

@@ -173,7 +173,6 @@ export class AdminDashboardComponent {
   }
 
   onRowSelected(event: any): void {
-    // // //console.log('event', event);
     this.selectedRow = event;
 
   }

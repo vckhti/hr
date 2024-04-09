@@ -1,5 +1,5 @@
 
 export const environment = {
   production: true,
-  serverUrl: 'http://hr-test.rf.gd/api',
+  serverUrl: 'https://hr-test.rf.gd/api',
 };
