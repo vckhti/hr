@@ -1,4 +1,11 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {DashboardModel} from "../../models/dashboardModel";
 import { Subscription} from "rxjs";
 import {DashboardService} from "../../services/dashboard.service";
@@ -12,7 +19,8 @@ import {PersistanceService} from "../../services/persistance.service";
 @Component({
   selector: 'app-test-layout',
   templateUrl: './test-layout.component.html',
-  styleUrls: ['./test-layout.component.scss']
+  styleUrls: ['./test-layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
 
@@ -34,6 +42,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   ngOnInit(): void {
+
   }
 
   ngAfterViewInit() {
@@ -74,7 +83,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
       }
       this._subscriptions.add(
         this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, event, ms).subscribe((res: any) => {
-          this.model.getQuestion().answers.push(answer) ;
+          this.model.getQuestion().answers.push(answer);
         })
       );
     }
@@ -90,7 +99,6 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
             const currentQuestion = this.model.getQuestion();
             this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
             this.model.selectedQuestionIndex = this.model.selectedQuestionIndex + 1;
-
         })
       );
     } else {

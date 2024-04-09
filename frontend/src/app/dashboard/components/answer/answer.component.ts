@@ -13,7 +13,7 @@ import {PersistanceService} from "../../services/persistance.service";
   selector: 'app-answer',
   templateUrl: './answer.component.html',
   styleUrls: ['./answer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnswerComponent {
 

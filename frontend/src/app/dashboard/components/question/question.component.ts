@@ -1,12 +1,16 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output} from '@angular/core';
 import {IQuestionInterface} from "../../interfaces/IQuestionInterface";
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+  styleUrls: ['./question.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuestionComponent {
+  constructor(
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   oldQuestionIndex: number | undefined;
   _question: IQuestionInterface;
@@ -25,6 +29,7 @@ export class QuestionComponent {
         this.oldQuestionIndex = question.id;
       }
       this._question = question;
+      this.cdr.detectChanges();
     }
   }
 
