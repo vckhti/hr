@@ -26,12 +26,6 @@ class QuestionSeeder extends Seeder
     public function run()
     {
 
-//        DB::table('answers')->insert([
-//        'question_id' => rand(1, 1),
-//        ]);
-
-        // QuestionsModel::factory()->create();
         QuestionsModel::factory()->count(20)->create();
-       // factory(QuestionsModel::class,25)->create();
     }
 }
