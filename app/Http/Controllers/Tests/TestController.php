@@ -73,7 +73,7 @@ class TestController extends Controller
         }
 
         $thinkingTime = DB::table('answers')
-                ->select(DB::raw('id,question_id,thinking_time,user_id'))
+                ->select(DB::raw('id,question_id,thinking_time,user_id,created_at'))
                 ->where('user_id',  $user->id)
                 ->orderBy('question_id')
                 ->get();
@@ -86,8 +86,8 @@ class TestController extends Controller
             } else if (!empty($current_question_id) && $current_question_id === $item->question_id){
                 $current_question_id = $item->question_id;
 
-                $to_time = strtotime($item->updated_at);
-                $from_time = strtotime($item->created_at);
+                $to_time = strtotime($item->created_at);
+                $from_time = strtotime($thinkingTime[$key-1]->created_at);
                 $item->sec = (round(abs($to_time - $from_time) / 60,2)) * 60;
 
                 $item->thinking_time = $item->sec + $thinkingTime[$key-1]->sec;
