@@ -72,7 +72,7 @@ class TestController extends Controller
             }
         }
 
-        $thinkingTime = DB::table('answers')
+  /*      $thinkingTime = DB::table('answers')
                // ->select(DB::raw('id,question_id,thinking_time,user_id,created_at'))
                 ->where('user_id',  $user->id)
                 ->orderBy('question_id')
@@ -96,7 +96,7 @@ class TestController extends Controller
             } else {
                 $current_question_id = $item->question_id;
             }
-        }
+        }*/
 
         $all_user_answers = DB::table('answers')
             ->select(DB::raw('id,question_id,thinking_time,user_id'))
@@ -113,8 +113,14 @@ class TestController extends Controller
             }
         }
 
+        $thinkingTimes2 = DB::table('answers')
+            ->where('current_value','=', null)
+            ->where('user_id',  $user->id)
+            ->orderByDesc('thinking_time')
+            ->get();
+
         $answer_times_ids = '';
-        foreach($thinkingTime->sortByDesc('thinking_time') as $item) {
+        foreach($thinkingTimes2 as $item) {
             $answer_times_ids= $answer_times_ids.$item->question_id.'-('.round((($item->thinking_time)/1000),1).' сек), ';
         }
         //dd($thinkingTime->sortByDesc('thinking_time'));
