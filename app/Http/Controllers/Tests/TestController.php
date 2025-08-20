@@ -73,7 +73,7 @@ class TestController extends Controller
         }
 
         $thinkingTime = DB::table('answers')
-                ->select(DB::raw('id,question_id,thinking_time,user_id,created_at'))
+               // ->select(DB::raw('id,question_id,thinking_time,user_id,created_at'))
                 ->where('user_id',  $user->id)
                 ->orderBy('question_id')
                 ->get();
