@@ -109,7 +109,7 @@ class TestController extends Controller
 
         $answer_times_ids = '';
         foreach($thinkingTime->sortByDesc('thinking_time') as $item) {
-            $answer_times_ids= $answer_times_ids.$item->question_id.':'.round(($item->thinking_time/1000),1).', ';
+            $answer_times_ids= $answer_times_ids.$item->question_id.':'.round(($item->thinking_time/10000),1).', ';
         }
         //dd($thinkingTime->sortByDesc('thinking_time'));
 
