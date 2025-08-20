@@ -90,7 +90,7 @@ class TestController extends Controller
                 $from_time = strtotime($thinkingTime[$key-1]->created_at);
                 $item->sec = (round(abs($to_time - $from_time) / 60,2)) * 60;
 
-                $item->thinking_time = $item->sec + $thinkingTime[$key-1]->sec;
+                $item->thinking_time = $item->sec + $thinkingTime[$key-1]->thinking_time;
                 unset($thinkingTime[$key-1]);
 
             } else {
