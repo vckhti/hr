@@ -85,8 +85,14 @@ class TestController extends Controller
                 $current_question_id = $item->question_id;
             } else if (!empty($current_question_id) && $current_question_id === $item->question_id){
                 $current_question_id = $item->question_id;
-                $item->thinking_time = $item->thinking_time + $thinkingTime[$key-1]->thinking_time;
+
+                $to_time = strtotime($item->updated_at);
+                $from_time = strtotime($item->created_at);
+                $item->sec = (round(abs($to_time - $from_time) / 60,2)) * 60;
+
+                $item->thinking_time = $item->sec + $thinkingTime[$key-1]->sec;
                 unset($thinkingTime[$key-1]);
+
             } else {
                 $current_question_id = $item->question_id;
             }
@@ -109,7 +115,7 @@ class TestController extends Controller
 
         $answer_times_ids = '';
         foreach($thinkingTime->sortByDesc('thinking_time') as $item) {
-            $answer_times_ids= $answer_times_ids.$item->question_id.'-('.round((($item->thinking_time/1000)),1).' сек), ';
+            $answer_times_ids= $answer_times_ids.$item->question_id.'-('.round((($item->thinking_time)),1).' сек), ';
         }
         //dd($thinkingTime->sortByDesc('thinking_time'));
 
