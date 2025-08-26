@@ -29,6 +29,33 @@ Route::post('/finishTest', [TestController::class, 'finishTest']);
 Route::get('/get_test_results', [TestController::class, 'getTestResults']);
 
 
+Route::get('tors', [MenuController::class, 'getMenuItems']);
+
+Route::get('products', 'App\Http\Controllers\ProductController@products');
+
+Route::post('products_by_category', 'App\Http\Controllers\ProductController@products_by_category');
+
+Route::get('categories', 'App\Http\Controllers\CategoryController@categories');
+
+
+Route::get('users_descriptions', 'App\Http\Controllers\Users\UsersController@usersDescriptions');
+
+Route::post('users_by_id', 'App\Http\Controllers\Users\UsersController@usersById');
+
+Route::get('orders', 'App\Http\Controllers\OrderController@getAllOrders');
+
+Route::post('order_product_by_id', 'App\Http\Controllers\OrderController@getOrderProductByProductId');
+
+Route::post('create_order', 'App\Http\Controllers\OrderController@createOrder');
+
+Route::post('order_by_id', 'App\Http\Controllers\OrderController@getOrderById');
+
+Route::any('logout', [UsersController::class, 'logout']);
+
+Route::post('change_order_status', 'App\Http\Controllers\OrderController@changeOrderStatus');
+
+
+
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
