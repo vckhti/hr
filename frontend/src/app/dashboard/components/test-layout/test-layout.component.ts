@@ -87,7 +87,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   public nextQuestion(): void {
-    if ( this.model.getQuestion().answer_id === 1 && this.model.getQuestion().answer_id === 1 && (this.model.selectedQuestionIndex < this.model.getDataArrayLength() -1)) {
+    if ( this.model.isCanGoToNextQuestion() && (this.model.selectedQuestionIndex < this.model.getDataArrayLength() -1)) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
       this._subscriptions.add(
@@ -108,7 +108,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   public previousQuestion(): void {
-    if ( this.model.getQuestion().answer_id === 1 && (this.model.selectedQuestionIndex > 0)) {
+    if ( this.model.isCanGoToNextQuestion() && (this.model.selectedQuestionIndex > 0)) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
       this._subscriptions.add(

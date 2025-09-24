@@ -109,6 +109,10 @@ export class DashboardModel {
     }
   }
 
+  isCanGoToNextQuestion(): boolean {
+    return this.getQuestion().answer_id === 1 || this.getQuestion().come_back_id === 1;
+  }
+
   isMarkForComeBack(index: number): boolean {
     let uniqueArray = [...this.uniqueArray(this.marksQuestionsIndexes)];
     return uniqueArray.includes(index);

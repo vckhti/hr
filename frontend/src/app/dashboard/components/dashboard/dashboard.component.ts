@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   }
 
   public handleCurrentPage(event: any): void {
-    if ( this.model.getQuestion().answer_id && (this.model.getQuestion().answer_id === 1) && this.model.selectedQuestionIndex > -1) {
+    if ( this.model.isCanGoToNextQuestion() && this.model.selectedQuestionIndex > -1) {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
       const currentQuestion = this.model.getQuestion();

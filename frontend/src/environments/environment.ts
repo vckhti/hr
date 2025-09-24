@@ -5,8 +5,9 @@
 
 export const environment = {
   production: false,
-  //serverUrl: 'http://hr-test.rf.gd/api',
-  serverUrl: 'http://localhost/api',
+  serverUrl: 'http://r908321m.beget.tech/api',
+  //serverUrl: 'http://localhost/api',
+
 };
 
 /*
