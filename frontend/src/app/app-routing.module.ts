@@ -2,8 +2,8 @@ import {inject, NgModule} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {AuthGuard} from "./modules/auth/services/auth.guard";
 import {LoginComponent} from "./modules/auth/components/login/login.component";
-import {DashboardCanDeactivateService} from "./dashboard/services/dashboard-can-deactivate.service";
 import {DashboardService} from "./dashboard/services/dashboard.service";
+import {Login2Component} from "./modules/auth/components/login2/login.component";
 
 const routes: Routes = [
   {
@@ -13,6 +13,9 @@ const routes: Routes = [
   },
   { path: 'login',
     component: LoginComponent
+  },
+  { path: 'login2',
+    component: Login2Component
   },
   { path: 'dashboard',
     canActivate: [AuthGuard],

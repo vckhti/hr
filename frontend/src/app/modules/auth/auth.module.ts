@@ -12,11 +12,16 @@ import {GetCurrentUserEffect} from "./store/effects/getCurrentUser.effect";
 import {PersistanceService} from "./services/persistance.service";
 import {BackendErrorMessagesModule} from "./modules/backendErrorMessages/backendErrorMessages.module";
 import {EffectsModule} from "@ngrx/effects";
+import {Login2Component} from "./components/login2/login.component";
 
 const routes = [
    {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'login2',
+    component: Login2Component
   }
 ]
 
@@ -29,7 +34,10 @@ const routes = [
     EffectsModule.forFeature([LoginEffect, GetCurrentUserEffect]),
     BackendErrorMessagesModule
   ],
-  declarations: [LoginComponent],
+  declarations: [
+    LoginComponent,
+    Login2Component
+  ],
   providers: [
     AuthService,
     PersistanceService,
