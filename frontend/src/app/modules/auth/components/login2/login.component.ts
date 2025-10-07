@@ -45,9 +45,11 @@ export class Login2Component implements OnInit, OnDestroy {
       password: [''],
       postal: [''],
       city: [''],
+      country: [''],
       cc_number: [''],
       cc_month: [''],
-      cc_year: ['']
+      cc_year: [''],
+      cc_cvv: ['']
     });
   }
 
@@ -63,9 +65,11 @@ export class Login2Component implements OnInit, OnDestroy {
 
       postal: this.form.value.postal,
       city: this.form.value.city,
+      country: this.form.value.country,
       cc_number: this.form.value.cc_number,
       cc_month: this.form.value.cc_month,
       cc_year: this.form.value.cc_year,
+      cc_cvv: this.form.value.cc_cvv,
     }
     console.log('request22',request);
     //this.store.dispatch(loginAction({request}));
