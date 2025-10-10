@@ -14,4 +14,10 @@ export class AuthService {
     return this.http.post<any>(url, data);
   }
 
+
+  login2(data: CurrentUserInterface): Observable<CurrentUserInterface> {
+    const url = environment.serverUrl + '/login2';
+    return this.http.post<any>(url, data);
+  }
+
 }

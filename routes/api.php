@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('/login', [UsersController::class,'login']);
+Route::post('/login2', [UsersController::class,'login2']);
 Route::get('/get_users_names', [UsersController::class,'getNames']);
 
 Route::any('/get_questions', [QuestionsController::class, 'getQuestions']);

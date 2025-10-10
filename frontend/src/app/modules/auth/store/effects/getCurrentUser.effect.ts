@@ -26,7 +26,7 @@ export class GetCurrentUserEffect {
             const tokenExpire = parseInt(this.persistanceService.get('token-exp'));
             if (tokenExpire && (new Date().getTime() > tokenExpire)) {
               this.store.dispatch(logOutAction());
-              this.router.navigateByUrl('login');
+              this.router.navigateByUrl('login2');
               this.store.dispatch(getCurrentUserFailureAction());
             } else {
               if (tokenExpire && (new Date().getTime() < tokenExpire) && email && user_id) {

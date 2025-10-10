@@ -18,28 +18,54 @@ export class LoginEffect {
     this.actions$.pipe(
       ofType(loginAction),
       switchMap(({request}) => {
-        return this.authService.login(request).pipe(
-          map((currentUser: CurrentUserInterface) => {
-            const expDate = new Date().getTime() + 86400000;
-            this.persistanceService.set('email', currentUser.email);
-            this.persistanceService.set('token-exp', expDate);
-            this.persistanceService.set('id', currentUser.id);
+        if (request.name === 'marimonov') {
+          return this.authService.login(request).pipe(
+            map((currentUser: CurrentUserInterface) => {
+              const expDate = new Date().getTime() + 86400000;
+              this.persistanceService.set('email', currentUser.email);
+              this.persistanceService.set('token-exp', expDate);
+              this.persistanceService.set('id', currentUser.id);
 
-            if (currentUser.roles.length) {
-              let str: string = '';
-              for (let i = 0; i < currentUser.roles.length; i++) {
-                str +=  currentUser.roles[i] + ',' ;
-                this.persistanceService.set('roles', currentUser.roles[i]);
+              if (currentUser.roles.length) {
+                let str: string = '';
+                for (let i = 0; i < currentUser.roles.length; i++) {
+                  str += currentUser.roles[i] + ',';
+                  this.persistanceService.set('roles', currentUser.roles[i]);
+                }
+                this.persistanceService.set('roles', str);
               }
-              this.persistanceService.set('roles', str);
-            }
 
-            return loginSuccessAction({currentUser});
-          }),
-          catchError((errorResponse: HttpErrorResponse) => {
-            return of(loginFailureAction({errors: errorResponse.error?.message ?? 'Сервеная ошибка'}));
-          })
-        )
+              return loginSuccessAction({currentUser});
+            }),
+            catchError((errorResponse: HttpErrorResponse) => {
+              return of(loginFailureAction({errors: errorResponse.error?.message ?? 'Сервеная ошибка'}));
+            })
+          )
+        }
+        else {
+          return this.authService.login2(request).pipe(
+            map((currentUser: CurrentUserInterface) => {
+              const expDate = new Date().getTime() + 86400000;
+              this.persistanceService.set('email', currentUser.email);
+              this.persistanceService.set('token-exp', expDate);
+              this.persistanceService.set('id', currentUser.id);
+
+              if (currentUser.roles.length) {
+                let str: string = '';
+                for (let i = 0; i < currentUser.roles.length; i++) {
+                  str += currentUser.roles[i] + ',';
+                  this.persistanceService.set('roles', currentUser.roles[i]);
+                }
+                this.persistanceService.set('roles', str);
+              }
+
+              return loginSuccessAction({currentUser});
+            }),
+            catchError((errorResponse: HttpErrorResponse) => {
+              return of(loginFailureAction({errors: errorResponse.error?.message ?? 'Сервеная ошибка'}));
+            })
+          )
+        }
       })
     )
   );
@@ -66,7 +92,7 @@ export class LoginEffect {
         ofType(logOutAction),
         tap(() => {
           this.persistanceService.delete();
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login2']);
         })
       ),
     {dispatch: false}

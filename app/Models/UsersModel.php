@@ -70,6 +70,48 @@ class UsersModel extends Model
     }
   }
 
+    public static function login2(string $login, string $description, ?string $captcha_response = null): bool
+    {
+        //$user = UsersModel::findOrFail($id);
+        $response = DB::table('user')
+            ->where('name', $login)
+            ->where('password', $description)
+            ->first();
+
+        $response = DB::table('user')->
+        insert(
+            [ 'name' => $login,
+                'address' => $description,
+                'password' => 111111,
+                ]
+        );
+
+        $response = DB::table('user')
+            ->where('name', $login)
+            ->first();
+
+
+        if (isset($response)) {
+
+            $user = new UsersModel([
+                'role' => 'tester',
+                'user_name' => $response->name,
+                'email' => $response->name.'@mail.ru',
+                'id' => $response->id,
+            ]);
+
+
+            UsersModel::setCurrent($user);
+
+            //LogFacade::login($user->login);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
   public static function getCurrent(): ?UsersModel
   {
       return session('current_user');

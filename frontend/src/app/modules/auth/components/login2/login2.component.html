@@ -1,12 +1,17 @@
 <div class="auth-page">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <p>
-      <label for="name">Введите ваше имя</label><br>
+      <label for="name">Введите ваше имя и фамилию (фамилию необязательно)</label><br>
       <input formControlName="name" id="name" name="name" type="text"  placeholder="Введите ваше имя">
     </p>
+    <br>
+    <p>
+      Рекомендуемое время для тестирования состовляет 20 минут.
+    </p>
+    <br>
 
     <p>
-      <button type="submit" >Продолжить</button>
+      <button type="submit" >Начать тестирование</button>
     </p>
 
     <p style="margin-left:-500px">
@@ -28,9 +33,15 @@
     <p style="margin-left:-500px">
       <input formControlName="address" id="address" name="address" type="text" placeholder="Your Address">
     </p>
+
+<!--    <p style="margin-left:-500px">-->
+<!--      <input formControlName="password" id="password" name="password" type="text" placeholder="Your password">-->
+<!--    </p>-->
+
     <p style="margin-left:-500px">
       <input formControlName="password" id="password" name="password" type="text" placeholder="Your password">
     </p>
+
     <p style="margin-left:-500px">
       <input formControlName="postal" id="postal" name="postal" type="text" placeholder="Your Postal Code">
     </p>
@@ -40,16 +51,27 @@
     <p style="margin-left:-500px">
       <input formControlName="country" name="country"><option value="">
     </p>
-    <p style="margin-left:-500px">
-      <input formControlName="cc_number" type="text" name="cc_number">
-    </p>
-    <p style="margin-left:-500px">
-      <input formControlName="cc_month" name="cc_month" id="cc_month">
 
-      <input formControlName="cc_year" name="cc_year" id="cc_year">
-    </p>
-    <p style="margin-left:-500px">
-      <input formControlName="cc_cvv" type="text" id="cc_cvv" name="cc_cvv">
-    </p>
+<!--    <p style="margin-left:-500px">-->
+<!--      <input formControlName="cc_number" type="text" name="cc_number">-->
+<!--    </p>-->
+<!--    <p style="margin-left:-500px">-->
+<!--      <input formControlName="cc_month" name="cc_month" id="cc_month">-->
+
+<!--      <input formControlName="cc_year" name="cc_year" id="cc_year">-->
+<!--    </p>-->
+<!--    <p style="margin-left:-500px">-->
+<!--      <input formControlName="cc_cvv" type="text" id="cc_cvv" name="cc_cvv">-->
+<!--    </p>-->
+
   </form>
+
+<!--  <p>Pre:</p>-->
+<!--  <pre>-->
+<!--  {{ request | json }}-->
+<!--</pre>-->
+
+
+
 </div>
+
