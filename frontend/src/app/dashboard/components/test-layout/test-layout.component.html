@@ -1,24 +1,28 @@
-<div class="test-wrapper">
-
+<div
+  [ngClass]="{
+      'd-none': isLoading,
+      'd-block': !isLoading
+      }"
+  class="test-wrapper">
   <div>
     <fieldset>
       <div class="form-group">
         <app-question
           [question]=model.getQuestion()
-          (questionIndexChanged)= questionChanged()
+          (questionIndexChanged)=questionChanged()
         ></app-question>
       </div>
 
       <div class="form-cols">
         <div class="form-col">
           <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [model] ="model"
+                      [model]="model"
                       [num]="1"
                       [answer]=model.getQuestion()?.variant1></app-answer>
         </div>
         <div class="form-col">
           <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [model] ="model"
+                      [model]="model"
                       [num]="2"
                       [answer]=model.getQuestion()?.variant2></app-answer>
         </div>
@@ -27,13 +31,13 @@
       <div class="form-cols">
         <div class="form-col">
           <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [model] ="model"
+                      [model]="model"
                       [num]="3"
                       [answer]=model.getQuestion()?.variant3></app-answer>
         </div>
         <div class="form-col">
           <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [model] ="model"
+                      [model]="model"
                       [num]="4"
                       [answer]=model.getQuestion()?.variant4></app-answer>
         </div>
@@ -42,13 +46,13 @@
       <div class="form-cols">
         <div class="form-col">
           <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [model] ="model"
+                      [model]="model"
                       [num]="5"
                       [answer]=model.getQuestion()?.variant5></app-answer>
         </div>
         <div class="form-col">
           <app-answer (itemClick)="submit($event)" [questionIndex]="model.selectedQuestionIndex"
-                      [model] ="model"
+                      [model]="model"
                       [num]="6"
                       [answer]=model.getQuestion()?.variant6></app-answer>
         </div>
@@ -68,7 +72,8 @@
     <button class="app-button" type="button" (click)="nextQuestion()" [disabled]="model.isLastQuestion()">Следующий
     </button>
   </div>
+</div>
 
-
-
+<div *ngIf="isLoading" class="d-flex justify-content-center">
+  <app-loading></app-loading>
 </div>

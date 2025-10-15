@@ -15,6 +15,7 @@ import {DialogModule} from "primeng/dialog";
 import { TestResultsComponent } from './components/test-results/test-results.component';
 import {DialogService} from "primeng/dynamicdialog";
 import {PersistanceService} from "./services/persistance.service";
+import {LoadingModule} from "./modules/loading/loading.module";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {PersistanceService} from "./services/persistance.service";
     FormsModule,
     ReactiveFormsModule,
     PaginationModule,
+    LoadingModule,
     DialogModule
   ],
   providers: [

@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import {DashboardModel} from "../../models/dashboardModel";
-import { Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {DashboardService} from "../../services/dashboard.service";
 import {IQuestionInterface} from "../../interfaces/IQuestionInterface";
 import {IAnswerInterface} from "../../interfaces/answer.interface";
@@ -22,7 +22,7 @@ import {PersistanceService} from "../../services/persistance.service";
   styleUrls: ['./test-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
+export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() model: DashboardModel;
   public selectedAnswer: number | undefined = undefined;
@@ -54,7 +54,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
 
   public submit(event: number): void {
     this.dashboardService.setIsAnswered(true);
-    const answersLength = (this.model.getQuestion()?.answers && this.model.getQuestion()?.answers.length)? (this.model.getQuestion()?.answers.length as number) : 0;
+    const answersLength = (this.model.getQuestion()?.answers && this.model.getQuestion()?.answers.length) ? (this.model.getQuestion()?.answers.length as number) : 0;
     this.selectedAnswer = event;
     if (this.model.getQuestion()) {
       this.model.setToSelectedQuestionAnswerIdFlag();
@@ -69,8 +69,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
           this.model.getQuestion().answers[answersLength - 1].user_id = parseInt(this.persistanceService.get('id'));
         })
       );
-    }
-    else {
+    } else {
       let now = new Date().getTime();
       const ms = now - this.model.getQuestion().execution_time_id;
       const answer: IAnswerInterface = {
@@ -87,18 +86,23 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   public nextQuestion(): void {
-    if ( this.model.isCanGoToNextQuestion() && (this.model.selectedQuestionIndex < this.model.getDataArrayLength() -1)) {
-      let now = new Date().getTime();
-      const ms = now - this.model.getQuestion().execution_time_id;
-      this._subscriptions.add(
-        this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, null, ms)
-          .subscribe((res: any) => {
-            const currentQuestion = this.model.getQuestion();
-            this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
-            this.model.selectedQuestionIndex = this.model.selectedQuestionIndex + 1;
-        })
-      );
+    if (this.model.isCanGoToNextQuestion() && (this.model.selectedQuestionIndex < this.model.getDataArrayLength() - 1)) {
+      this.isLoading = true;
+      setTimeout(() => {
+        let now = new Date().getTime();
+        const ms = now - this.model.getQuestion().execution_time_id;
+        this._subscriptions.add(
+          this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, null, ms)
+            .subscribe((res: any) => {
+              const currentQuestion = this.model.getQuestion();
+              this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion, history_id: 1};
+              this.model.selectedQuestionIndex = this.model.selectedQuestionIndex + 1;
+              this.isLoading = false;
+            })
+        );
+      }, 750);
     } else {
+      this.isLoading = false;
       this.messageService.add({
         severity: 'error',
         summary: 'Ответ не выбран',
@@ -108,29 +112,38 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   public previousQuestion(): void {
-    if ( this.model.isCanGoToNextQuestion() && (this.model.selectedQuestionIndex > 0)) {
-      let now = new Date().getTime();
-      const ms = now - this.model.getQuestion().execution_time_id;
-      this._subscriptions.add(
-        this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, null, ms)
-          .subscribe((res: any) => {
-            const currentQuestion = this.model.getQuestion();
-            this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
-            this.model.selectedQuestionIndex = this.model.selectedQuestionIndex - 1;
-        })
-      );
+    if (this.model.isCanGoToNextQuestion() && (this.model.selectedQuestionIndex > 0)) {
+      this.isLoading = true;
+      setTimeout(() => {
+
+        let now = new Date().getTime();
+        const ms = now - this.model.getQuestion().execution_time_id;
+        this._subscriptions.add(
+          this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, null, ms)
+            .subscribe((res: any) => {
+              const currentQuestion = this.model.getQuestion();
+              this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion, history_id: 1};
+              this.model.selectedQuestionIndex = this.model.selectedQuestionIndex - 1;
+              this.isLoading = false;
+            })
+        );
+
+      }, 750);
     } else {
+      this.isLoading = false;
       this.messageService.add({
         severity: 'error',
         summary: 'Ответ не выбран',
         detail: 'Выберите ответ!',
       });
     }
+
+
   }
 
   public finishTest(): void {
     if (!this.model.canFinishTest()) {
-      return ;
+      return;
     }
 
     this.isLoading = true;
@@ -149,7 +162,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
         .subscribe((res: any) => {
           this.isLoading = false;
           this.testIsOver = true;
-          this.showResultsDialog(res.questions_count,res.right_questions,res.wrong_questions,res.testing_times,);
+          this.showResultsDialog(res.questions_count, res.right_questions, res.wrong_questions, res.testing_times,);
         })
     )
   }
@@ -163,15 +176,15 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   converArrayIndexesToQuestionsIdString(array: number[]): string {
-    let str='';
-    this.uniqueArray(array).map(item => item +1).forEach(item => {
-      str=str + item + ', ';
+    let str = '';
+    this.uniqueArray(array).map(item => item + 1).forEach(item => {
+      str = str + item + ', ';
     });
 
     return str;
   }
 
-  private showResultsDialog(questions_count: number,right_questions: number, wrong_questions: number, testing_time: number): void {
+  private showResultsDialog(questions_count: number, right_questions: number, wrong_questions: number, testing_time: number): void {
 
     this.dialogService.open(TestResultsComponent, {
       header: 'Результаты тестирования',
@@ -187,8 +200,8 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy{
 
   }
 
- public questionChanged(): void {
+  public questionChanged(): void {
     this.model.getQuestion().execution_time_id = new Date().getTime();
- }
+  }
 
 }

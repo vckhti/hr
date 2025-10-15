@@ -1,14 +1,12 @@
 <div class="auth-page">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <p>
-      <label for="name">Введите ваше имя и фамилию (фамилию необязательно)</label><br>
-      <input formControlName="name" id="name" name="name" type="text"  placeholder="Введите ваше имя">
+      Рекомендуемое время для тестирования составляет 20 минут. Ко всем вопросам можно будет вернуться. Вопросы можно помечать, что позволит перейти к следующему вопросу без ответа на текущий вопрос. 
     </p>
-    <br>
     <p>
-      Рекомендуемое время для тестирования состовляет 20 минут.
+      <label for="name">Введите вашу фамилию и имя:</label><br>
+      <input formControlName="name" id="name" name="name" type="text"  placeholder="">
     </p>
-    <br>
 
     <p>
       <button type="submit" >Начать тестирование</button>

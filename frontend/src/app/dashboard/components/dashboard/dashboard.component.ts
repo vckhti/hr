@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   private _listInitializer: BehaviorSubject<DashboardModel>;
   private _subscriptions: Subscription;
   public isProduction = environment.production;
+  public isLoading = false;
 
   constructor(
     private dashboardService: DashboardService,
@@ -45,17 +46,25 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
   public handleCurrentPage(event: any): void {
     if ( this.model.isCanGoToNextQuestion() && this.model.selectedQuestionIndex > -1) {
-      let now = new Date().getTime();
-      const ms = now - this.model.getQuestion().execution_time_id;
-      const currentQuestion = this.model.getQuestion();
-      this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
-      this._subscriptions.add(
-        this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, null, ms)
-          .subscribe((res: any) => {
-            this.model.selectedQuestionIndex = parseInt(event);
-          })
-      );
+      this.isLoading = true;
+      setTimeout(()=> {
+
+        let now = new Date().getTime();
+        const ms = now - this.model.getQuestion().execution_time_id;
+        const currentQuestion = this.model.getQuestion();
+        this.model.data[this.model.selectedQuestionIndex] = {...currentQuestion,history_id: 1};
+        this._subscriptions.add(
+          this.dashboardService.updateAnswer((this.model.getQuestion() as IQuestionInterface).id, null, ms)
+            .subscribe((res: any) => {
+              this.model.selectedQuestionIndex = parseInt(event);
+              this.isLoading = false;
+            })
+        );
+
+      },750);
+
     } else {
+      this.isLoading = false;
       this.messageService.add({
         severity: 'error',
         summary: 'Ответ не выбран',

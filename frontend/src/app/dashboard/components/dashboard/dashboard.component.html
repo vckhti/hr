@@ -1,4 +1,9 @@
-<div  class="dashboard-outer-wrapper">
+<div
+  [ngClass]="{
+      'd-none': isLoading,
+      'd-block': !isLoading
+      }"
+  class="dashboard-outer-wrapper">
 
   <!--Header-->
    <app-header *ngIf="!isProduction"></app-header>
@@ -42,4 +47,8 @@
     ></mc-pagination>
 
   </app-footer>
+</div>
+
+<div *ngIf="isLoading" class="d-flex justify-content-center">
+  <app-loading></app-loading>
 </div>
