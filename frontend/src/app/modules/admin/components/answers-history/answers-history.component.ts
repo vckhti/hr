@@ -26,7 +26,7 @@ export class AnswersHistoryComponent implements OnInit, OnDestroy {
     this.selectedNumber = 1;
     this.onQestionIdChanged('1');
   }
-  selectedNumber: 1;
+  selectedNumber: number;
   loading = false;
   onDestroy$ = new Subject();
   data: any[];
@@ -48,6 +48,10 @@ export class AnswersHistoryComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
 
+  }
+
+  parseValue(value: string):number {
+    return parseInt(value);
   }
 
   getQuestionVariantById(question: any): void {
@@ -106,6 +110,17 @@ export class AnswersHistoryComponent implements OnInit, OnDestroy {
       this.loading = true;
       this.initGetQuestionByIdObserver(this.question_id);
       this.initGetAnswersByQuestionIdObserver(this.question_id, this.contract.user_id);
+    }
+  }
+
+  onQestionValueChanged(value: number): void {
+    this.variants = [];
+    if ( this.contract !== undefined && this.contract.user_id) {
+      this.question_id = value;
+      this.loading = true;
+      this.initGetQuestionByIdObserver(this.question_id);
+      this.initGetAnswersByQuestionIdObserver(this.question_id, this.contract.user_id);
+      this.selectedNumber = value;
     }
   }
 
