@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
             })
         );
 
-      },750);
+      },350);
 
     } else {
       this.isLoading = false;

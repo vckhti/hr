@@ -100,7 +100,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
               this.isLoading = false;
             })
         );
-      }, 750);
+      }, 350);
     } else {
       this.isLoading = false;
       this.messageService.add({
@@ -128,7 +128,7 @@ export class TestLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
             })
         );
 
-      }, 750);
+      }, 350);
     } else {
       this.isLoading = false;
       this.messageService.add({

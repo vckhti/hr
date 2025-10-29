@@ -5,16 +5,18 @@
       <option *ngFor="let item of numbersArray" value="{{item}}">{{item}} </option>
     </select>
     <br>
+    <br>
+    <div class="form-group">
+      <button class="app-button" [disabled]="question_id === 1"
+              (click)="onQestionValueChanged(question_id - 1)">Предыдущий
+      </button>
+      &nbsp;
+      <button class="app-button" [disabled]="question_id === 20"
+              (click)="onQestionValueChanged(question_id + 1)">Следующий
+      </button>
+    </div>
   </div>
-  <div class="form-group">
-    <button class="app-button" [disabled]="question_id === 1"
-            (click)="onQestionValueChanged(question_id - 1)">Предыдущий
-    </button>
-    &nbsp;
-    <button class="app-button" [disabled]="question_id === 20"
-            (click)="onQestionValueChanged(question_id + 1)">Следующий
-    </button>
-  </div>
+
   <div *ngIf="question" class="form-group question">
     <span>{{question.question}}?</span>
     <br>
