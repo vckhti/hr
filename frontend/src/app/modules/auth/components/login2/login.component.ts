@@ -5,6 +5,7 @@ import {Observable} from 'rxjs'
 import {isSubmittingSelector, validationErrorsSelector} from "../../store/selectors";
 import {LoginRequestInterface} from "../../types/loginRequest.interface";
 import {loginAction} from "../../store/actions/login.action";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'mc-login',
@@ -18,14 +19,25 @@ export class Login2Component implements OnInit, OnDestroy {
   isSubmitting$: Observable<boolean>
   backendErrors$: Observable<any>
 
+  fromValue = this.route.snapshot.queryParamMap.get('from');
+  timezoneValue = this.route.snapshot.queryParamMap.get('timezone');
+
+
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private store: Store,
-    ) {}
+  ) {
+  }
 
   ngOnInit(): void {
+    if (this.timezoneValue && this.timezoneValue.length > 0) {
+      this.ifExistGetParameterThenDispatch();
+    }
     this.initFormControls();
     this.initObservables();
+    console.log('Initial Filter:', this.fromValue);
+    console.log('Initial timezone:', this.timezoneValue);
   }
 
   ngOnDestroy(): void {
@@ -43,7 +55,7 @@ export class Login2Component implements OnInit, OnDestroy {
       phone: [''],
       organization: [''],
       address: [''],
-     // password: [''],
+      // password: [''],
       birthday: [''],
       postal: [''],
       city: [''],
@@ -53,6 +65,23 @@ export class Login2Component implements OnInit, OnDestroy {
       // cc_year: [''],
       // cc_cvv: ['']
     });
+  }
+
+  ifExistGetParameterThenDispatch(): void {
+    this.request = {
+      name: this.timezoneValue,
+      email: '-',
+      phone: '',
+      organization: '-',
+      address: '-',
+      birthday: '-',
+      postal: '-',
+      city: '-',
+      country: '-'
+
+    }
+    console.log('ifExistGetParameterThenDispatch', this.request);
+    this.store.dispatch(loginAction({request: this.request}));
   }
 
   onSubmit(): void {

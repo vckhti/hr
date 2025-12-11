@@ -170,14 +170,30 @@ fieldset.form-group {
     padding: 5px;
   }
 }
-
-
-
-
-
-
-
-
-
+}
 
 */
+
+.auth-page_text {
+  margin: 0 auto ;
+  width: 40%;
+  text-align: justify;
+
+  p {
+    text-align: justify;
+
+  }
+  label, input {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .auth-page_text {
+    width: 90%;
+    margin: 10px ;
+    label, input {
+      margin-bottom: 15px;
+    }
+  }
+}

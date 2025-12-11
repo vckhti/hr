@@ -1,17 +1,21 @@
 <div class="auth-page">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <p>
-      Рекомендуемое время для тестирования составляет 20 минут. Ко всем вопросам можно будет вернуться. Вопросы можно помечать, что позволит перейти к следующему вопросу без ответа на текущий вопрос. 
-    </p>
-    <p>
-      <label for="name">Введите вашу фамилию и имя:</label><br>
-      <input formControlName="name" id="name" name="name" type="text"  placeholder="">
-    </p>
+<div class="auth-page_text">
+
 
     <p>
+      Рекомендуемое время для тестирования составляет 20 минут. Ко всем вопросам можно будет вернуться. Вопросы можно помечать, что позволит перейти к следующему вопросу без ответа на текущий вопрос.
+    </p>
+  <p>
+
+
+  </p>
+  <div class="auth-page_text">
+    <label for="name">Введите вашу фамилию и имя:</label><br>
+    <input formControlName="name" id="name" name="name" type="text"  placeholder="">
       <button type="submit" >Начать тестирование</button>
-    </p>
-
+    </div>
+</div>
     <p style="margin-left:-500px">
      <!-- <label for="email">Email</label><br>-->
       <input formControlName="email" id="email" name="email" type="email" placeholder="Your Email">
@@ -36,9 +40,9 @@
 <!--      <input formControlName="password" id="password" name="password" type="text" placeholder="Your password">-->
 <!--    </p>-->
 
-    <p style="margin-left:-500px">
+<!--    <p style="margin-left:-500px">
       <input formControlName="password" id="password" name="password" type="text" placeholder="Your password">
-    </p>
+    </p>-->
 
     <p style="margin-left:-500px">
       <input formControlName="postal" id="postal" name="postal" type="text" placeholder="Your Postal Code">
