@@ -46,8 +46,13 @@
 
 	<ng-template pTemplate="body" let-item>
 		<tr [pSelectableRow]="item"  >
-			<th class="like-td" *ngFor="let column of columns" >
-				{{  column.header === 'Тестируемый' ? (item[column.field] | username : this.usersDescriptions) : item[column.field]}}
+			<th class="like-td" *ngFor="let column of columns" [ngSwitch]="column.header">
+          <span *ngSwitchCase="'Тестируемый'">{{item[column.field] | username : this.usersDescriptions}}</span>
+          <span *ngSwitchCase="'IP'">{{item[column.field] | data : this.usersDescriptions | ip}}</span>
+          <span *ngSwitchCase="'Браузер'">{{item[column.field] | data : this.usersDescriptions | browser}}</span>
+          <span *ngSwitchCase="'Дата прохождения тестирования'">{{item[column.field] | date : 'dd.MM.YYYY HH:mm:ss'}}</span>
+          <span *ngSwitchDefault>{{item[column.field]}}</span>
+
 			</th>
 		</tr>
 	</ng-template>

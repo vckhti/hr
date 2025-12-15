@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {CommonModule, DatePipe, NgSwitch} from "@angular/common";
 import {RouterModule, Routes} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AdminLayoutComponent} from './components/admin-layout/admin-layout.component';
@@ -15,6 +15,9 @@ import {TabComponent} from "./components/tab/tab.component";
 import {ContractSummaryComponent} from "./components/contract-summary/contract-summary.component";
 import {AnswersHistoryComponent} from "./components/answers-history/answers-history.component";
 import {UsernamePipe} from "./pipes/username.pipe";
+import {DataPipe} from "./pipes/data.pipe";
+import {IpPipe} from "./pipes/ip.pipe";
+import {BrowserPipe} from "./pipes/browser.pipe";
 
 const routes: Routes = [
   {
@@ -39,9 +42,11 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    NgSwitch,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
+    DatePipe,
     TableModule
   ],
   declarations: [
@@ -52,6 +57,9 @@ const routes: Routes = [
     DataTableComponent,
     TabsComponent,
     TabComponent,
+    IpPipe,
+    BrowserPipe,
+    DataPipe,
     UsernamePipe
   ],
   providers: [

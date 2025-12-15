@@ -106,7 +106,7 @@ $description =
     public function getNames()
     {
         $doubles =DB::table('user')
-            ->select(DB::raw('id,name'))
+            ->select(DB::raw('id,name,address'))
             ->get();
 
 
