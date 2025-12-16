@@ -22,6 +22,7 @@ import { ItemDetailComponent } from "./components/item-detail/item-detail.compon
 import { NestedObjectDisplayComponent } from "./components/recursive-template/recursive-display.component";
 import { DialogService } from "primeng/dynamicdialog";
 import { CleanPipe } from "./pipes/clean.pipe";
+import { CleanTwoPipe } from "./pipes/clean2.pipe";
 
 const routes: Routes = [
   {
@@ -65,6 +66,7 @@ const routes: Routes = [
     BrowserPipe,
     DataPipe,
     CleanPipe,
+    CleanTwoPipe,
     ItemDetailComponent,
     NestedObjectDisplayComponent,
     UsernamePipe

@@ -48,7 +48,7 @@
 		<tr [pSelectableRow]="item"  >
 			<th class="like-td" *ngFor="let column of columns" [ngSwitch]="column.header">
           <span class="link-style" (click)="onRowClick()" *ngSwitchCase="'Тестируемый'">{{item[column.field] | username : this.usersDescriptions}}</span>
-          <span *ngSwitchCase="'IP'">{{item[column.field] | data : this.usersDescriptions | ip | clean}}</span>
+          <span *ngSwitchCase="'IP'">{{item[column.field] | data : this.usersDescriptions | ip | clean | clean2}}</span>
           <span *ngSwitchCase="'Браузер'">{{item[column.field] | data : this.usersDescriptions | browser | clean}}</span>
           <span *ngSwitchCase="'Дата прохождения тестирования'">{{item[column.field] | date : 'dd.MM.YYYY HH:mm:ss'}}</span>
           <span *ngSwitchDefault>{{item[column.field]}}</span>
