@@ -30,12 +30,17 @@ export class DataTableComponent<ItemType> {
   @Input() paginationEnable = false;
 	@ViewChild('table') table?: Table;
 	@Output() selectedItemChange = new EventEmitter<ItemType|undefined>();
+  @Output() onItemClick  = new EventEmitter<ItemType|undefined>();
 
   constructor(private cdr: ChangeDetectorRef) { }
 
 	onRowSelect(): void {
 		this.selectedItemChange.emit(this.selectedItem);
 	}
+
+  onRowClick(): void {
+    this.onItemClick.emit(this.selectedItem);
+  }
 
 	onRowUnselect($event: any): void {
 		const element = $event.data as ItemType;

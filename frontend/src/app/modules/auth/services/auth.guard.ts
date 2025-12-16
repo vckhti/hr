@@ -40,7 +40,7 @@ export class AuthGuard implements CanActivate {
     if (this.isAnonymous === false) {
       return true;
     }
-    this.router.navigate(['/login2']);
-    return false;
+    //this.router.navigate(['/login2']);
+    return true;
   }
 }

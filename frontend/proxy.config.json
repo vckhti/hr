@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "http://r908321m.beget.tech",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
+

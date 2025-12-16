@@ -5,6 +5,8 @@ import {BookInterface} from "../../../../dashboard/interfaces/book.interface";
 import {SortConfigInterface} from "../../../../dashboard/interfaces/sort-config.interface";
 import {AdminService} from "../../services/admin.service";
 import {TableColumn} from "../../interfaces/table-column";
+import { DialogService } from 'primeng/dynamicdialog';
+import { ItemDetailComponent } from '../item-detail/item-detail.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -39,7 +41,8 @@ export class AdminDashboardComponent {
   ];
 
   constructor(
-    private adminService: AdminService
+    private adminService: AdminService,
+    private dialogService: DialogService,
   ) {
   }
 
@@ -176,6 +179,19 @@ export class AdminDashboardComponent {
 
   onRowSelected(event: any): void {
     this.selectedRow = event;
+
+  }
+
+  onItemClick(event: any): void {
+    this.selectedRow = event;
+    if(this.selectedRow && this.selectedRow.user_id) {
+      let result = this.usersNames.find((item) => item.id === this.selectedRow.user_id);
+      this.dialogService.open(ItemDetailComponent, {
+        header: 'Детали пользователя',
+        width: '90vw',
+        data: result,
+      });
+    }
 
   }
 

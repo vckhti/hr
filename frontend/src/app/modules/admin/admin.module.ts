@@ -18,6 +18,10 @@ import {UsernamePipe} from "./pipes/username.pipe";
 import {DataPipe} from "./pipes/data.pipe";
 import {IpPipe} from "./pipes/ip.pipe";
 import {BrowserPipe} from "./pipes/browser.pipe";
+import { ItemDetailComponent } from "./components/item-detail/item-detail.component";
+import { NestedObjectDisplayComponent } from "./components/recursive-template/recursive-display.component";
+import { DialogService } from "primeng/dynamicdialog";
+import { CleanPipe } from "./pipes/clean.pipe";
 
 const routes: Routes = [
   {
@@ -60,11 +64,15 @@ const routes: Routes = [
     IpPipe,
     BrowserPipe,
     DataPipe,
+    CleanPipe,
+    ItemDetailComponent,
+    NestedObjectDisplayComponent,
     UsernamePipe
   ],
   providers: [
     AuthService,
     PersistanceService,
+    DialogService,
     AdminService
   ],
   exports: []
