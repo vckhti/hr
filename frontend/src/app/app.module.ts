@@ -18,6 +18,7 @@ import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 import {DashboardCanDeactivateService} from "./dashboard/services/dashboard-can-deactivate.service";
 import {DashboardService} from "./dashboard/services/dashboard.service";
+import {CookieService} from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {DashboardService} from "./dashboard/services/dashboard.service";
     DashboardService,
     DashboardCanDeactivateService,
     MessageService,
+    CookieService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

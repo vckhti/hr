@@ -31,13 +31,13 @@ export class AdminDashboardComponent {
   selectedRow: any;
 
   columns: TableColumn[] = [
-    {header: 'Id', field: 'id', width: 25, sortable: false},
-    {header: 'Тестируемый', field: 'user_id', width: 160, sortable: false},
+    {header: 'id', field: 'id', width: 25, sortable: false},
+    {header: 'Тестируемый', field: 'user_id', width: 100, sortable: false},
     {header: 'IP', field: 'user_id', width: 90, sortable: false},
     {header: 'Браузер', field: 'user_id', width: 500, sortable: false},
-    {header: 'Кол-во правильных ответов', field: 'right_questions', width: 25, sortable: false},
-    {header: 'Кол-во неправильных ответов', field: 'wrong_questions', width: 25, sortable: false},
-    {header: 'Дата прохождения тестирования', field: 'created_at', width: 75, sortable: false},
+    {header: '+', field: 'right_questions', width: 25, sortable: false},
+    {header: '-', field: 'wrong_questions', width: 25, sortable: false},
+    {header: 'Дата ', field: 'created_at', width: 125, sortable: true},
   ];
 
   constructor(

@@ -23,7 +23,7 @@ export class DataTableComponent<ItemType> {
 	@Input() columns: TableColumn[] = [];
 	@Input() selectedItem?: ItemType;
 	@Input() loading = false;
-	@Input() showFilters = true;
+	@Input() showFilters = false;
   @Input() showHotspot = true;
   @Input() customProjectFilter = false;
   @Input() perPage: number = 100;

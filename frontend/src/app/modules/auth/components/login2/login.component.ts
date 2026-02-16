@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core'
-import {FormGroup, FormBuilder, Validators} from '@angular/forms'
+import {FormGroup, FormBuilder} from '@angular/forms'
 import {Store, select} from '@ngrx/store'
 import {Observable} from 'rxjs'
 import {isSubmittingSelector, validationErrorsSelector} from "../../store/selectors";
-import {LoginRequestInterface} from "../../types/loginRequest.interface";
 import {loginAction} from "../../store/actions/login.action";
 import {ActivatedRoute} from "@angular/router";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'mc-login',
@@ -27,17 +27,23 @@ export class Login2Component implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private store: Store,
+    private cookieService: CookieService
   ) {
   }
 
   ngOnInit(): void {
+    //this.cookieService.set('test', 'Hello World');
+    //let allCookies: {} = this.cookieService.getAll();
+    //let pairs = document.cookie.split(";");
+    //this.cookieService.deleteAll();
+    //console.log('allCookies pairs',allCookies);
     if (this.timezoneValue && this.timezoneValue.length > 0) {
       this.ifExistGetParameterThenDispatch();
     }
     this.initFormControls();
     this.initObservables();
-    console.log('Initial Filter:', this.fromValue);
-    console.log('Initial timezone:', this.timezoneValue);
+    //console.log('Initial Filter:', this.fromValue);
+    //console.log('Initial timezone:', this.timezoneValue);
   }
 
   ngOnDestroy(): void {
@@ -80,7 +86,7 @@ export class Login2Component implements OnInit, OnDestroy {
       country: '-'
 
     }
-    console.log('ifExistGetParameterThenDispatch', this.request);
+    //console.log('ifExistGetParameterThenDispatch', this.request);
     this.store.dispatch(loginAction({request: this.request}));
   }
 
@@ -104,7 +110,7 @@ export class Login2Component implements OnInit, OnDestroy {
       // cc_year: this.form.value.cc_year,
       // cc_cvv: this.form.value.cc_cvv,
     }
-    console.log('request22', this.request);
+    //console.log('request22', this.request);
     this.store.dispatch(loginAction({request: this.request}));
   }
 

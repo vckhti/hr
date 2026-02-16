@@ -11,7 +11,7 @@ export class BrowserPipe implements PipeTransform {
       const searchTerm = "HTTP_USER_AGENT";
       const index = string.indexOf(searchTerm);
 
-      return string.substring((index+24), (index + 174));
+      return string.substring((index+24), (index + 194));
     }
     else {
       return "";

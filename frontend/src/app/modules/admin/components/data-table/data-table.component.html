@@ -29,15 +29,17 @@
 		<tr *ngIf="showFilters">
 			<ng-container *ngFor="let column of columns">
 				<th>
-					<input *ngIf="column.header !== 'Тестируемый'" type="text"
+					<input *ngIf="column.sortable === true" type="text"
 						   class="table-filter"
 						   (input)="table.filter($any($event).target.value,  column.field , 'contains')"
           >
 
-          <select class="table-filter" *ngIf="column.header === 'Тестируемый'" id="question-select" #select2 (change)="table.filter(toInt(select2.value),  column.field , 'contains')">
+<!--
+          <select class="table-filter" *ngIf="column.header === 'Тестируемый123'" id="question-select" #select2 (change)="table.filter(toInt(select2.value),  column.field , 'contains')">
             <option  value="">Все пользователи</option>
             <option *ngFor="let item of usersDescriptions" value="{{item.id}}">{{item.name}} </option>
           </select>
+-->
 
         </th>
 			</ng-container>
