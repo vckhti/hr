@@ -13,77 +13,74 @@ use Illuminate\Support\Facades\DB;
 class UsersController extends Controller
 {
 
-  public function login(Request $request)
-  {
+    public function login(Request $request)
+    {
 
-    $input = $request->validate([
-      'name' => 'required|string',
-      'password' => 'required|string',
-    ]);
-
-
+        $input = $request->validate([
+            'name' => 'required|string',
+            'password' => 'required|string',
+        ]);
 
 
+        $success = UsersModel::login(
+            $input['name'],
+            $input['password']
+        );
 
-    $success = UsersModel::login(
-      $input['name'],
-      $input['password']
-    );
-
-    if($success) {
-        $hasResult = null;
-        $hasResult = DB::table('answers')
-            ->where('user_id', CommonData::getCommonData()->id)
-            ->first();
+        if ($success) {
+            $hasResult = null;
+            $hasResult = DB::table('answers')
+                ->where('user_id', CommonData::getCommonData()->id)
+                ->first();
 
 //        if (!empty($hasResult)) {
 //            throw new \Exception('Вы уже прошли тестирование.');
 //        } // TODO включить на проде!
 
-        return response()->json([
-            'id' => CommonData::getCommonData()->id,
-            'username' => CommonData::getCommonData()->username,
-            'email' => CommonData::getCommonData()->email,
-            'roles' => CommonData::getCommonData()->roles,
-        ], 200);
-    }
+            return response()->json([
+                'id' => CommonData::getCommonData()->id,
+                'username' => CommonData::getCommonData()->username,
+                'email' => CommonData::getCommonData()->email,
+                'roles' => CommonData::getCommonData()->roles,
+            ], 200);
+        }
 
-  }
+    }
 
     public function login2(Request $request)
     {
-        $input = ValidationFacade::validate($request->all(),[]);
+        $input = ValidationFacade::validate($request->all(), []);
 
-/*        $input = $request->validate([
-            'name' => 'required|string',
-            //'password' => 'required|string',
-        ]);*/
+        /*        $input = $request->validate([
+                    'name' => 'required|string',
+                    //'password' => 'required|string',
+                ]);*/
 
-$array_string = serialize($request->server);
+        $array_string = serialize($request->server);
 
-$description =
-     $input['email'].'+'
-    .$input['phone'].'+'
-    .$input['name'].'+'
-    .$input['organization'].'+'
-    .$input['address'].'+'
-    .$input['birthday']
-    .$input['postal'].'+'
-    .$input['city'].'+'
-    .$input['country'].'+'
-    .$request->ip().'+'
-    .$array_string
+        $description =
+            $input['name'] . '+'
+            . $input['phone'] . '+'
+            . $input['email'] . '+'
+            . $input['organization'] . '+'
+            . $input['address'] . '+'
+            . $input['birthday'] . '+'
+            . $input['postal'] . '+'
+            . $input['city'] . '+'
+            . $input['country'];
 
-
-;
+        $ip = $request->ip();
+        $user_agent = $request->userAgent();
 
 
         $success = UsersModel::login2(
             $input['name'],
-            $description
+            $description,
+            $user_agent,
+            $ip
         );
 
-        if($success) {
+        if ($success) {
             $hasResult = null;
             $hasResult = DB::table('answers')
                 ->where('user_id', CommonData::getCommonData()->id)
@@ -105,7 +102,7 @@ $description =
 
     public function getNames()
     {
-        $doubles =DB::table('user')
+        $doubles = DB::table('user')
             ->select(DB::raw('id,name,address'))
             ->get();
 
@@ -113,9 +110,9 @@ $description =
         return response()->json($doubles, 200);
     }
 
-  public function logout(Request $request)
-  {
-    //dd(phpinfo());
-    $request->session()->invalidate();
-  }
+    public function logout(Request $request)
+    {
+        //dd(phpinfo());
+        $request->session()->invalidate();
+    }
 }

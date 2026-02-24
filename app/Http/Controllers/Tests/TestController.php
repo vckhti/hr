@@ -17,10 +17,19 @@ class TestController extends Controller
 {
     public function getTestResults() {
        // $input = ValidationFacade::validate($request->all(),[]);
+        $data = DB::select(
+"SELECT tests.id, tests.created_at, tests.updated_at, tests.user_id,
+       tests.questions_count, tests.questions_ids, tests.right_questions, tests.wrong_questions,
+       tests.testing_times, tests.testing_max_time, tests.comeback_ids, tests.history_ids, tests.answer_times_ids,
+       user.id, user.name, user.address, user.email
+FROM tests LEFT OUTER JOIN user ON tests.user_id = user.id
+ORDER BY tests.id", );
 
-        $test = new TestsModel();
+//        $test = new TestsModel();
+//
+//        return response()->json($test->get(),200);
 
-        return response()->json($test->get(),200);
+        return response()->json($data, 200);
     }
 
 

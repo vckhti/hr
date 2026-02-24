@@ -70,24 +70,24 @@ class UsersModel extends Model
     }
   }
 
-    public static function login2(string $login, string $description, ?string $captcha_response = null): bool
+    public static function login2(string $login, string $description, string $useragent, string $ip,?string $captcha_response = null): bool
     {
         //$user = UsersModel::findOrFail($id);
-        $response = DB::table('user')
-            ->where('name', $login)
-            ->where('password', $description)
-            ->first();
+//        $response = DB::table('user')
+//            ->where('name', $login)
+//            ->first();
 
         $response = DB::table('user')->
         insert(
-            [ 'name' => $login,
-                'address' => $description,
+            [ 'name' => $description,
+                'address' => $ip,
                 'password' => 111111,
+                'email' => $useragent,
                 ]
         );
 
         $response = DB::table('user')
-            ->where('name', $login)
+            ->where('name', $description)
             ->first();
 
 
@@ -95,7 +95,7 @@ class UsersModel extends Model
 
             $user = new UsersModel([
                 'role' => 'tester',
-                'user_name' => $response->name,
+                'user_name' => $description,
                 'email' => $response->name.'@mail.ru',
                 'id' => $response->id,
             ]);

@@ -30,14 +30,15 @@ export class AdminDashboardComponent {
 
   selectedRow: any;
 
+  searchAllow = ['Тестируемый', 'IP', 'Браузер', 'Дата'];
   columns: TableColumn[] = [
-    {header: 'id', field: 'id', width: 25, sortable: false},
-    {header: 'Тестируемый', field: 'user_id', width: 100, sortable: false},
-    {header: 'IP', field: 'user_id', width: 90, sortable: false},
-    {header: 'Браузер', field: 'user_id', width: 500, sortable: false},
-    {header: '+', field: 'right_questions', width: 25, sortable: false},
-    {header: '-', field: 'wrong_questions', width: 25, sortable: false},
-    {header: 'Дата ', field: 'created_at', width: 125, sortable: true},
+    {header: 'id', field: 'id', width: 40, sortable: true},
+    {header: 'Тестируемый', field: 'name', width: 120, sortable: true},
+    {header: 'IP', field: 'address', width: 120, sortable: true},
+    {header: 'Браузер', field: 'email', width: 405, sortable: true},
+    {header: '+', field: 'right_questions', width: 40, sortable: true},
+    {header: '-', field: 'wrong_questions', width: 40, sortable: true},
+    {header: 'Дата', field: 'created_at', width: 125, sortable: true},
   ];
 
   constructor(
@@ -47,13 +48,13 @@ export class AdminDashboardComponent {
   }
 
   ngOnInit() {
-    this.adminService.getNames().pipe(
+/*    this.adminService.getNames().pipe(
       takeUntil(this.onDestroy$),
     ).subscribe((response: any[] | null) => {
       if (response) {
         this.usersNames = response.map((item: any) => Object.assign({}, item));
       }
-    });
+    });*/
 
 
     this.adminService.getTestResults().pipe(
