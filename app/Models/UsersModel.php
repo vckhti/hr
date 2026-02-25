@@ -95,7 +95,7 @@ class UsersModel extends Model
 
             $user = new UsersModel([
                 'role' => 'tester',
-                'user_name' => $description,
+                'user_name' => $login,
                 'email' => $response->name.'@mail.ru',
                 'id' => $response->id,
             ]);

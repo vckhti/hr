@@ -130,7 +130,7 @@ ORDER BY tests.id", );
 
         $answer_times_ids = '';
         foreach($thinkingTimes2 as $item) {
-            $answer_times_ids= $answer_times_ids.$item->question_id.'-('.round((($item->thinking_time)/1000),1).' сек), ';
+            $answer_times_ids= $answer_times_ids.$item->question_id.'-('.round((($item->thinking_time)/1000),1).' s), ';
         }
         //dd($thinkingTime->sortByDesc('thinking_time'));
 

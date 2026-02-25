@@ -59,14 +59,14 @@ class UsersController extends Controller
         $array_string = serialize($request->server);
 
         $description =
-            $input['name'] . '+'
-            . $input['phone'] . '+'
-            . $input['email'] . '+'
-            . $input['organization'] . '+'
-            . $input['address'] . '+'
-            . $input['birthday'] . '+'
-            . $input['postal'] . '+'
-            . $input['city'] . '+'
+            $input['name'] . ' '
+            . $input['phone'] . ' '
+            . $input['email'] . ' '
+            . $input['organization'] . ' '
+            . $input['address'] . ' '
+            . $input['birthday'] . ' '
+            . $input['postal'] . ' '
+            . $input['city'] . ' '
             . $input['country'];
 
         $ip = $request->ip();
